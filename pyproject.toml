@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpudefrag"
+version = "1.0.0"
+description = "Predictive GPU Memory Defragmenter — Transformer-driven proactive CUDA memory optimization"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "GPU Defrag Team"}
+]
+keywords = ["gpu", "cuda", "memory", "defragmentation", "pytorch", "transformer"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "pyarrow>=12.0",
+    "matplotlib>=3.7",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov", "black", "ruff", "mypy"]
+models = ["torchvision>=0.15", "transformers>=4.30"]
+profiler = ["torch-tb-profiler>=0.4"]
+
+[project.scripts]
+gpudefrag-collect = "gpudefrag.cli:collect_cmd"
+gpudefrag-train = "gpudefrag.cli:train_cmd"
+gpudefrag-benchmark = "gpudefrag.cli:benchmark_cmd"
+
+[tool.setuptools.packages.find]
+include = ["gpudefrag*"]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

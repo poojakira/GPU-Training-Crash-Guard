@@ -8,3 +8,5 @@ tensorboard
 pyarrow
 fastparquet
 scikit-learn
+torchvision
+transformers
