@@ -22,6 +22,169 @@ GPU-accelerated ML workloads crash with **Out-of-Memory (OOM) errors** even when
 
 ---
 
+## How We Solve It — Step by Step
+
+### Step 1: Understanding the Root Cause
+
+When PyTorch trains a model, the CUDA memory allocator creates and destroys thousands of tensors per second. Over time, this creates a "swiss cheese" pattern in GPU memory:
+
+```
+BEFORE FRAGMENTATION:
+[████████████████████████████████████] 8 GB contiguous
+
+AFTER 1000+ ITERATIONS:
+[██░░██████░░░░██░░████░░░░░░██░░██░] 8 GB, but largest free block = 400 MB
+ ↑     ↑         ↑        ↑
+ live  free      live     scattered free gaps
+```
+
+A new 600 MB tensor allocation **fails** even though 3 GB total is free — because no single contiguous block is large enough. PyTorch throws `torch.cuda.OutOfMemoryError`.
+
+### Step 2: Collecting the Signal
+
+We instrument the training loop to capture every memory state change. Our `AllocationCollector` records **4 features per event**:
+
+```
+Event #4821:  action=ALLOC  |  size=+0.147 GB  |  Δt=0.3ms  |  frag=0.23
+Event #4822:  action=FREE   |  size=-0.008 GB  |  Δt=0.1ms  |  frag=0.31
+Event #4823:  action=ALLOC  |  size=+0.512 GB  |  Δt=0.2ms  |  frag=0.28
+...
+```
+
+**Why these 4 features?**
+| Feature | What It Tells the Model |
+|---|---|
+| `action` (alloc/free) | Direction of memory pressure |
+| `size_gb` | Magnitude — large allocs are high-risk |
+| `time_delta_ms` | Allocation velocity — bursts signal danger |
+| `fragmentation` | Current state — `1 - (allocated/reserved)` |
+
+We collect **thousands of events per model** across GPT-2, ResNet-50, and BERT to train a generalizable predictor.
+
+### Step 3: Learning the Fragmentation Pattern
+
+The key insight: **fragmentation is not random — it follows patterns.** A forward pass creates temporary activations, backward creates gradients, and the optimizer updates parameters. These create repeating allocation rhythms.
+
+We train a **4-layer Transformer encoder** (812,801 parameters) to learn these patterns:
+
+```
+Input:  Last 64 allocation events  →  (batch, 64, 4)
+                     │
+        ┌────────────▼────────────────┐
+        │   Linear + LayerNorm + GELU │  Project 4 features → 128 dims
+        │   + Learnable Positional Enc│  Encode temporal order
+        └────────────┬────────────────┘
+                     │
+        ┌────────────▼────────────────┐
+        │  4× Transformer Encoder     │  Self-attention learns:
+        │    - 4 attention heads      │   "When I see this alloc pattern,
+        │    - Pre-LayerNorm          │    fragmentation spikes next"
+        │    - 512-dim FFN            │
+        └────────────┬────────────────┘
+                     │
+        ┌────────────▼────────────────┐
+        │  MLP Head → Sigmoid         │  Output: score ∈ [0, 1]
+        │                             │  0 = healthy, 1 = critical frag
+        └─────────────────────────────┘
+```
+
+**Why a Transformer?** Because allocation patterns have **long-range temporal dependencies** — a large allocation 30 events ago affects fragmentation now. Self-attention captures this naturally, unlike RNNs which struggle with long sequences.
+
+**Training recipe:**
+- **Loss**: MSE between predicted score and actual fragmentation ratio
+- **Optimizer**: AdamW (lr=1e-3, weight_decay=0.01)
+- **Scheduler**: CosineAnnealing for smooth convergence
+- **Regularization**: Dropout (0.1) + gradient clipping (max_norm=1.0)
+- **Validation**: 80/10/10 train/val/test split, best-model checkpointing
+
+### Step 4: Real-Time Prediction (The Core Loop)
+
+Once trained, the predictor runs in a **background daemon thread** alongside training:
+
+```
+Every 50ms:
+
+1. READ:   Poll torch.cuda.memory_allocated()
+           ↳ Compute delta, action, time gap, current frag ratio
+           ↳ Append to ring buffer (last 64 events)
+
+2. PREDICT: Feed buffer → FragPredictor → score ∈ [0, 1]
+            ↳ Inference time: < 2ms on CPU (no GPU needed)
+
+3. DECIDE:  if score > 0.7:
+                TRIGGER compaction
+            else:
+                SLEEP and repeat
+```
+
+**Critical safety features:**
+- **Kill switch**: If prediction takes > 5ms → monitor auto-disables (zero training impact guaranteed)
+- **Cooldown**: Minimum 1 second between compactions (prevents thrashing)
+- **Thread safety**: All buffer operations are lock-protected
+
+### Step 5: Proactive Compaction
+
+When the predicted fragmentation score exceeds the threshold (default: 0.7), we execute a **controlled compaction cycle**:
+
+```
+┌─────────────────────────────────────────────────┐
+│              COMPACTION SEQUENCE                 │
+├─────────────────────────────────────────────────┤
+│                                                  │
+│  1. torch.cuda.synchronize()                     │
+│     └─ Wait for all GPU ops to finish            │
+│     └─ This is the "safe point" — no tensors     │
+│        are mid-computation                       │
+│                                                  │
+│  2. torch.cuda.empty_cache()                     │
+│     └─ Release ALL cached (but unused) blocks    │
+│     └─ Returns memory to the CUDA driver         │
+│     └─ Next allocs get fresh, contiguous blocks  │
+│                                                  │
+│  3. gc.collect() (optional)                      │
+│     └─ Free Python objects holding CUDA refs      │
+│     └─ Catches leaked tensors                    │
+│                                                  │
+│  4. Record metrics:                              │
+│     └─ freed_mb, frag_before, frag_after         │
+│     └─ elapsed_ms, compaction_id                 │
+│                                                  │
+│  RESULT: Memory is now defragmented.             │
+│  Next allocations get contiguous blocks.         │
+│  OOM avoided.                                    │
+└─────────────────────────────────────────────────┘
+```
+
+### Step 6: Why This Wins
+
+```
+TIMELINE — WITHOUT gpudefrag:
+
+ Iter 1    Iter 25       Iter 50        Iter 78     Iter 79
+  │          │              │              │           │
+  ▼          ▼              ▼              ▼           ▼
+ [OK]  → [frag growing] → [frag=0.6] → [frag=0.9] → [💥 OOM!]
+                                                       ↳ Training crashes
+                                                       ↳ Lost 78 iterations of progress
+                                                       ↳ Manual restart required
+
+
+TIMELINE — WITH gpudefrag:
+
+ Iter 1    Iter 25       Iter 50     Iter 78    Iter 79   Iter 100
+  │          │              │           │          │         │
+  ▼          ▼              ▼           ▼          ▼         ▼
+ [OK]  → [frag growing] → [frag=0.6] → [🛡️ PREDICTED! score=0.72]
+                                         ↳ Compactor fires
+                                         ↳ empty_cache() in 1.2ms
+                                         ↳ Frag drops: 0.6 → 0.1
+                                         ↳ Training continues smoothly → [✅ DONE]
+```
+
+The system doesn't eliminate fragmentation — it **prevents fragmentation from reaching dangerous levels** by timing cleanup operations at the optimal moment. The Transformer learns when that moment is, based on the workload's unique allocation fingerprint.
+
+---
+
 ## Phase 2 — System Architecture
 
 ```
