@@ -1,0 +1,10 @@
+--extra-index-url https://download.pytorch.org/whl/nightly/cu121
+torch
+torch-tb-profiler
+numpy
+pandas
+matplotlib
+tensorboard
+pyarrow
+fastparquet
+scikit-learn
