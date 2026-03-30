@@ -38,7 +38,9 @@ function App() {
     smActive: Array.from({length: 20}, () => Math.random() * 100),
     tensorCore: Array.from({length: 20}, () => Math.random() * 100),
     pcieRx: Array.from({length: 20}, () => Math.random() * 100),
-    pcieTx: Array.from({length: 20}, () => Math.random() * 100)
+    pcieTx: Array.from({length: 20}, () => Math.random() * 100),
+    l2Cache: Array.from({length: 20}, () => 85 + Math.random() * 10),
+    temp: 72.4
   });
 
   useEffect(() => {
@@ -50,7 +52,9 @@ function App() {
         smActive: [...prev.smActive.slice(1), 70 + Math.random() * 30],
         tensorCore: [...prev.tensorCore.slice(1), 40 + Math.random() * 60],
         pcieRx: [...prev.pcieRx.slice(1), Math.random() * 100],
-        pcieTx: [...prev.pcieTx.slice(1), Math.random() * 100]
+        pcieTx: [...prev.pcieTx.slice(1), Math.random() * 100],
+        l2Cache: [...prev.l2Cache.slice(1), 85 + Math.random() * 10],
+        temp: Math.min(84, Math.max(65, prev.temp + (Math.random() * 1.5 - 0.7)))
       }));
 
       fetchLiveTelemetry().then(live => {
@@ -241,48 +245,94 @@ function App() {
           )}
 
           {activeSection === 'telemetry' && (
-            <div className="w-full h-full">
-               <div className="glass-card h-full flex flex-col p-6">
-                 <span className="kpi-title text-brand mb-4">Extended Telemetry Feed (Iteration Times)</span>
-                 <div className="w-full h-[500px]">
-                    <IterationTimeChart 
-                      data={viewMode === 'live' ? data.liveHistory : (data.benchmark?.defrag.chart || [])} 
-                    />
-                 </div>
+            <div className="w-full h-full flex flex-col gap-4">
+               <div className="grid grid-cols-12 gap-4">
+                  {/* Performance Chart Split */}
+                  <div className="col-span-8 glass-card flex flex-col p-6 h-[500px]">
+                     <span className="kpi-title text-brand mb-4">Pipeline Execution Latency (Iteration Bounds)</span>
+                     <div className="w-full h-[400px]">
+                        <IterationTimeChart data={viewMode === 'live' ? data.liveHistory : (data.benchmark?.defrag.chart || [])} />
+                     </div>
+                  </div>
+                  
+                  {/* Dense Cache & Thermal Metrics */}
+                  <div className="col-span-4 flex flex-col gap-4">
+                     <div className="glass-card flex-1 p-6 flex flex-col">
+                        <span className="kpi-title mb-4">L2 Cache Hit Rate</span>
+                        <div className="text-3xl font-mono text-white mb-2">{dummyHw.l2Cache[19].toFixed(1)}%</div>
+                        <Sparkline data={dummyHw.l2Cache} color="#00ffcc" />
+                        
+                        <div className="mt-8 border-t border-brand/20 pt-4">
+                            <span className="kpi-title text-accent-red mb-2">GPU Thermal State</span>
+                            <div className="flex items-end gap-2">
+                               <div className="text-4xl font-black font-mono" style={{color: dummyHw.temp > 80 ? '#ef4444' : '#76b900'}}>{dummyHw.temp.toFixed(1)}°C</div>
+                               <span className="text-[10px] text-secondary font-mono mb-2">/ T.J MAX: 90°C</span>
+                            </div>
+                        </div>
+                     </div>
+                     <div className="glass-card flex-none h-32 p-6 bg-brand/5 border-brand/20">
+                          <span className="kpi-title text-brand">Deep Learning Accelerator</span>
+                          <div className="mt-4 grid grid-cols-2 gap-4">
+                              <div>
+                                 <div className="text-[10px] text-secondary">A100 NVSWITCH RX</div>
+                                 <div className="text-lg font-mono text-white">{(dummyHw.pcieRx[19] * 3).toFixed(1)} GB/s</div>
+                              </div>
+                              <div>
+                                 <div className="text-[10px] text-secondary">A100 NVSWITCH TX</div>
+                                 <div className="text-lg font-mono text-white">{(dummyHw.pcieTx[19] * 3).toFixed(1)} GB/s</div>
+                              </div>
+                          </div>
+                     </div>
+                  </div>
                </div>
             </div>
           )}
 
           {activeSection === 'console' && (
-            <div className="w-full h-[600px] flex">
+            <div className="w-full h-[600px] flex gap-4">
+              <div className="glass-card flex-none w-[300px] flex flex-col p-6 bg-[#050505] border-white/5">
+                 <span className="kpi-title text-secondary">Terminal STDOUT</span>
+                 <div className="flex-1 overflow-hidden mt-4 font-mono text-[9px] text-brand opacity-70">
+                    <p>[AEON] Hooking module nn.Linear... OK</p>
+                    <p>[AEON] Bypassing autograd.Function...</p>
+                    <p>[INIT] CUDA Context 0 established</p>
+                    <p>[NCCL] Rank 0 broadcast sync ready</p>
+                    <p>[TRITON] JIT compiling compaction kernels...</p>
+                    <p className="animate-pulse mt-4">Awaiting memory trigger &gt;_</p>
+                 </div>
+              </div>
+              
               <div className="glass-card flex-1 flex flex-col p-6">
                 <div className="flex justify-between items-center mb-6 border-b border-brand/20 pb-4">
                   <span className="kpi-title text-brand">Active Execution Trace Log</span>
-                  <div className="text-[10px] text-brand font-mono px-2 py-1 bg-brand/10 rounded">CHANNEL: 01_FRAG_SENSE</div>
+                  <div className="flex gap-2">
+                     <div className="text-[10px] text-white font-mono px-2 py-1 bg-accent-red/20 border border-accent-red/40 rounded">PID: 49201</div>
+                     <div className="text-[10px] text-brand font-mono px-2 py-1 bg-brand/10 border border-brand/30 rounded">CHANNEL: 01_FRAG_SENSE</div>
+                  </div>
                 </div>
                 <div className="flex-1 overflow-y-auto">
-                  <table className="w-full text-left font-mono text-sm border-collapse">
-                    <thead className="text-[10px] text-secondary uppercase border-b border-white/10">
+                  <table className="w-full text-left font-mono text-xs border-collapse">
+                    <thead className="text-[10px] text-secondary uppercase border-b border-white/10 bg-white/5">
                       <tr>
-                        <th className="py-2">Timestamp</th>
-                        <th className="py-2">Event</th>
-                        <th className="py-2">Impact</th>
-                        <th className="py-2">Status</th>
+                        <th className="py-3 px-2">Timestamp (ms)</th>
+                        <th className="py-3 px-2">Triton Op</th>
+                        <th className="py-3 px-2">VRAM Action</th>
+                        <th className="py-3 px-2">Sync Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       {data.live?.history?.length > 0 ? (
                         data.live.history.map(h => (
                           <tr key={h.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                            <td className="py-2 text-dim">{h.timestamp}</td>
-                            <td className="py-2 font-bold text-white">COMPACTION_EVENT_{h.id}</td>
-                            <td className="py-2 text-brand">+{h.freed}MB</td>
-                            <td className="py-2 text-brand">COMPLETE</td>
+                            <td className="py-3 px-2 text-dim">{h.timestamp}</td>
+                            <td className="py-3 px-2 font-bold text-white">TRITON_COMPACT_{h.id}</td>
+                            <td className="py-3 px-2 text-brand">+{h.freed}MB RECLAIMED</td>
+                            <td className="py-3 px-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand"></div> 0_BARRIER_SYNC</td>
                           </tr>
                         ))
                       ) : (
                         <tr>
-                          <td colSpan="4" className="text-center py-20 opacity-30 italic">Streaming from Allocation Hooks... Awaiting first trigger.</td>
+                          <td colSpan="4" className="text-center py-20 opacity-30 italic">No compaction events intercepted in current epoch.</td>
                         </tr>
                       )}
                     </tbody>
@@ -293,16 +343,43 @@ function App() {
           )}
 
           {activeSection === 'memory' && (
-            <div className="w-full glass-card h-[600px] flex flex-col p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="kpi-title text-brand">Physical VRAM Topology (Address View)</span>
-                  <div className="text-[10px] text-brand font-mono">ADDR RANGE: 0x0000 - 0xFFFF</div>
-                </div>
-                <div className="flex-1 w-full overflow-hidden flex items-center justify-center">
-                    <div style={{transform: 'scale(1.5)', transformOrigin: 'center'}}>
-                      <MemoryMap fragPercent={metrics.frag} />
-                    </div>
-                </div>
+            <div className="w-full h-full flex gap-4">
+               {/* Hex Pointer Array */}
+               <div className="glass-card flex-none w-[350px] p-6 flex flex-col overflow-hidden">
+                  <span className="kpi-title mb-4">Hardware Page Table Map</span>
+                  <table className="w-full text-left font-mono text-[9px]">
+                    <thead>
+                      <tr className="text-secondary border-b border-white/10">
+                        <th className="py-2">HEX OFFSET</th>
+                        <th className="py-2">SIZE</th>
+                        <th className="py-2 text-right">STATE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       {Array.from({length: 22}).map((_, i) => {
+                          const isFrag = Math.random() < (metrics.frag/100);
+                          return (
+                          <tr key={i} className="border-b border-white/5 opacity-80">
+                            <td className="py-1.5 text-dim">0x{(7000000 + i * 4096).toString(16).toUpperCase()}</td>
+                            <td className="py-1.5 text-white">4096 B</td>
+                            <td className={`py-1.5 text-right font-bold ${isFrag ? 'text-accent-red' : 'text-brand'}`}>{isFrag ? 'ORPHANED' : 'ALLOCATED'}</td>
+                          </tr>
+                       )})}
+                    </tbody>
+                  </table>
+               </div>
+            
+               <div className="w-full glass-card h-[600px] flex flex-col p-6 flex-1">
+                   <div className="flex justify-between items-center mb-6">
+                     <span className="kpi-title text-brand">Deep Topology Matrix View</span>
+                     <div className="text-[10px] text-brand font-mono">ADDR RANGE: 0x0000 - 0xFFFF</div>
+                   </div>
+                   <div className="flex-1 w-full overflow-hidden flex items-center justify-center bg-[#020202] border border-white/5 rounded">
+                       <div style={{transform: 'scale(1.2)', transformOrigin: 'center'}}>
+                         <MemoryMap fragPercent={metrics.frag} />
+                       </div>
+                   </div>
+               </div>
             </div>
           )}
         </div>
