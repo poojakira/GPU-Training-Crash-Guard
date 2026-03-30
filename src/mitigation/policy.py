@@ -23,7 +23,7 @@ Usage::
 import logging
 import time
 from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Iterable
 
 log = logging.getLogger("gpudefrag.mitigation_policy")
 
@@ -61,16 +61,19 @@ class MitigationPolicy:
         warn_threshold: float = 0.5,
         act_threshold: float = 0.8,
         batch_downshift_factor: float = 0.75,
+        engine: Optional[Any] = None,
     ) -> None:
         self.warn_threshold = warn_threshold
         self.act_threshold = act_threshold
         self.batch_downshift_factor = batch_downshift_factor
+        self.engine = engine
         self._actions: List[MitigationAction] = []
 
     def evaluate(
         self,
         risk_score: float,
         current_batch_size: int = 0,
+        tensors_to_defragment: Optional[Iterable[Any]] = None,
     ) -> MitigationAction:
         """
         Evaluate the policy for a given risk score.
@@ -88,7 +91,17 @@ class MitigationPolicy:
                 f"HIGH RISK ({risk_score:.3f}) — cleared CUDA cache"
                 + (f", suggest batch_size → {suggested_bs}" if suggested_bs else "")
             )
-            cache_cleared = self._try_empty_cache()
+            
+            # Active Defragmentation if engine is provided
+            cache_cleared = False
+            if self.engine is not None and tensors_to_defragment is not None:
+                record = self.engine.defragment_tensors(tensors_to_defragment, reason="policy_act")
+                cache_cleared = not record.get("skipped", False)
+                if cache_cleared:
+                    msg = f"HIGH RISK ({risk_score:.3f}) — Defragmented {record.get('tensors_compacted', 0)} tensors, freed {record.get('freed_mb', 0):.1f} MB. " + (f"Suggest batch_size → {suggested_bs}" if suggested_bs else "")
+            else:
+                cache_cleared = self._try_empty_cache()
+                
             action = MitigationAction(
                 timestamp=ts,
                 risk_score=risk_score,
