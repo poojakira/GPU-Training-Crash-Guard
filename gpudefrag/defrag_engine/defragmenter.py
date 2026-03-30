@@ -76,6 +76,11 @@ class GPUMemoryDefragmenter:
         if total_elements == 0:
             return {"skipped": True, "reason": "no_matching_tensors"}
 
+        # 0. Distributed Data Parallel (DDP) sync safety
+        if torch.distributed.is_available() and torch.distributed.is_initialized():
+            log.info("DDP active: Waiting at barrier before defragmentation...")
+            torch.distributed.barrier()
+            
         t0 = time.perf_counter()
         
         # Pre-execution snapshot

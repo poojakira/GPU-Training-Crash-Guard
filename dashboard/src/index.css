@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Ultra-Premium Cyber Palette */
-  --bg-dark: #020205;
-  --bg-card: rgba(20, 20, 28, 0.6);
-  --bg-sidebar: rgba(10, 10, 15, 0.8);
+  /* NVIDIA Nsight Enterprise Palette */
+  --bg-dark: #000000;
+  --bg-card: rgba(15, 15, 15, 0.8);
+  --bg-sidebar: rgba(5, 5, 5, 0.95);
   
-  --brand: #3b82f6;
-  --brand-glow: rgba(59, 130, 246, 0.3);
-  --accent-green: #10b981;
-  --accent-cyan: #06b6d4;
-  --accent-red: #ef4444;
+  --brand: #76b900;
+  --brand-glow: rgba(118, 185, 0, 0.3);
+  --accent-green: #76b900;
+  --accent-cyan: #00ffcc;
+  --accent-red: #ff3333;
   
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-dim: #475569;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  --text-dim: #666666;
   
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shine: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(118, 185, 0, 0.15);
+  --glass-shine: rgba(118, 185, 0, 0.05);
   
   font-family: 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,7 +30,7 @@
 }
 
 body {
-  background: radial-gradient(circle at 50% 0%, #1a1a2e 0%, var(--bg-dark) 100%);
+  background: radial-gradient(circle at 50% -20%, #152200 0%, var(--bg-dark) 100%);
   color: var(--text-primary);
   height: 100vh;
   overflow: hidden;
@@ -127,8 +127,8 @@ header.top-nav {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--glass-border);
-  background: rgba(2, 2, 5, 0.4);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
   position: sticky;
   top: 0;
   z-index: 5;
