@@ -1,0 +1,1502 @@
+[
+  {
+    "file": "gpt2m_bs2_seq512_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10663,
+    "ooms": 0,
+    "mean_frag": 0.3666,
+    "max_frag": 0.5613,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs2_seq128_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6681,
+    "ooms": 0,
+    "mean_frag": 0.304,
+    "max_frag": 0.4564,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs8_seq1024_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 8260,
+    "ooms": 2785,
+    "mean_frag": 0.1306,
+    "max_frag": 0.4871,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs16_seq128_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10609,
+    "ooms": 0,
+    "mean_frag": 0.3557,
+    "max_frag": 0.551,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs2_seq1024_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10789,
+    "ooms": 190,
+    "mean_frag": 0.1629,
+    "max_frag": 0.422,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs16_seq256_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10625,
+    "ooms": 4,
+    "mean_frag": 0.4619,
+    "max_frag": 0.7094,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs4_seq256_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6645,
+    "ooms": 0,
+    "mean_frag": 0.3939,
+    "max_frag": 0.6042,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs8_seq128_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10671,
+    "ooms": 0,
+    "mean_frag": 0.317,
+    "max_frag": 0.4879,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs2_seq256_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10657,
+    "ooms": 0,
+    "mean_frag": 0.2945,
+    "max_frag": 0.4494,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs8_seq128_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10645,
+    "ooms": 0,
+    "mean_frag": 0.3293,
+    "max_frag": 0.4963,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs2_seq256_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6665,
+    "ooms": 0,
+    "mean_frag": 0.3215,
+    "max_frag": 0.4889,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs4_seq128_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6607,
+    "ooms": 0,
+    "mean_frag": 0.3032,
+    "max_frag": 0.4723,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs8_seq1024_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6683,
+    "ooms": 16,
+    "mean_frag": 0.5778,
+    "max_frag": 0.8804,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs2_seq128_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6649,
+    "ooms": 0,
+    "mean_frag": 0.2991,
+    "max_frag": 0.4605,
+    "risk_label": "stable",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs16_seq128_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10653,
+    "ooms": 4,
+    "mean_frag": 0.2902,
+    "max_frag": 0.4908,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs2_seq512_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10621,
+    "ooms": 4,
+    "mean_frag": 0.3203,
+    "max_frag": 0.5195,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs8_seq512_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10672,
+    "ooms": 15,
+    "mean_frag": 0.4029,
+    "max_frag": 0.662,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs2_seq256_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10665,
+    "ooms": 0,
+    "mean_frag": 0.2925,
+    "max_frag": 0.453,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq128_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10668,
+    "ooms": 9,
+    "mean_frag": 0.207,
+    "max_frag": 0.3508,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs2_seq256_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6543,
+    "ooms": 0,
+    "mean_frag": 0.3205,
+    "max_frag": 0.4815,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs2_seq512_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10613,
+    "ooms": 0,
+    "mean_frag": 0.3426,
+    "max_frag": 0.5232,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "effnet_b4_bs8_vram6144.parquet",
+    "architecture": "EfficientNet-B4",
+    "events": 15888,
+    "ooms": 4,
+    "mean_frag": 0.4544,
+    "max_frag": 0.6972,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "resnet101_bs32_vram8192.parquet",
+    "architecture": "ResNet-101",
+    "events": 29232,
+    "ooms": 7079,
+    "mean_frag": 0.1846,
+    "max_frag": 0.6042,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs16_seq256_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10676,
+    "ooms": 5,
+    "mean_frag": 0.4369,
+    "max_frag": 0.6804,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs4_seq256_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10597,
+    "ooms": 14,
+    "mean_frag": 0.2002,
+    "max_frag": 0.3607,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs16_seq128_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10649,
+    "ooms": 30,
+    "mean_frag": 0.1704,
+    "max_frag": 0.324,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs2_seq256_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10573,
+    "ooms": 0,
+    "mean_frag": 0.2906,
+    "max_frag": 0.4611,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs8_seq512_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6489,
+    "ooms": 0,
+    "mean_frag": 0.643,
+    "max_frag": 0.8415,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs2_seq1024_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6647,
+    "ooms": 4,
+    "mean_frag": 0.5182,
+    "max_frag": 0.7597,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs16_seq128_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10631,
+    "ooms": 18,
+    "mean_frag": 0.2,
+    "max_frag": 0.367,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs8_seq1024_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6641,
+    "ooms": 16,
+    "mean_frag": 0.5854,
+    "max_frag": 0.8945,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs16_seq1024_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6691,
+    "ooms": 184,
+    "mean_frag": 0.3194,
+    "max_frag": 0.8094,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs8_seq512_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 9898,
+    "ooms": 1259,
+    "mean_frag": 0.142,
+    "max_frag": 0.4137,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs8_seq256_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10653,
+    "ooms": 8,
+    "mean_frag": 0.297,
+    "max_frag": 0.5053,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet101_bs16_vram8192.parquet",
+    "architecture": "ResNet-101",
+    "events": 35927,
+    "ooms": 46,
+    "mean_frag": 0.3066,
+    "max_frag": 0.6072,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs4_seq1024_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10741,
+    "ooms": 42,
+    "mean_frag": 0.3451,
+    "max_frag": 0.6619,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs8_seq256_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10545,
+    "ooms": 24,
+    "mean_frag": 0.214,
+    "max_frag": 0.4111,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2_bs4_seq256_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6631,
+    "ooms": 0,
+    "mean_frag": 0.3887,
+    "max_frag": 0.5651,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs4_seq256_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6563,
+    "ooms": 0,
+    "mean_frag": 0.3887,
+    "max_frag": 0.5764,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_base_bs16_seq1024_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6705,
+    "ooms": 60,
+    "mean_frag": 0.4579,
+    "max_frag": 0.8892,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs2_seq1024_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10728,
+    "ooms": 9,
+    "mean_frag": 0.4292,
+    "max_frag": 0.6778,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "effnet_b4_bs16_vram8192.parquet",
+    "architecture": "EfficientNet-B4",
+    "events": 15828,
+    "ooms": 12,
+    "mean_frag": 0.495,
+    "max_frag": 0.7826,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs16_seq512_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10622,
+    "ooms": 59,
+    "mean_frag": 0.3575,
+    "max_frag": 0.7089,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs2_seq128_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6649,
+    "ooms": 0,
+    "mean_frag": 0.2989,
+    "max_frag": 0.4413,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq512_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10697,
+    "ooms": 72,
+    "mean_frag": 0.2361,
+    "max_frag": 0.5102,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs2_seq128_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10645,
+    "ooms": 0,
+    "mean_frag": 0.2722,
+    "max_frag": 0.4069,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs4_seq1024_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6613,
+    "ooms": 24,
+    "mean_frag": 0.4483,
+    "max_frag": 0.7564,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "resnet50_bs8_vram6144.parquet",
+    "architecture": "ResNet-50",
+    "events": 19096,
+    "ooms": 20,
+    "mean_frag": 0.1619,
+    "max_frag": 0.304,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs8_seq256_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10564,
+    "ooms": 51,
+    "mean_frag": 0.151,
+    "max_frag": 0.3185,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2_bs16_seq256_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6663,
+    "ooms": 0,
+    "mean_frag": 0.5719,
+    "max_frag": 0.7909,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs16_seq256_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10740,
+    "ooms": 29,
+    "mean_frag": 0.2753,
+    "max_frag": 0.5213,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet101_bs16_vram6144.parquet",
+    "architecture": "ResNet-101",
+    "events": 31535,
+    "ooms": 4766,
+    "mean_frag": 0.1651,
+    "max_frag": 0.4762,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs8_seq256_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10657,
+    "ooms": 8,
+    "mean_frag": 0.2884,
+    "max_frag": 0.4874,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs2_seq256_vram6144.parquet",
+    "architecture": "BERT-Base",
+    "events": 6711,
+    "ooms": 0,
+    "mean_frag": 0.3155,
+    "max_frag": 0.4949,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs2_seq128_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10617,
+    "ooms": 0,
+    "mean_frag": 0.2642,
+    "max_frag": 0.403,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs4_seq1024_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 9523,
+    "ooms": 1586,
+    "mean_frag": 0.1589,
+    "max_frag": 0.4927,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs8_seq1024_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6565,
+    "ooms": 92,
+    "mean_frag": 0.3557,
+    "max_frag": 0.7636,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs8_seq128_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10778,
+    "ooms": 15,
+    "mean_frag": 0.1828,
+    "max_frag": 0.3232,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs16_seq256_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10694,
+    "ooms": 35,
+    "mean_frag": 0.2471,
+    "max_frag": 0.4856,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs16_seq128_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6661,
+    "ooms": 0,
+    "mean_frag": 0.3935,
+    "max_frag": 0.5934,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs4_seq1024_vram6144.parquet",
+    "architecture": "BERT-Base",
+    "events": 6667,
+    "ooms": 20,
+    "mean_frag": 0.4835,
+    "max_frag": 0.7884,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs2_seq512_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10607,
+    "ooms": 4,
+    "mean_frag": 0.291,
+    "max_frag": 0.4885,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs4_seq512_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6625,
+    "ooms": 0,
+    "mean_frag": 0.5405,
+    "max_frag": 0.7528,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs4_seq512_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10637,
+    "ooms": 12,
+    "mean_frag": 0.3335,
+    "max_frag": 0.5643,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs8_seq256_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10677,
+    "ooms": 0,
+    "mean_frag": 0.4263,
+    "max_frag": 0.6302,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs16_seq512_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6621,
+    "ooms": 6,
+    "mean_frag": 0.6395,
+    "max_frag": 0.8791,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs16_seq1024_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 9528,
+    "ooms": 1531,
+    "mean_frag": 0.2373,
+    "max_frag": 0.6839,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "effnet_b4_bs8_vram8192.parquet",
+    "architecture": "EfficientNet-B4",
+    "events": 15804,
+    "ooms": 0,
+    "mean_frag": 0.5457,
+    "max_frag": 0.7628,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq1024_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10180,
+    "ooms": 949,
+    "mean_frag": 0.1839,
+    "max_frag": 0.5142,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs4_seq128_vram6144.parquet",
+    "architecture": "BERT-Base",
+    "events": 6627,
+    "ooms": 0,
+    "mean_frag": 0.3144,
+    "max_frag": 0.4898,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs4_seq1024_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10873,
+    "ooms": 192,
+    "mean_frag": 0.2174,
+    "max_frag": 0.5652,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet50_bs64_vram6144.parquet",
+    "architecture": "ResNet-50",
+    "events": 13222,
+    "ooms": 6394,
+    "mean_frag": 0.0615,
+    "max_frag": 0.292,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs2_seq256_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10649,
+    "ooms": 4,
+    "mean_frag": 0.2496,
+    "max_frag": 0.4205,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs8_seq256_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10599,
+    "ooms": 4,
+    "mean_frag": 0.3469,
+    "max_frag": 0.5628,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs8_seq512_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 8790,
+    "ooms": 2257,
+    "mean_frag": 0.0971,
+    "max_frag": 0.3262,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs16_seq128_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6697,
+    "ooms": 0,
+    "mean_frag": 0.4016,
+    "max_frag": 0.5899,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs16_seq128_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6641,
+    "ooms": 0,
+    "mean_frag": 0.3934,
+    "max_frag": 0.589,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs4_seq256_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6553,
+    "ooms": 0,
+    "mean_frag": 0.3892,
+    "max_frag": 0.5759,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs16_seq1024_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 8560,
+    "ooms": 2465,
+    "mean_frag": 0.149,
+    "max_frag": 0.5232,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq256_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10611,
+    "ooms": 2,
+    "mean_frag": 0.3347,
+    "max_frag": 0.5178,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs16_seq512_vram6144.parquet",
+    "architecture": "BERT-Base",
+    "events": 6699,
+    "ooms": 30,
+    "mean_frag": 0.4541,
+    "max_frag": 0.7889,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2_bs16_seq128_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6669,
+    "ooms": 0,
+    "mean_frag": 0.3773,
+    "max_frag": 0.5649,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_base_bs8_seq256_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6661,
+    "ooms": 0,
+    "mean_frag": 0.4884,
+    "max_frag": 0.6971,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs2_seq1024_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10619,
+    "ooms": 8,
+    "mean_frag": 0.4538,
+    "max_frag": 0.7024,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_base_bs2_seq128_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6669,
+    "ooms": 0,
+    "mean_frag": 0.2888,
+    "max_frag": 0.4586,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs16_seq1024_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 8501,
+    "ooms": 2296,
+    "mean_frag": 0.0809,
+    "max_frag": 0.3103,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs8_seq512_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10641,
+    "ooms": 80,
+    "mean_frag": 0.2257,
+    "max_frag": 0.4984,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs4_seq256_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10739,
+    "ooms": 0,
+    "mean_frag": 0.3541,
+    "max_frag": 0.5445,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq512_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10628,
+    "ooms": 81,
+    "mean_frag": 0.1634,
+    "max_frag": 0.368,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs8_seq512_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 9174,
+    "ooms": 1959,
+    "mean_frag": 0.1097,
+    "max_frag": 0.3617,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs4_seq128_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10725,
+    "ooms": 0,
+    "mean_frag": 0.2787,
+    "max_frag": 0.4293,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq1024_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10588,
+    "ooms": 45,
+    "mean_frag": 0.3526,
+    "max_frag": 0.6754,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs8_seq512_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6533,
+    "ooms": 8,
+    "mean_frag": 0.4979,
+    "max_frag": 0.7619,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs2_seq1024_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10715,
+    "ooms": 48,
+    "mean_frag": 0.2496,
+    "max_frag": 0.5089,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet101_bs32_vram6144.parquet",
+    "architecture": "ResNet-101",
+    "events": 25130,
+    "ooms": 11183,
+    "mean_frag": 0.1039,
+    "max_frag": 0.4684,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs16_seq512_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 8691,
+    "ooms": 2476,
+    "mean_frag": 0.0982,
+    "max_frag": 0.3594,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs2_seq128_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10641,
+    "ooms": 0,
+    "mean_frag": 0.2826,
+    "max_frag": 0.4221,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet101_bs64_vram6144.parquet",
+    "architecture": "ResNet-101",
+    "events": 22525,
+    "ooms": 13820,
+    "mean_frag": 0.0719,
+    "max_frag": 0.4704,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_large_bs2_seq128_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10613,
+    "ooms": 0,
+    "mean_frag": 0.2696,
+    "max_frag": 0.4031,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_base_bs4_seq256_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6609,
+    "ooms": 0,
+    "mean_frag": 0.3752,
+    "max_frag": 0.5537,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs2_seq128_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10683,
+    "ooms": 0,
+    "mean_frag": 0.2671,
+    "max_frag": 0.4085,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs16_seq256_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6611,
+    "ooms": 0,
+    "mean_frag": 0.5763,
+    "max_frag": 0.7858,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs2_seq256_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10651,
+    "ooms": 8,
+    "mean_frag": 0.1997,
+    "max_frag": 0.3463,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs16_seq1024_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6724,
+    "ooms": 181,
+    "mean_frag": 0.3327,
+    "max_frag": 0.8435,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs8_seq1024_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6690,
+    "ooms": 45,
+    "mean_frag": 0.4406,
+    "max_frag": 0.817,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs2_seq128_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10641,
+    "ooms": 0,
+    "mean_frag": 0.2677,
+    "max_frag": 0.4269,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs16_seq1024_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 9021,
+    "ooms": 1968,
+    "mean_frag": 0.1732,
+    "max_frag": 0.5591,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq1024_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10783,
+    "ooms": 300,
+    "mean_frag": 0.2727,
+    "max_frag": 0.6829,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs4_seq512_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10658,
+    "ooms": 57,
+    "mean_frag": 0.1946,
+    "max_frag": 0.4132,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs8_seq256_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10653,
+    "ooms": 0,
+    "mean_frag": 0.4182,
+    "max_frag": 0.6037,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs8_seq128_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6637,
+    "ooms": 0,
+    "mean_frag": 0.3448,
+    "max_frag": 0.523,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs4_seq128_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10671,
+    "ooms": 0,
+    "mean_frag": 0.2811,
+    "max_frag": 0.4338,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs8_seq128_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6551,
+    "ooms": 0,
+    "mean_frag": 0.3595,
+    "max_frag": 0.5388,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs8_seq1024_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 7917,
+    "ooms": 3172,
+    "mean_frag": 0.1029,
+    "max_frag": 0.4248,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs16_seq128_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10653,
+    "ooms": 0,
+    "mean_frag": 0.3495,
+    "max_frag": 0.5248,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs2_seq256_vram8192.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10615,
+    "ooms": 0,
+    "mean_frag": 0.2838,
+    "max_frag": 0.445,
+    "risk_label": "stable",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq256_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10699,
+    "ooms": 0,
+    "mean_frag": 0.4187,
+    "max_frag": 0.6158,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs8_seq1024_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 8566,
+    "ooms": 2357,
+    "mean_frag": 0.081,
+    "max_frag": 0.3011,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs8_seq256_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6637,
+    "ooms": 0,
+    "mean_frag": 0.4813,
+    "max_frag": 0.6814,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "vit_large_bs16_seq128_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10597,
+    "ooms": 0,
+    "mean_frag": 0.3521,
+    "max_frag": 0.5473,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs4_seq128_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10674,
+    "ooms": 3,
+    "mean_frag": 0.273,
+    "max_frag": 0.4238,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2m_bs16_seq512_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10757,
+    "ooms": 70,
+    "mean_frag": 0.3214,
+    "max_frag": 0.6638,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs4_seq1024_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10633,
+    "ooms": 38,
+    "mean_frag": 0.3825,
+    "max_frag": 0.7111,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs8_seq128_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6533,
+    "ooms": 0,
+    "mean_frag": 0.3334,
+    "max_frag": 0.5332,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq512_vram12288.parquet",
+    "architecture": "BERT-Large",
+    "events": 10713,
+    "ooms": 4,
+    "mean_frag": 0.4344,
+    "max_frag": 0.6788,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs16_seq256_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10626,
+    "ooms": 5,
+    "mean_frag": 0.4324,
+    "max_frag": 0.6637,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs2_seq256_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6645,
+    "ooms": 0,
+    "mean_frag": 0.3312,
+    "max_frag": 0.5024,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs4_seq512_vram8192.parquet",
+    "architecture": "BERT-Large",
+    "events": 10614,
+    "ooms": 17,
+    "mean_frag": 0.2895,
+    "max_frag": 0.5178,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq256_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10644,
+    "ooms": 39,
+    "mean_frag": 0.1687,
+    "max_frag": 0.3469,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs4_seq512_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6609,
+    "ooms": 0,
+    "mean_frag": 0.5509,
+    "max_frag": 0.7585,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2m_bs4_seq512_vram12288.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10605,
+    "ooms": 4,
+    "mean_frag": 0.421,
+    "max_frag": 0.6639,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2m_bs4_seq128_vram6144.parquet",
+    "architecture": "GPT-2-Medium",
+    "events": 10675,
+    "ooms": 8,
+    "mean_frag": 0.1884,
+    "max_frag": 0.3152,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2_bs2_seq256_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6473,
+    "ooms": 0,
+    "mean_frag": 0.3308,
+    "max_frag": 0.4955,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs4_seq128_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6619,
+    "ooms": 0,
+    "mean_frag": 0.3025,
+    "max_frag": 0.4613,
+    "risk_label": "high_risk",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs4_seq512_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6701,
+    "ooms": 0,
+    "mean_frag": 0.5402,
+    "max_frag": 0.7505,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "gpt2_bs16_seq1024_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6730,
+    "ooms": 61,
+    "mean_frag": 0.4503,
+    "max_frag": 0.8775,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_base_bs4_seq512_vram12288.parquet",
+    "architecture": "BERT-Base",
+    "events": 6549,
+    "ooms": 0,
+    "mean_frag": 0.5442,
+    "max_frag": 0.7613,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "bert_large_bs2_seq1024_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10116,
+    "ooms": 1019,
+    "mean_frag": 0.1253,
+    "max_frag": 0.3626,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "resnet50_bs32_vram8192.parquet",
+    "architecture": "ResNet-50",
+    "events": 19068,
+    "ooms": 88,
+    "mean_frag": 0.219,
+    "max_frag": 0.475,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs8_seq1024_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 8265,
+    "ooms": 2914,
+    "mean_frag": 0.0878,
+    "max_frag": 0.3555,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "bert_base_bs8_seq128_vram8192.parquet",
+    "architecture": "BERT-Base",
+    "events": 6637,
+    "ooms": 0,
+    "mean_frag": 0.3673,
+    "max_frag": 0.5549,
+    "risk_label": "high_risk",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs2_seq1024_vram8192.parquet",
+    "architecture": "GPT-2",
+    "events": 6584,
+    "ooms": 1,
+    "mean_frag": 0.6072,
+    "max_frag": 0.8187,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "gpt2_bs4_seq1024_vram12288.parquet",
+    "architecture": "GPT-2",
+    "events": 6709,
+    "ooms": 4,
+    "mean_frag": 0.6336,
+    "max_frag": 0.881,
+    "risk_label": "critical",
+    "vram_mb": 12288
+  },
+  {
+    "file": "resnet101_bs64_vram8192.parquet",
+    "architecture": "ResNet-101",
+    "events": 24739,
+    "ooms": 11666,
+    "mean_frag": 0.1258,
+    "max_frag": 0.6042,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "bert_large_bs2_seq128_vram6144.parquet",
+    "architecture": "BERT-Large",
+    "events": 10627,
+    "ooms": 4,
+    "mean_frag": 0.2124,
+    "max_frag": 0.3505,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs4_seq256_vram6144.parquet",
+    "architecture": "ViT-Large",
+    "events": 10583,
+    "ooms": 8,
+    "mean_frag": 0.2336,
+    "max_frag": 0.4108,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  },
+  {
+    "file": "gpt2_bs4_seq128_vram6144.parquet",
+    "architecture": "GPT-2",
+    "events": 6581,
+    "ooms": 0,
+    "mean_frag": 0.3108,
+    "max_frag": 0.4732,
+    "risk_label": "high_risk",
+    "vram_mb": 6144
+  },
+  {
+    "file": "vit_large_bs2_seq256_vram12288.parquet",
+    "architecture": "ViT-Large",
+    "events": 10549,
+    "ooms": 0,
+    "mean_frag": 0.2934,
+    "max_frag": 0.4571,
+    "risk_label": "stable",
+    "vram_mb": 12288
+  },
+  {
+    "file": "vit_large_bs16_seq256_vram8192.parquet",
+    "architecture": "ViT-Large",
+    "events": 10683,
+    "ooms": 22,
+    "mean_frag": 0.3165,
+    "max_frag": 0.5616,
+    "risk_label": "critical",
+    "vram_mb": 8192
+  },
+  {
+    "file": "resnet50_bs16_vram6144.parquet",
+    "architecture": "ResNet-50",
+    "events": 19227,
+    "ooms": 151,
+    "mean_frag": 0.134,
+    "max_frag": 0.3187,
+    "risk_label": "critical",
+    "vram_mb": 6144
+  }
+]

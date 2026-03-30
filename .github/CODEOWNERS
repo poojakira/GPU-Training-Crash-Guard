@@ -1,0 +1,35 @@
+# CODEOWNERS — Predictive GPU Memory Defragmenter
+# GitHub will automatically request reviews from the listed owners
+# when changes are made to matching paths.
+
+# ──────────────────────────────────────────────────────────
+# ML Engineering — Pooja Kiran
+# ──────────────────────────────────────────────────────────
+/src/                           @poojakira
+/gpudefrag/                     @poojakira
+/benchmarks/                    @poojakira
+/scripts/                       @poojakira
+/tests/                         @poojakira
+/data/                          @poojakira
+/results/                       @poojakira
+/examples/                      @poojakira
+*.py                            @poojakira
+pyproject.toml                  @poojakira
+requirements.txt                @poojakira
+setup.py                        @poojakira
+config.yaml                     @poojakira
+
+# ──────────────────────────────────────────────────────────
+# Robotics Engineering — Rhutvik Pachghare
+# ──────────────────────────────────────────────────────────
+/dashboard/                     @rhutvik-pachghare
+/.github/                       @rhutvik-pachghare
+/benchmark/                     @rhutvik-pachghare
+
+# ──────────────────────────────────────────────────────────
+# Shared ownership (documentation, config, CI)
+# ──────────────────────────────────────────────────────────
+README.md                       @poojakira @rhutvik-pachghare
+TECHNICAL_REPORT.md             @poojakira @rhutvik-pachghare
+RESULTS.md                      @poojakira @rhutvik-pachghare
+LICENSE                         @poojakira

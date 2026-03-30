@@ -1,0 +1,154 @@
+"""
+src.mitigation.policy — Honest OOM-risk mitigation policy.
+
+Actions based on risk-score thresholds:
+
+  +-----------+------+---------------------------------------------+
+  | Risk      | Tier | Action                                      |
+  +-----------+------+---------------------------------------------+
+  | 0.0 – 0.5 | SAFE | no-op                                       |
+  | 0.5 – 0.8 | WARN | log warning, suggest batch-size reduction    |
+  | 0.8 – 1.0 | ACT  | empty_cache, suggest batch-size downshift    |
+  +-----------+------+---------------------------------------------+
+
+No magic — just cache-clearing and logged advice.
+
+Usage::
+
+    policy = MitigationPolicy()
+    action = policy.evaluate(risk_score=0.85)
+    # action.tier == "ACT", action.cache_cleared == True
+"""
+
+import logging
+import time
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Any, Optional
+
+log = logging.getLogger("gpudefrag.mitigation_policy")
+
+
+@dataclass
+class MitigationAction:
+    """Record of one policy evaluation."""
+    timestamp: float
+    risk_score: float
+    tier: str                     # SAFE / WARN / ACT
+    message: str
+    cache_cleared: bool = False
+    suggested_batch_size: Optional[int] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+class MitigationPolicy:
+    """
+    Threshold-driven mitigation policy.
+
+    Parameters
+    ----------
+    warn_threshold : float
+        Risk score above which a warning is logged.
+    act_threshold : float
+        Risk score above which active intervention (cache clear) occurs.
+    batch_downshift_factor : float
+        Multiply current batch size by this when suggesting a downshift.
+    """
+
+    def __init__(
+        self,
+        warn_threshold: float = 0.5,
+        act_threshold: float = 0.8,
+        batch_downshift_factor: float = 0.75,
+    ) -> None:
+        self.warn_threshold = warn_threshold
+        self.act_threshold = act_threshold
+        self.batch_downshift_factor = batch_downshift_factor
+        self._actions: List[MitigationAction] = []
+
+    def evaluate(
+        self,
+        risk_score: float,
+        current_batch_size: int = 0,
+    ) -> MitigationAction:
+        """
+        Evaluate the policy for a given risk score.
+
+        Returns
+        -------
+        MitigationAction
+            What was done (or not done).
+        """
+        ts = time.time()
+
+        if risk_score >= self.act_threshold:
+            suggested_bs = max(1, int(current_batch_size * self.batch_downshift_factor)) if current_batch_size else None
+            msg = (
+                f"HIGH RISK ({risk_score:.3f}) — cleared CUDA cache"
+                + (f", suggest batch_size → {suggested_bs}" if suggested_bs else "")
+            )
+            cache_cleared = self._try_empty_cache()
+            action = MitigationAction(
+                timestamp=ts,
+                risk_score=risk_score,
+                tier="ACT",
+                message=msg,
+                cache_cleared=cache_cleared,
+                suggested_batch_size=suggested_bs,
+            )
+            log.warning(msg)
+
+        elif risk_score >= self.warn_threshold:
+            suggested_bs = max(1, int(current_batch_size * self.batch_downshift_factor)) if current_batch_size else None
+            msg = (
+                f"ELEVATED RISK ({risk_score:.3f}) — consider reducing batch size"
+                + (f" to {suggested_bs}" if suggested_bs else "")
+            )
+            action = MitigationAction(
+                timestamp=ts,
+                risk_score=risk_score,
+                tier="WARN",
+                message=msg,
+                suggested_batch_size=suggested_bs,
+            )
+            log.warning(msg)
+
+        else:
+            action = MitigationAction(
+                timestamp=ts,
+                risk_score=risk_score,
+                tier="SAFE",
+                message="No action needed",
+            )
+
+        self._actions.append(action)
+        return action
+
+    @property
+    def actions(self) -> List[MitigationAction]:
+        return list(self._actions)
+
+    @property
+    def action_counts(self) -> Dict[str, int]:
+        counts = {"SAFE": 0, "WARN": 0, "ACT": 0}
+        for a in self._actions:
+            counts[a.tier] = counts.get(a.tier, 0) + 1
+        return counts
+
+    def clear(self) -> None:
+        self._actions.clear()
+
+    # -- Helpers -----------------------------------------------------------
+
+    @staticmethod
+    def _try_empty_cache() -> bool:
+        """Attempt torch.cuda.empty_cache(); return True if successful."""
+        try:
+            import torch
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+                return True
+        except Exception:
+            pass
+        return False

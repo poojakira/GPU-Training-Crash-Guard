@@ -1,0 +1,488 @@
+"""
+scripts/workload_simulator.py
+==============================
+High-fidelity GPU memory workload simulator.
+
+Models the memory lifecycle of real DL training steps:
+  Forward  →  activations allocated (quadratic in seq_len for Transformers)
+  Backward →  gradients allocated, activations freed
+  Optimizer → state buffers (Adam m/v) allocated
+  Cleanup  →  gradient zeroing, periodic cache clears
+
+Fragmentation emerges naturally from interleaved alloc/free patterns
+with 2 MB block quantization (matching PyTorch's caching allocator).
+
+Usage::
+
+    from scripts.workload_simulator import GPUWorkload, TransformerSpec
+    wl = GPUWorkload(TransformerSpec.gpt2(), vram_mb=8192)
+    events = wl.run(steps=500)
+"""
+
+from __future__ import annotations
+
+import math
+import time
+import random
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Any, Optional
+
+import numpy as np
+
+
+# ---------------------------------------------------------------------------
+# Architecture specifications
+# ---------------------------------------------------------------------------
+
+@dataclass
+class TransformerSpec:
+    """Memory geometry for a Transformer model."""
+    name: str
+    layers: int
+    hidden: int
+    heads: int
+    vocab: int
+    seq_len: int
+    batch_size: int
+
+    # Derived sizes (MB) — computed in __post_init__
+    param_mb: float = 0.0
+    activation_per_layer_mb: float = 0.0
+    gradient_mb: float = 0.0
+    optimizer_state_mb: float = 0.0
+
+    def __post_init__(self):
+        # Parameters: embeddings + layers*(QKV + FFN + norms)
+        embed_params = self.vocab * self.hidden + 1024 * self.hidden
+        layer_params = (4 * self.hidden * self.hidden +   # QKV + out proj
+                        2 * 4 * self.hidden * self.hidden + # FFN up/down
+                        4 * self.hidden)                     # layer norms
+        total_params = embed_params + self.layers * layer_params
+        self.param_mb = total_params * 4 / (1024 ** 2)  # fp32
+
+        # Activations per layer: attention scores + FFN intermediates
+        # Attention: B * H * S * S (quadratic in seq_len)
+        attn_mb = (self.batch_size * self.heads * self.seq_len * self.seq_len * 4) / (1024 ** 2)
+        ffn_mb = (self.batch_size * self.seq_len * 4 * self.hidden * 4) / (1024 ** 2)
+        self.activation_per_layer_mb = attn_mb + ffn_mb
+
+        # Gradients mirror params
+        self.gradient_mb = self.param_mb
+
+        # Adam: 2x param size (momentum + variance)
+        self.optimizer_state_mb = 2 * self.param_mb
+
+    @classmethod
+    def gpt2(cls, batch_size: int = 6, seq_len: int = 512) -> TransformerSpec:
+        return cls("GPT-2", layers=12, hidden=768, heads=12,
+                   vocab=50257, seq_len=seq_len, batch_size=batch_size)
+
+    @classmethod
+    def gpt2_medium(cls, batch_size: int = 4, seq_len: int = 512) -> TransformerSpec:
+        return cls("GPT-2-Medium", layers=24, hidden=1024, heads=16,
+                   vocab=50257, seq_len=seq_len, batch_size=batch_size)
+
+    @classmethod
+    def bert_base(cls, batch_size: int = 16, seq_len: int = 256) -> TransformerSpec:
+        return cls("BERT-Base", layers=12, hidden=768, heads=12,
+                   vocab=30522, seq_len=seq_len, batch_size=batch_size)
+
+    @classmethod
+    def bert_large(cls, batch_size: int = 8, seq_len: int = 256) -> TransformerSpec:
+        return cls("BERT-Large", layers=24, hidden=1024, heads=16,
+                   vocab=30522, seq_len=seq_len, batch_size=batch_size)
+
+    @classmethod
+    def vit_large(cls, batch_size: int = 8, seq_len: int = 197) -> TransformerSpec:
+        return cls("ViT-Large", layers=24, hidden=1024, heads=16,
+                   vocab=1000, seq_len=seq_len, batch_size=batch_size)
+
+    @classmethod
+    def llama_7b(cls, batch_size: int = 2, seq_len: int = 2048) -> TransformerSpec:
+        return cls("Llama-7B", layers=32, hidden=4096, heads=32,
+                   vocab=32000, seq_len=seq_len, batch_size=batch_size)
+
+
+@dataclass
+class CNNSpec:
+    """Memory geometry for a CNN model."""
+    name: str
+    layers: int
+    base_channels: int
+    input_hw: int
+    batch_size: int
+
+    param_mb: float = 0.0
+    activation_per_layer_mb: float = 0.0
+    gradient_mb: float = 0.0
+    optimizer_state_mb: float = 0.0
+
+    def __post_init__(self):
+        total_params = 0
+        hw = self.input_hw
+        cin = 3
+        for i in range(self.layers):
+            cout = self.base_channels * (2 ** min(i // 3, 4))
+            total_params += cin * cout * 9 + cout  # 3x3 conv + bias
+            cin = cout
+            if i % 2 == 1:
+                hw = max(hw // 2, 1)
+
+        self.param_mb = total_params * 4 / (1024 ** 2)
+        # Activations: feature map at mid-resolution
+        mid_hw = self.input_hw // 4
+        mid_ch = self.base_channels * 4
+        self.activation_per_layer_mb = (
+            self.batch_size * mid_ch * mid_hw * mid_hw * 4 / (1024 ** 2)
+        )
+        self.gradient_mb = self.param_mb
+        self.optimizer_state_mb = 2 * self.param_mb
+
+    @classmethod
+    def resnet50(cls, batch_size: int = 32) -> CNNSpec:
+        return cls("ResNet-50", layers=50, base_channels=64,
+                   input_hw=224, batch_size=batch_size)
+
+    @classmethod
+    def resnet101(cls, batch_size: int = 16) -> CNNSpec:
+        return cls("ResNet-101", layers=101, base_channels=64,
+                   input_hw=224, batch_size=batch_size)
+
+    @classmethod
+    def efficientnet(cls, batch_size: int = 24) -> CNNSpec:
+        return cls("EfficientNet-B4", layers=40, base_channels=48,
+                   input_hw=380, batch_size=batch_size)
+
+
+# ---------------------------------------------------------------------------
+# Block-level allocator model
+# ---------------------------------------------------------------------------
+
+BLOCK_SIZE_MB = 2  # PyTorch caching allocator quantizes to 2 MB blocks
+
+
+def _quantize(mb: float) -> float:
+    """Round up to nearest BLOCK_SIZE_MB."""
+    return math.ceil(mb / BLOCK_SIZE_MB) * BLOCK_SIZE_MB
+
+
+@dataclass
+class _Block:
+    """Represents an allocated memory block."""
+    block_id: int
+    size_mb: float
+    tag: str        # "param", "activation", "gradient", "optimizer", "temp"
+    step: int
+    timestamp_ns: int
+
+
+class CachingAllocator:
+    """
+    Simulates PyTorch's CUDA caching allocator at the block level.
+
+    Tracks allocated and free blocks, computes fragmentation as the ratio
+    of unusable free memory (blocks too small to satisfy typical requests)
+    to total reserved memory.
+    """
+
+    def __init__(self, vram_mb: float = 8192.0, noise_std: float = 0.02):
+        self.vram_mb = vram_mb
+        self.noise_std = noise_std
+        self._blocks: Dict[int, _Block] = {}
+        self._free_blocks: List[float] = []  # sizes of freed-but-cached blocks
+        self._next_id = 0
+        self._reserved_mb = 0.0
+        self._allocated_mb = 0.0
+
+    def alloc(self, size_mb: float, tag: str, step: int) -> Optional[int]:
+        """Allocate a block. Returns block_id or None on OOM."""
+        quantized = _quantize(size_mb + abs(np.random.normal(0, self.noise_std * size_mb)))
+
+        # Try to reuse a free block
+        reused = False
+        for i, free_sz in enumerate(self._free_blocks):
+            if free_sz >= quantized:
+                self._free_blocks.pop(i)
+                # Internal fragmentation: block may be larger than needed
+                leftover = free_sz - quantized
+                if leftover >= BLOCK_SIZE_MB:
+                    self._free_blocks.append(leftover)
+                else:
+                    quantized = free_sz  # absorb the leftover
+                reused = True
+                break
+
+        if not reused:
+            # Need new memory from VRAM
+            if self._reserved_mb + quantized > self.vram_mb:
+                return None  # OOM
+            self._reserved_mb += quantized
+
+        self._allocated_mb += quantized
+        bid = self._next_id
+        self._next_id += 1
+        self._blocks[bid] = _Block(
+            block_id=bid,
+            size_mb=quantized,
+            tag=tag,
+            step=step,
+            timestamp_ns=int(time.perf_counter() * 1e9),
+        )
+        return bid
+
+    def free(self, block_id: int) -> float:
+        """Free a block (returns it to cache, not to OS)."""
+        if block_id not in self._blocks:
+            return 0.0
+        blk = self._blocks.pop(block_id)
+        self._allocated_mb -= blk.size_mb
+        self._free_blocks.append(blk.size_mb)
+        return blk.size_mb
+
+    def empty_cache(self):
+        """Release all cached blocks back to VRAM pool."""
+        total_freed = sum(self._free_blocks)
+        self._reserved_mb -= total_freed
+        self._free_blocks.clear()
+        return total_freed
+
+    @property
+    def allocated_mb(self) -> float:
+        return max(0.0, self._allocated_mb)
+
+    @property
+    def reserved_mb(self) -> float:
+        return max(BLOCK_SIZE_MB, self._reserved_mb)
+
+    @property
+    def fragmentation(self) -> float:
+        """External fragmentation: fraction of reserved that is unusable."""
+        if self._reserved_mb <= 0:
+            return 0.0
+        return 1.0 - (self._allocated_mb / self._reserved_mb)
+
+    @property
+    def free_cached_mb(self) -> float:
+        return sum(self._free_blocks)
+
+    @property
+    def utilization(self) -> float:
+        return self._allocated_mb / self.vram_mb if self.vram_mb > 0 else 0.0
+
+    def snapshot(self) -> Dict[str, float]:
+        return {
+            "allocated_mb": round(self.allocated_mb, 2),
+            "reserved_mb": round(self.reserved_mb, 2),
+            "free_cached_mb": round(self.free_cached_mb, 2),
+            "fragmentation": round(self.fragmentation, 6),
+            "utilization": round(self.utilization, 6),
+            "num_blocks": len(self._blocks),
+            "num_free_blocks": len(self._free_blocks),
+        }
+
+
+# ---------------------------------------------------------------------------
+# Workload runner
+# ---------------------------------------------------------------------------
+
+@dataclass
+class TraceEvent:
+    """Single memory event in a trace."""
+    timestamp_ns: int
+    step: int
+    phase: str          # forward / backward / optimizer / cleanup
+    action: int         # 1=alloc, 0=free
+    delta_bytes: int    # positive=alloc, negative=free
+    abs_allocated: float
+    abs_reserved: float
+    fragmentation: float
+    utilization: float
+    tag: str
+    oom: bool = False
+
+
+class GPUWorkload:
+    """
+    Simulates a full DL training workload on a virtual GPU.
+
+    Parameters
+    ----------
+    spec : TransformerSpec | CNNSpec
+        Architecture specification.
+    vram_mb : float
+        Total VRAM in MB (default 8192 = 8 GB).
+    noise_std : float
+        Gaussian noise on allocation sizes (0.02 = 2%).
+    cache_clear_interval : int
+        Steps between full cache clears (simulates empty_cache calls).
+    """
+
+    def __init__(
+        self,
+        spec: TransformerSpec | CNNSpec,
+        vram_mb: float = 8192.0,
+        noise_std: float = 0.02,
+        cache_clear_interval: int = 50,
+    ):
+        self.spec = spec
+        self.allocator = CachingAllocator(vram_mb=vram_mb, noise_std=noise_std)
+        self.cache_clear_interval = cache_clear_interval
+        self.events: List[TraceEvent] = []
+        self._param_blocks: List[int] = []
+        self._optimizer_blocks: List[int] = []
+
+    def _emit(self, step: int, phase: str, action: int,
+              delta_mb: float, tag: str, oom: bool = False):
+        snap = self.allocator.snapshot()
+        self.events.append(TraceEvent(
+            timestamp_ns=int(time.perf_counter() * 1e9),
+            step=step,
+            phase=phase,
+            action=action,
+            delta_bytes=int(delta_mb * 1024 * 1024) * (1 if action == 1 else -1),
+            abs_allocated=snap["allocated_mb"],
+            abs_reserved=snap["reserved_mb"],
+            fragmentation=snap["fragmentation"],
+            utilization=snap["utilization"],
+            tag=tag,
+            oom=oom,
+        ))
+
+    def _alloc_or_oom(self, size_mb: float, tag: str, step: int, phase: str) -> Optional[int]:
+        bid = self.allocator.alloc(size_mb, tag, step)
+        if bid is None:
+            self._emit(step, phase, 1, size_mb, tag, oom=True)
+            # Emergency: clear cache and retry
+            self.allocator.empty_cache()
+            bid = self.allocator.alloc(size_mb, tag, step)
+            if bid is None:
+                return None
+        self._emit(step, phase, 1, size_mb, tag, oom=False)
+        return bid
+
+    def run(self, steps: int = 500, seed: int = 42) -> List[Dict[str, Any]]:
+        """
+        Execute the workload for `steps` training iterations.
+
+        Returns a list of event dicts suitable for Parquet export.
+        """
+        rng = np.random.RandomState(seed)
+        random.seed(seed)
+
+        spec = self.spec
+
+        # Step 0: Allocate model parameters (persist for lifetime)
+        if isinstance(spec, TransformerSpec):
+            per_layer = spec.param_mb / max(spec.layers, 1)
+            for layer_i in range(spec.layers):
+                bid = self._alloc_or_oom(per_layer, "param", 0, "init")
+                if bid is not None:
+                    self._param_blocks.append(bid)
+        else:
+            bid = self._alloc_or_oom(spec.param_mb, "param", 0, "init")
+            if bid is not None:
+                self._param_blocks.append(bid)
+
+        # Allocate optimizer state (Adam m + v, persist)
+        opt_bid = self._alloc_or_oom(spec.optimizer_state_mb, "optimizer", 0, "init")
+        if opt_bid is not None:
+            self._optimizer_blocks.append(opt_bid)
+
+        # Training loop
+        for step in range(1, steps + 1):
+            activation_ids = []
+            gradient_ids = []
+
+            # ── Forward pass ──
+            n_act_allocs = max(1, spec.layers // 2)
+            for i in range(n_act_allocs):
+                act_size = spec.activation_per_layer_mb * (1 + rng.normal(0, 0.05))
+                bid = self._alloc_or_oom(max(act_size, 0.5), "activation", step, "forward")
+                if bid is not None:
+                    activation_ids.append(bid)
+
+            # Small temporary buffers (attention masks, scaling tensors)
+            n_temps = rng.randint(2, 8)
+            temp_ids = []
+            for _ in range(n_temps):
+                temp_size = rng.uniform(0.5, 4.0)  # 0.5–4 MB
+                bid = self._alloc_or_oom(temp_size, "temp", step, "forward")
+                if bid is not None:
+                    temp_ids.append(bid)
+
+            # Free temps immediately (creates fragmentation gaps)
+            for tid in temp_ids:
+                freed = self.allocator.free(tid)
+                self._emit(step, "forward", 0, freed, "temp")
+
+            # ── Backward pass ──
+            grad_size = spec.gradient_mb / max(spec.layers, 1)
+            for i in range(max(1, spec.layers // 3)):
+                bid = self._alloc_or_oom(
+                    grad_size * (1 + rng.normal(0, 0.03)), "gradient", step, "backward"
+                )
+                if bid is not None:
+                    gradient_ids.append(bid)
+
+            # Free activations during backward (as gradients are computed)
+            for aid in activation_ids:
+                freed = self.allocator.free(aid)
+                self._emit(step, "backward", 0, freed, "activation")
+
+            # ── Optimizer step ──
+            # Small temp allocs for Adam updates
+            for _ in range(rng.randint(1, 4)):
+                temp_size = rng.uniform(1.0, 6.0)
+                bid = self._alloc_or_oom(temp_size, "optimizer_temp", step, "optimizer")
+                if bid is not None:
+                    freed = self.allocator.free(bid)
+                    self._emit(step, "optimizer", 0, freed, "optimizer_temp")
+
+            # ── Cleanup: free gradients (zero_grad) ──
+            for gid in gradient_ids:
+                freed = self.allocator.free(gid)
+                self._emit(step, "cleanup", 0, freed, "gradient")
+
+            # Periodic cache clear
+            if self.cache_clear_interval > 0 and step % self.cache_clear_interval == 0:
+                cleared = self.allocator.empty_cache()
+                if cleared > 0:
+                    self._emit(step, "cleanup", 0, cleared, "cache_clear")
+
+        return [asdict(e) for e in self.events]
+
+
+# ---------------------------------------------------------------------------
+# CLI verification
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser(description="Run workload simulator verification")
+    ap.add_argument("--verify", action="store_true", help="Run quick verification")
+    ap.add_argument("--steps", type=int, default=200, help="Training steps")
+    args = ap.parse_args()
+
+    specs = [
+        TransformerSpec.gpt2(),
+        TransformerSpec.bert_base(),
+        CNNSpec.resnet50(),
+    ]
+
+    for spec in specs:
+        wl = GPUWorkload(spec, vram_mb=8192, noise_std=0.02)
+        events = wl.run(steps=args.steps, seed=42)
+        frags = [e["fragmentation"] for e in events]
+        ooms = sum(1 for e in events if e["oom"])
+        print(f"{spec.name:20s}  events={len(events):5d}  "
+              f"frag=[{min(frags):.3f}, {max(frags):.3f}]  "
+              f"mean={np.mean(frags):.3f}  OOMs={ooms}")
+
+    if args.verify:
+        # Verify non-trivial fragmentation
+        wl = GPUWorkload(TransformerSpec.gpt2(), vram_mb=8192)
+        events = wl.run(steps=100)
+        frags = [e["fragmentation"] for e in events]
+        assert max(frags) > 0.05, f"Max frag too low: {max(frags)}"
+        assert len(events) > 500, f"Too few events: {len(events)}"
+        print("\n✓ Verification passed")

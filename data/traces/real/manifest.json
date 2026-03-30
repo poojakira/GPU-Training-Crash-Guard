@@ -1,0 +1,26 @@
+[
+  {
+    "file": "resnet50_real_500steps.parquet",
+    "model": "resnet50",
+    "device": "cpu",
+    "steps": 500,
+    "events": 2000,
+    "mean_frag": 0.4944,
+    "max_frag": 0.6263,
+    "min_frag": 0.4741,
+    "time_s": 89.8,
+    "parquet_size_mb": 0.07
+  },
+  {
+    "file": "bert_real_500steps.parquet",
+    "model": "bert",
+    "device": "cpu",
+    "steps": 500,
+    "events": 2000,
+    "mean_frag": 0.2741,
+    "max_frag": 0.4286,
+    "min_frag": 0.263,
+    "time_s": 608.7,
+    "parquet_size_mb": 0.07
+  }
+]

@@ -1,0 +1,3 @@
+frag_threshold: 0.70
+ddp_sync: true
+async_compaction: true
