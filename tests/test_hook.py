@@ -2,18 +2,12 @@
 tests/test_hook.py — Prove the TrainingHook actually runs.
 """
 
-import os
-import sys
-import pytest
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 import torch
 import torch.nn as nn
 
-from src.hooks.training_hook import TrainingHook
-from src.monitor.allocator_logger import AllocatorLogger
-from src.predictor.risk_model import OOMRiskModel
+from gpudefrag.trainer.training_hook import TrainingHook
+from gpudefrag.profiler.allocator_logger import AllocatorLogger
+from gpudefrag.scheduler.risk_model import OOMRiskModel
 
 
 class TestTrainingHook:

@@ -1,11 +1,6 @@
 """Unit tests for the FragPredictor model."""
 
 import torch
-import pytest
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from gpudefrag.scheduler.predictor import FragPredictor
 from gpudefrag.utils import DefragConfig

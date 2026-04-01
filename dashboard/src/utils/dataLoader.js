@@ -1,65 +1,81 @@
-// Process processed chart data from snapshots
-const processChartSnapshots = (snapshots) => {
-  return snapshots.map(s => ({
-    iteration: s.iteration,
-    frag: (s.frag * 100).toFixed(1),
-    allocated: s.allocated_mb.toFixed(0)
-  }));
-};
+// ============================================================================
+// dataLoader.js — Production Telemetry Data Layer
+// ============================================================================
+// RULE: This module returns NUMBERS, not strings. All formatting is the
+// responsibility of the UI components at render time. This prevents
+// TypeError crashes from calling .toFixed() on string values.
+// ============================================================================
 
-// Fetch live telemetry (Real-time)
+// Fetch live telemetry (Real-time polling from gpudefrag backend)
+// Fetch live telemetry (Real-time polling from gpudefrag backend)
 export const fetchLiveTelemetry = async () => {
   try {
-    const response = await fetch('/live/live_telemetry.json?t=' + Date.now());
+    const response = await fetch('/api/telemetry');
     if (!response.ok) throw new Error('Live telemetry not found');
     const data = await response.json();
     
+    // Validate required top-level fields exist before accessing
+    if (data.current_allocated_mb == null || data.current_reserved_mb == null) {
+      throw new Error('Malformed telemetry: missing required fields');
+    }
+
     return {
-      currentAllocated: data.current_allocated_mb.toFixed(0),
-      currentReserved: data.current_reserved_mb.toFixed(0),
-      currentFrag: (data.current_frag * 100).toFixed(1),
-      totalCompactions: data.total_compactions,
-      totalFreed: data.total_freed_mb.toFixed(0),
-      history: data.compaction_history.map(c => ({
-        id: c.compaction_id,
-        freed: c.freed_mb,
-        fragReduction: (c.frag_reduction * 100).toFixed(1),
-        elapsedMs: c.elapsed_ms.toFixed(0),
-        timestamp: c.timestamp
-      })),
-      avgTime: data.avg_latency_ms.toFixed(3) // Monitoring latency
+      currentAllocated: Number(data.current_allocated_mb) || 0,
+      currentReserved:  Number(data.current_reserved_mb) || 0,
+      currentFrag:      Number(data.current_frag) * 100 || 0,
+      totalCompactions: Number(data.total_compactions) || 0,
+      totalFreed:       Number(data.total_freed_mb) || 0,
+      avgTime:          Number(data.avg_latency_ms) || 0,
+      history: Array.isArray(data.compaction_history)
+        ? data.compaction_history.map((c, idx) => ({
+            id:            c.compaction_id ?? idx,
+            freed:         Number(c.freed_mb) || 0,
+            fragReduction: Number(c.frag_reduction) * 100 || 0,
+            elapsedMs:     Number(c.elapsed_ms) || 0,
+            timestamp:     c.timestamp || `sweep_${idx}`
+          }))
+        : []
     };
   } catch (e) {
-    console.warn("Polling live data failed, system might be idle:", e.message);
+    // Silent fail — returns null so App.jsx falls back to local synthesis
     return null;
   }
 };
 
-// Fetch baseline/static stats
+// Fetch baseline/static benchmark stats
 export const fetchBenchmarkStats = async () => {
-    try {
-        const [baseRes, defragRes] = await Promise.all([
-            fetch('/live/baseline.json'),
-            fetch('/live/defrag.json')
-        ]);
-        
-        const base = await baseRes.json();
-        const defrag = await defragRes.json();
-        
-        return {
-            baseline: {
-                avgTime: base.avg_iteration_time.toFixed(2),
-                peakMem: base.peak_memory_mb.toFixed(0),
-                chart: base.memory_snapshots.map(s => ({ iteration: s.iteration, frag: (s.frag * 100).toFixed(1) }))
-            },
-            defrag: {
-                avgTime: defrag.avg_iteration_time.toFixed(2),
-                peakMem: defrag.peak_memory_mb.toFixed(0),
-                chart: defrag.memory_snapshots.map(s => ({ iteration: s.iteration, frag: (s.frag * 100).toFixed(1) }))
-            }
-        };
-    } catch (e) {
-        console.error("Static data load failed:", e);
-        return null;
-    }
+  try {
+    const response = await fetch('/api/benchmarks');
+    if (!response.ok) throw new Error('Benchmark data not found');
+    
+    const data = await response.json();
+    const base = data.baseline || {};
+    const defrag = data.defrag || {};
+    
+    return {
+      baseline: {
+        avgTime:  Number(base.avg_iteration_time) || 0,
+        peakMem:  Number(base.peak_memory_mb) || 0,
+        chart:    Array.isArray(base.memory_snapshots)
+          ? base.memory_snapshots.map(s => ({
+              iteration: s.iteration,
+              frag: Number(s.frag) * 100 || 0
+            }))
+          : []
+      },
+      defrag: {
+        avgTime:  Number(defrag.avg_iteration_time) || 0,
+        peakMem:  Number(defrag.peak_memory_mb) || 0,
+        chart:    Array.isArray(defrag.memory_snapshots)
+          ? defrag.memory_snapshots.map(s => ({
+              iteration: s.iteration,
+              frag: Number(s.frag) * 100 || 0
+            }))
+          : []
+      }
+    };
+  } catch (e) {
+    console.error("Static data load failed:", e);
+    return null;
+  }
 };

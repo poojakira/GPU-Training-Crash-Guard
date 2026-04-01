@@ -21,16 +21,19 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install CPU-only PyTorch and dependencies
-        run: |
-          pip install --upgrade pip
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install numpy pandas matplotlib scikit-learn pyarrow pyyaml
-          pip install fastapi uvicorn
-          pip install pytest pytest-cov
+      - name: Install PyTorch (CPU-only)
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
 
-      - name: Run all tests
-        run: pytest tests/ -v --tb=short -p no:warnings
+      - name: Install package and dependencies
+        run: pip install -e ".[dev,profiler,rich]"
+
+      - name: Run unit tests with coverage
+        run: pytest tests/ -v --tb=short -p no:warnings --cov=gpudefrag
+
+      - name: Verify CLI entry points
+        run: |
+          gpu-defragger --help
+          gpu-defragger profile --help
 
       - name: Verify benchmark outputs
         run: |
@@ -44,6 +47,24 @@ jobs:
           assert len(rows) == 2
           print('Benchmark artifacts validated.')
           "
+
+  dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+          
+      - name: Build Dashboard
+        working-directory: dashboard
+        run: |
+          npm ci
+          npm run build
 
   lint:
     runs-on: ubuntu-latest
@@ -60,7 +81,7 @@ jobs:
         run: pip install flake8 ruff
 
       - name: Run Flake8
-        run: flake8 gpudefrag/ src/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        run: flake8 gpudefrag/ --count --select=E9,F63,F7,F82 --show-source --statistics
 
       - name: Run Ruff
-        run: ruff check gpudefrag/ src/ tests/ --select E,F,W --ignore E501
+        run: ruff check gpudefrag/ tests/ --select E,F,W --ignore E501

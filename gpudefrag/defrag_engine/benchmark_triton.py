@@ -37,10 +37,10 @@ def run_benchmark():
     # Create a dummy tensor representing a fragmented parameter or activation buffer (e.g., 512 MB)
     size_mb = 512
     num_elements = (size_mb * 1024 * 1024) // 4  # fp32 = 4 bytes
-    
-    print(f"--- Triton Contiguous Compaction Benchmark ---")
+
+    print("--- Triton Contiguous Compaction Benchmark ---")
     print(f"Payload Size: {size_mb} MB (fp32 elements: {num_elements:,})\n")
-    
+
     # Pre-allocate source and destination
     src = torch.randn(num_elements, dtype=torch.float32, device='cuda')
     dst_torch = torch.empty_like(src)
@@ -69,7 +69,7 @@ def run_benchmark():
     print("Results:")
     print(f"  PyTorch generic copy_() latency: {torch_time:.2f} ms")
     print(f"  Triton compaction sweep latency: {triton_time:.2f} ms")
-    
+
     if triton_time < torch_time:
         gain = ((torch_time - triton_time) / torch_time) * 100
         print(f"\n🚀 {gain:.1f}% bandwidth optimization via custom Triton block mechanics.")

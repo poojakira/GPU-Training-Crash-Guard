@@ -1,11 +1,6 @@
 """Unit tests for the MemoryCompactor."""
 
 import torch
-import pytest
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from gpudefrag.defrag_engine.compactor import MemoryCompactor
 

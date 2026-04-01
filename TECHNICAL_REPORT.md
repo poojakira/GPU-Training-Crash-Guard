@@ -1,6 +1,6 @@
-# TECHNICAL REPORT: Predictive GPU Memory Optimization
+# TECHNICAL REPORT: Predictive GPU Memory Optimization v2.0.0
 
-*A Systems Engineering Deep-Dive into Proactive Defragmentation for Large-Scale AI Workloads.*
+*A Systems Engineering Deep-Dive into Proactive Defragmentation for Large-Scale AI Workloads. Powered by AeroGrid Telemetry.*
 
 ---
 
@@ -34,8 +34,8 @@ graph LR
 ### Module Breakdown
 1. **`profiler/`**: Native ingestion of `torch.cuda.memory_snapshot` block dictionaries. Transposes block layouts into sequential metric tensors tracking physical address contiguity.
 2. **`scheduler/`**: Implements an ultra-lightweight (800k param) autoregressive Transformer predicting the vector state of memory fragmentation $T+100ms$ into the future.
-3. **`defrag_engine/`**: The execution plane. Unlike typical recursive deep-copies, the engine relies on a custom Triton kernel utilizing explicit eviction policies (`evict_first`) to sweep memory contiguously while bypassing the L2 cache hierarchy.
-4. **`trainer/`**: PyTorch API hooks orchestrating DDP (Distributed Data Parallel) barriers. `DDPSyncManager` conducts global `all_reduce(MAX)` checks to guarantee that all parallel ranks sweep synchronously, avoiding rank divergence.
+3. **`defrag_engine/`**: The execution plane. `GPUMemoryDefragmenter` physically repacks scattered tensors into contiguous VRAM blocks using custom Triton kernels with explicit eviction policies (`evict_first`), bypassing the L2 cache hierarchy. Telemetry is persisted to `results/live_telemetry.json` for the AeroGrid dashboard.
+4. **`trainer/`**: `auto_instrument()` provides zero-code-change PyTorch hook orchestration. `DDPSyncManager` conducts global `all_reduce(MAX)` checks to guarantee that all parallel ranks sweep synchronously, avoiding rank divergence.
 5. **`optimization/` & `llm_system/`**: Provides dynamic int8 weight quantizations and integration paths with custom PagedKV cache structures for long-context generation.
 
 ---
@@ -71,3 +71,4 @@ Triggering our Triton engine *before* PyTorch stalls completely circumvents the 
 - **C++ Extension Rewriting**: Port the scheduler daemon specifically to ATen C++ threading pools, stripping Python GIL interference and executing alongside NCCL watchdogs.
 - **RDMA Defragmentation**: Sync memory pressure metrics off-band via InfiniBand prior to collective gathering, further reducing `all_reduce` payload overhead across 128+ GPU clusters.
 - **Native Block Swapping**: Direct NVLink page migration bypassing host completely for fragmented KV cache offloading (Deep integration with vLLM / TensorRT-LLM frameworks).
+- **AeroGrid v2**: WebSocket-based live telemetry streaming to replace JSON file polling, enabling sub-50ms dashboard refresh rates.

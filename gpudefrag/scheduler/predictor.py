@@ -14,7 +14,6 @@ will be in the near future.
 
 import torch
 import torch.nn as nn
-import math
 from typing import Optional
 from gpudefrag.utils import DefragConfig
 
@@ -96,9 +95,9 @@ class FragPredictor(nn.Module):
         x = self.encoder(x)
         x = self.encoder_norm(x)
 
-        # Use the CLS-like last token for prediction
-        cls_token = x[:, -1, :]
-        return self.head(cls_token)
+        # Utilize Global Average Pooling across the temporal axis to capture steady historical trends
+        global_avg = x.mean(dim=1)
+        return self.head(global_avg)
 
     @classmethod
     def from_config(cls, config: DefragConfig) -> "FragPredictor":

@@ -5,10 +5,9 @@ gpudefrag.utils — Shared utilities, logging, and configuration.
 import logging
 import time
 import json
-import os
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, asdict
 from pathlib import Path
-from typing import Optional
+import yaml
 
 # ─── Logging ───────────────────────────────────────────────────────────────────
 
@@ -67,14 +66,37 @@ class DefragConfig:
     results_dir: str = "results"
 
     def save(self, path: str) -> None:
+        """Save config to JSON or YAML."""
+        ext = Path(path).suffix.lower()
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
-            json.dump(asdict(self), f, indent=2)
+            if ext == ".yaml" or ext == ".yml":
+                yaml.safe_dump(asdict(self), f, sort_keys=False)
+            else:
+                json.dump(asdict(self), f, indent=2)
 
     @classmethod
-    def load(cls, path: str) -> "DefragConfig":
-        with open(path) as f:
-            return cls(**json.load(f))
+    def load(cls, path: str | None = None) -> "DefragConfig":
+        """Load config from file (JSON/YAML) or return defaults."""
+        if path is None or not Path(path).exists():
+            return cls()
+
+        try:
+            ext = Path(path).suffix.lower()
+            with open(path) as f:
+                if ext == ".yaml" or ext == ".yml":
+                    data = yaml.safe_load(f)
+                else:
+                    data = json.load(f)
+
+            # Filter keys to match dataclass fields
+            from dataclasses import fields
+            valid_keys = {f.name for f in fields(cls)}
+            filtered = {k: v for k, v in data.items() if k in valid_keys}
+            return cls(**filtered)
+        except Exception as e:
+            get_logger("config").warning(f"Failed to load config from {path}: {e}. Using defaults.")
+            return cls()
 
 
 # ─── Timer ─────────────────────────────────────────────────────────────────────
@@ -139,17 +161,17 @@ def parse_memory_snapshot() -> dict:
     import torch
     if not torch.cuda.is_available():
         return {"blocks": [], "frag_score": 0.0}
-        
+
     try:
         snapshot = torch.cuda.memory_snapshot()
     except Exception:
         return {"blocks": [], "frag_score": 0.0}
-        
+
     blocks = []
     total_free = 0
     total_allocated = 0
     largest_free = 0
-    
+
     for segment in snapshot:
         for block in segment['blocks']:
             size = block['size']
@@ -161,12 +183,12 @@ def parse_memory_snapshot() -> dict:
                 blocks.append({'size': size, 'free': True})
                 total_free += size
                 largest_free = max(largest_free, size)
-                
+
     if total_free == 0:
         frag_score = 0.0
     else:
         frag_score = 1.0 - (largest_free / total_free)
-        
+
     return {
         "blocks": blocks,
         "frag_score": frag_score,

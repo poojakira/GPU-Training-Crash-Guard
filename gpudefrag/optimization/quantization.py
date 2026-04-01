@@ -12,19 +12,23 @@ from gpudefrag.utils import get_logger
 
 log = get_logger("quantization")
 
-def apply_dynamic_quantization(model: nn.Module, dtype=torch.qint8) -> nn.Module:
+def apply_gpu_quantization(model: nn.Module, dtype=torch.float16) -> nn.Module:
     """
-    Applies aggressive dynamic weight quantization to a PyTorch model.
-    By compressing weight representations from fp32 -> int8, we free up massive
-    blocks of memory for KV-caching during LLM inference, massively reducing the
-    need for frequent defragmentation.
+    Applies authentic GPU-native mixed-precision downcasting to a PyTorch model.
+    By compressing weight representations from FP32 to FP16 or BF16, we cut the contiguous
+    memory footprint by 50% globally, directly alleviating the CachingAllocator's 
+    fragmentation workload on CUDA.
     """
-    log.info(f"Applying CPU dynamic quantization to model logic using {dtype}")
-    # We target nn.Linear as they account for >80% of parameters in Transformers
-    quantized_model = torch.quantization.quantize_dynamic(
-        model, {nn.Linear}, dtype=dtype
-    )
-    return quantized_model
+    log.info(f"Applying GPU-native memory optimization via automatic casting to {dtype}")
+    
+    # Check if the hardware supports fast generic downcasting
+    if not torch.cuda.is_available():
+        log.warning("CUDA not available. Downcasting may not yield physical VRAM improvements.")
+        return model.to(dtype)
+
+    # Cast to precision (e.g., float16 or bfloat16)
+    optimized_model = model.to(dtype)
+    return optimized_model
 
 def get_model_size_mb(model: nn.Module) -> float:
     """Calculates the physical memory footprint of a model."""
@@ -34,5 +38,5 @@ def get_model_size_mb(model: nn.Module) -> float:
     buffer_size = 0
     for buffer in model.buffers():
         buffer_size += buffer.nelement() * buffer.element_size()
-    
+
     return (param_size + buffer_size) / (1024**2)

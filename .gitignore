@@ -31,3 +31,9 @@ checkpoints/*.pt
 # Temp files
 data/err.txt
 data/test.parquet
+
+# Environment and Coverage
+.env
+.coverage
+htmlcov/
+*.whl

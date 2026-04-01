@@ -2,10 +2,6 @@
 
 import torch
 import pytest
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from gpudefrag.profiler.collector import AllocationCollector
 from gpudefrag.utils import DefragConfig

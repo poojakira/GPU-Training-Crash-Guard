@@ -19,9 +19,8 @@ import torch
 import numpy as np
 from typing import Optional, Dict, List
 from gpudefrag.scheduler.predictor import FragPredictor
-from gpudefrag.defrag_engine.compactor import MemoryCompactor
+from gpudefrag.defrag_engine.defragmenter import GPUMemoryDefragmenter
 from gpudefrag.utils import get_logger, DefragConfig, parse_memory_snapshot
-import logging
 
 log = get_logger("monitor")
 
@@ -56,7 +55,7 @@ class DefragMonitor:
         self.config.frag_threshold = threshold
 
         # Components
-        self.compactor = MemoryCompactor()
+        self.compactor = GPUMemoryDefragmenter()
         self._model: Optional[FragPredictor] = None
         self._model_path = model_path or self.config.checkpoint_path
 
@@ -114,7 +113,7 @@ class DefragMonitor:
         self._active = False
         if self._thread:
             self._thread.join(timeout=3.0)
-        log.info("Monitor stopped. %d predictions, %d compactions.", len(self._predictions), self.compactor.total_compactions)
+        log.info("Monitor stopped. %d predictions, %d compactions.", len(self._predictions), len(self.compactor._history))
         return self
 
     def record_alloc(self, size_bytes: int, is_alloc: bool = True) -> None:
@@ -205,7 +204,8 @@ class DefragMonitor:
             if self.config.ddp_sync or self.config.async_compaction:
                 self.pending_compaction = True
             else:
-                self.compactor.compact(reason=f"predicted_frag={score:.3f}")
+                # If no tensors provided, it falls back to empty_cache() which is safer for a background daemon
+                self.compactor.defragment_tensors([], reason=f"predicted_frag={score:.3f}")
                 self._last_defrag_time = time.time()
 
     # ── Telemetry ─────────────────────────────────────────────────────────
@@ -214,12 +214,12 @@ class DefragMonitor:
         """Return comprehensive monitor statistics."""
         return {
             "total_predictions": len(self._predictions),
-            "total_compactions": self.compactor.total_compactions,
-            "total_freed_mb": self.compactor.total_freed_mb,
+            "total_compactions": len(self.compactor._history),
+            "total_freed_mb": sum(h.get("freed_mb", 0.0) for h in self.compactor._history),
             "avg_prediction_score": np.mean(self._predictions) if self._predictions else 0,
             "max_prediction_score": max(self._predictions) if self._predictions else 0,
             "avg_latency_ms": np.mean(self._prediction_latencies) if self._prediction_latencies else 0,
             "max_latency_ms": max(self._prediction_latencies) if self._prediction_latencies else 0,
             "killed": self._killed,
-            "compaction_history": self.compactor.history,
+            "compaction_history": self.compactor._history,
         }

@@ -2,14 +2,10 @@
 tests/test_risk_model.py — Prove the OOMRiskModel actually runs.
 """
 
-import os
-import sys
 import pytest
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from src.predictor.risk_model import OOMRiskModel, RiskThresholds
+from gpudefrag.scheduler.risk_model import OOMRiskModel, RiskThresholds
 
 
 class TestRuleBasedScorer:

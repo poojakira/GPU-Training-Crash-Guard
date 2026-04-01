@@ -21,10 +21,10 @@ sys.path.insert(0, str(ROOT))
 import torch
 import torch.nn as nn
 
-from src.monitor.allocator_logger import AllocatorLogger
-from src.predictor.risk_model import OOMRiskModel
-from src.hooks.training_hook import TrainingHook
-from src.mitigation.policy import MitigationPolicy
+from gpudefrag.profiler.allocator_logger import AllocatorLogger
+from gpudefrag.scheduler.risk_model import OOMRiskModel
+from gpudefrag.trainer.training_hook import TrainingHook
+from gpudefrag.defrag_engine.policy import MitigationPolicy
 
 
 def main():

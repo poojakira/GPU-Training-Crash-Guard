@@ -1,5 +1,5 @@
 """
-src.monitor.allocator_logger — Per-step GPU memory state logger.
+gpudefrag.profiler.allocator_logger — Per-step GPU memory state logger.
 
 Records allocated, reserved, free_estimate, fragmentation_ratio,
 step_time, and batch_size at each training step. Works on CPU (zeros

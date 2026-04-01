@@ -1,5 +1,5 @@
 """
-src.mitigation.policy — Honest OOM-risk mitigation policy.
+gpudefrag.defrag_engine.policy — Honest OOM-risk mitigation policy.
 
 Actions based on risk-score thresholds:
 
@@ -22,7 +22,7 @@ Usage::
 
 import logging
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, asdict
 from typing import List, Dict, Any, Optional, Iterable
 
 log = logging.getLogger("gpudefrag.mitigation_policy")
@@ -74,6 +74,7 @@ class MitigationPolicy:
         risk_score: float,
         current_batch_size: int = 0,
         tensors_to_defragment: Optional[Iterable[Any]] = None,
+        force_act: bool = False,
     ) -> MitigationAction:
         """
         Evaluate the policy for a given risk score.
@@ -85,27 +86,29 @@ class MitigationPolicy:
         """
         ts = time.time()
 
-        if risk_score >= self.act_threshold:
+        if risk_score >= self.act_threshold or force_act:
             suggested_bs = max(1, int(current_batch_size * self.batch_downshift_factor)) if current_batch_size else None
+
+            risk_label = f"PEER-INDUCED COMPACTION (Local Risk: {risk_score:.3f})" if force_act and risk_score < self.act_threshold else f"HIGH RISK ({risk_score:.3f})"
             msg = (
-                f"HIGH RISK ({risk_score:.3f}) — cleared CUDA cache"
+                f"{risk_label} — cleared CUDA cache"
                 + (f", suggest batch_size → {suggested_bs}" if suggested_bs else "")
             )
-            
+
             # Active Defragmentation if engine is provided
             cache_cleared = False
             if self.engine is not None and tensors_to_defragment is not None:
                 record = self.engine.defragment_tensors(tensors_to_defragment, reason="policy_act")
                 cache_cleared = not record.get("skipped", False)
                 if cache_cleared:
-                    msg = f"HIGH RISK ({risk_score:.3f}) — Defragmented {record.get('tensors_compacted', 0)} tensors, freed {record.get('freed_mb', 0):.1f} MB. " + (f"Suggest batch_size → {suggested_bs}" if suggested_bs else "")
+                    msg = f"{risk_label} — Defragmented {record.get('tensors_compacted', 0)} tensors, freed {record.get('freed_mb', 0):.1f} MB. " + (f"Suggest batch_size → {suggested_bs}" if suggested_bs else "")
             else:
                 cache_cleared = self._try_empty_cache()
-                
+
             action = MitigationAction(
                 timestamp=ts,
                 risk_score=risk_score,
-                tier="ACT",
+                tier="ACT" if not force_act else "PEER_ACT",
                 message=msg,
                 cache_cleared=cache_cleared,
                 suggested_batch_size=suggested_bs,
@@ -136,6 +139,19 @@ class MitigationPolicy:
             )
 
         self._actions.append(action)
+
+        # Trigger heartbeat telemetry for the dashboard
+        if self.engine is not None:
+            try:
+                import torch
+                if torch.cuda.is_available():
+                    self.engine._persist_telemetry(
+                        torch.cuda.memory_allocated() / 1024**2,
+                        torch.cuda.memory_reserved() / 1024**2
+                    )
+            except Exception:
+                pass
+
         return action
 
     @property
@@ -144,7 +160,7 @@ class MitigationPolicy:
 
     @property
     def action_counts(self) -> Dict[str, int]:
-        counts = {"SAFE": 0, "WARN": 0, "ACT": 0}
+        counts = {"SAFE": 0, "WARN": 0, "ACT": 0, "PEER_ACT": 0}
         for a in self._actions:
             counts[a.tier] = counts.get(a.tier, 0) + 1
         return counts

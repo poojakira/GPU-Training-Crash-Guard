@@ -53,8 +53,10 @@ class AllocationDataset(Dataset):
             log.warning("Skipping %s — missing columns: %s", path, required - set(df.columns))
             return
 
-        if len(df) < self.seq_len + 10:
-            log.warning("Skipping %s — too few events (%d)", path, len(df))
+        # Need at least seq_len + 1 to form a window/label pair
+        # Industry standard: suggest at least 1.5x seq_len for stability
+        if len(df) < int(self.seq_len * 1.2):
+            log.warning("Skipping %s — trace too short (%d events, seq_len=%d)", path, len(df), self.seq_len)
             return
 
         # Build feature matrix
@@ -107,6 +109,14 @@ def create_dataloaders(
         )
 
     n = len(dataset)
+    if n < 3: # Need at least 1 per split
+        log.warning("Extremely small dataset (%d samples); using dummy splits", n)
+        return (
+            DataLoader(dataset, batch_size=min(n, config.batch_size), shuffle=True),
+            DataLoader(dataset, batch_size=min(n, config.batch_size), shuffle=False),
+            DataLoader(dataset, batch_size=min(n, config.batch_size), shuffle=False),
+        )
+
     train_n = int(n * 0.8)
     val_n = int(n * 0.1)
     test_n = n - train_n - val_n

@@ -17,8 +17,8 @@ log = get_logger("benchmark.compare")
 
 def run_comparison(iterations: int = 100):
     """Run both benchmarks and produce comparison reports."""
-    from benchmark.run_baseline import run_benchmark
-    from benchmark.run_with_defrag import run_benchmark_with_defrag
+    from benchmarks.run_baseline import run_benchmark
+    from benchmarks.run_with_defrag import run_benchmark_with_defrag
 
     log.info("═" * 60)
     log.info("PHASE 1: Running BASELINE (no defrag)")

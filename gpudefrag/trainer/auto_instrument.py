@@ -19,9 +19,10 @@ import torch.nn as nn
 from torch.optim import Optimizer
 
 from gpudefrag.defrag_engine.defragmenter import GPUMemoryDefragmenter
-from src.hooks.training_hook import TrainingHook
-from src.mitigation.policy import MitigationPolicy
-from src.predictor.risk_model import OOMRiskModel
+from gpudefrag.trainer.training_hook import TrainingHook
+from gpudefrag.defrag_engine.policy import MitigationPolicy
+from gpudefrag.scheduler.risk_model import OOMRiskModel
+from gpudefrag.trainer.ddp import DDPSyncManager
 
 log = logging.getLogger("gpudefrag.auto_instrument")
 
@@ -37,7 +38,7 @@ class _InstrumentedModel(nn.Module):
         super().__init__()
         self.module = model
         self.hook = hook
-        
+
         # Register forward hook directly on the root module
         self.module.register_forward_pre_hook(self._forward_pre_hook)
         self.module.register_forward_hook(self._forward_post_hook)
@@ -50,7 +51,7 @@ class _InstrumentedModel(nn.Module):
         # The backward pass starts right after the loss is derived from this output.
         # We assume the user creates loss and calls backward.
         self.hook.on_backward_begin()
-        
+
         # We can loosely register a backward hook on the output tensor if it requires grad
         if isinstance(output, torch.Tensor) and output.requires_grad:
             output.register_hook(self._backward_done_hook)
@@ -58,7 +59,7 @@ class _InstrumentedModel(nn.Module):
             for o in output:
                 if isinstance(o, torch.Tensor) and o.requires_grad:
                     o.register_hook(self._backward_done_hook)
-                    
+
     def _backward_done_hook(self, grad):
         self.hook.on_backward_end()
         return grad
@@ -67,34 +68,44 @@ class _InstrumentedModel(nn.Module):
         return self.module(*args, **kwargs)
 
 
-class _InstrumentedOptimizer(Optimizer):
+class _InstrumentedOptimizer:
     """
     Wrapper around the PyTorch optimizer to intercept `.step()`.
     """
-    def __init__(self, optimizer: Optimizer, hook: TrainingHook, policy: MitigationPolicy, model: nn.Module):
+    def __init__(self, optimizer: Optimizer, hook: TrainingHook, policy: MitigationPolicy, model: nn.Module, ddp_manager: DDPSyncManager):
         self.optimizer = optimizer
         self.hook = hook
         self.policy = policy
         self.model = model
-        
-        # We must manually intercept step because Optimizer doesn't have native hook APIs in all PyTorch versions
-        self.param_groups = self.optimizer.param_groups
-        self.defaults = getattr(optimizer, 'defaults', {})
-        self.state = self.optimizer.state
+        self.ddp_manager = ddp_manager
+
+    @property
+    def __class__(self):
+        """Spoof class to pass isinstance(opt, Optimizer) checks in LR Schedulers."""
+        return self.optimizer.__class__
+
+    def __getattr__(self, name):
+        """Transparently forward all undefined attributes to the real optimizer."""
+        return getattr(self.optimizer, name)
 
     def step(self, closure=None):
         self.hook.on_optimizer_step()
         result = self.optimizer.step(closure)
-        
+
         # Extract batch size heuristically if possible, default to 1
         batch_size = 1
         risk = self.hook.on_step_complete(batch_size=batch_size)
-        
+
+        # Determine strict DDP global consistency BEFORE evaluating local policy
+        local_pending = risk >= self.policy.act_threshold
+        global_act = self.ddp_manager.check_global_compaction(local_pending)
+
         # Dispatch the mitigation policy transparently
         self.policy.evaluate(
             risk_score=risk,
             current_batch_size=batch_size,
-            tensors_to_defragment=self.model.parameters()
+            tensors_to_defragment=self.model.parameters(),
+            force_act=global_act
         )
         return result
 
@@ -103,8 +114,8 @@ class _InstrumentedOptimizer(Optimizer):
 
 
 def auto_instrument(
-    model: nn.Module, 
-    optimizer: Optimizer, 
+    model: nn.Module,
+    optimizer: Optimizer,
     risk_threshold: float = 0.8,
     use_triton: bool = True
 ) -> Tuple[nn.Module, Optimizer]:
@@ -126,16 +137,25 @@ def auto_instrument(
         (instrumented_model, instrumented_optimizer)
     """
     log.info("Applying Zero-Code-Change generic Auto-Instrumentation...")
-    
+
     # Initialize the entire intelligence stack silently
     risk_model = OOMRiskModel(mode="rule")
     hook = TrainingHook(risk_model=risk_model)
-    
+
     engine = GPUMemoryDefragmenter(use_triton=use_triton)
     policy = MitigationPolicy(act_threshold=risk_threshold, engine=engine)
-    
+    ddp_manager = DDPSyncManager()
+
+    # Force an initial heartbeat to create results/live_telemetry.json immediately
+    try:
+        import torch
+        if torch.cuda.is_available():
+            engine._persist_telemetry(torch.cuda.memory_allocated() / 1024**2, torch.cuda.memory_reserved() / 1024**2)
+    except Exception:
+        pass
+
     # Wrap user objects
     wrapped_model = _InstrumentedModel(model, hook)
-    wrapped_optimizer = _InstrumentedOptimizer(optimizer, hook, policy, wrapped_model.module)
-    
+    wrapped_optimizer = _InstrumentedOptimizer(optimizer, hook, policy, wrapped_model.module, ddp_manager)
+
     return wrapped_model, wrapped_optimizer

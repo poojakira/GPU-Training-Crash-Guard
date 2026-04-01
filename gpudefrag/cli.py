@@ -2,89 +2,298 @@
 gpudefrag.cli — Enterprise Command-Line Interface.
 
 NVIDIA-grade CLI entry point for the Predictive GPU Memory Defragmenter.
-Provides a unified interface for profiling, simulating, and auto-instrumenting training runs.
+Provides a unified interface for profiling, training, benchmarking, and serving.
+
+Usage::
+
+    gpu-defragger profile --model gpt2
+    gpu-defragger train --epochs 20
+    gpu-defragger benchmark --runs 5
+    gpu-defragger server --port 8000
 """
 
 import argparse
-import sys
 import os
-import time
+import sys
+import threading
+from pathlib import Path
+from typing import Optional
+
+from gpudefrag.utils import get_logger
+
+log = get_logger("cli")
 
 try:
     from rich.console import Console
     from rich.panel import Panel
     from rich.text import Text
-    from rich import print as rprint
     console = Console()
     HAS_RICH = True
 except ImportError:
     HAS_RICH = False
     console = None
 
-# Ensure project root is in path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def print_banner():
+def print_banner() -> None:
     """Prints an NVIDIA-style enterprise banner."""
     if HAS_RICH:
         banner = Text("▶ gpudefrag: NVIDIA-Grade GPU Memory Infrastructure", style="bold #76b900")
         console.print(Panel(banner, border_style="#76b900"))
     else:
-        print("="*60)
+        print("=" * 60)
         print("▶ gpudefrag: NVIDIA-Grade GPU Memory Infrastructure")
-        print("="*60)
+        print("=" * 60)
 
-def main():
+
+def _print(msg: str, style: Optional[str] = None) -> None:
+    """Print with optional Rich styling."""
+    if HAS_RICH and style:
+        console.print(f"[{style}]{msg}[/]")
+    else:
+        print(msg)
+
+
+# ─── Entry Points ─────────────────────────────────────────────────────────────
+# These are registered in pyproject.toml as console_scripts.
+# Each must parse its own args when called standalone.
+
+
+def collect_cmd() -> None:
+    """Entry point for `gpudefrag-collect` — collect CUDA allocation traces."""
+    parser = argparse.ArgumentParser(
+        description="Collect CUDA allocation traces from reference models."
+    )
+    parser.add_argument(
+        "--model", choices=["gpt2", "resnet50", "bert", "all"], default="all",
+        help="Model to profile (default: all)"
+    )
+    parser.add_argument(
+        "--iterations", type=int, default=200,
+        help="Training iterations per model (default: 200)"
+    )
+    args = parser.parse_args()
+    print_banner()
+    _print(f"▶ Starting telemetry collection for {args.model}...", "bold cyan")
+
+    from gpudefrag.profiler.collector import collect_from_model
+
+    models = ["gpt2", "resnet50", "bert"] if args.model == "all" else [args.model]
+    for model_name in models:
+        try:
+            count = collect_from_model(model_name, iterations=args.iterations)
+            _print(f"  ✓ {model_name}: {count} events collected", "bold green")
+        except Exception as e:
+            _print(f"  ✗ {model_name}: {e}", "bold red")
+
+
+def train_cmd() -> None:
+    """Entry point for `gpudefrag-train` — train the FragPredictor."""
+    parser = argparse.ArgumentParser(
+        description="Train the Transformer-based fragmentation predictor."
+    )
+    parser.add_argument("--epochs", type=int, default=20, help="Training epochs")
+    parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate")
+    parser.add_argument("--batch-size", type=int, default=64, help="Batch size")
+    parser.add_argument("--trace-dir", default="data/traces", help="Trace directory")
+    args = parser.parse_args()
+    print_banner()
+    _print("▶ Starting FragPredictor training...", "bold cyan")
+
+    from gpudefrag.utils import DefragConfig
+    from gpudefrag.trainer.trainer import train
+
+    config = DefragConfig(
+        train_epochs=args.epochs,
+        learning_rate=args.lr,
+        batch_size=args.batch_size,
+        trace_dir=args.trace_dir,
+    )
+    metrics = train(config=config, verbose=True)
+    _print(f"  ✓ Training complete. Test MAE: {metrics.get('test_mae', 'N/A')}", "bold green")
+
+
+def benchmark_cmd() -> None:
+    """Entry point for `gpudefrag-benchmark` — run the local benchmark suite."""
+    parser = argparse.ArgumentParser(
+        description="Run the local GPU defragmentation benchmark."
+    )
+    parser.add_argument("--runs", type=int, default=5, help="Number of runs")
+    parser.add_argument("--steps", type=int, default=100, help="Steps per run")
+    args = parser.parse_args()
+    print_banner()
+    _print(f"▶ Launching benchmark ({args.runs} runs, {args.steps} steps)...", "bold #76b900")
+
+    # Import and run the benchmark directly instead of shelling out
+    sys.argv = [
+        "run_local_benchmark.py",
+        "--runs", str(args.runs),
+        "--steps", str(args.steps),
+    ]
+    from benchmarks.run_local_benchmark import main as benchmark_main
+    benchmark_main()
+
+
+def serve_cmd() -> None:
+    """Entry point for `gpudefrag-serve` — launch the REST API server."""
+    parser = argparse.ArgumentParser(
+        description="Launch the gpudefrag REST API server."
+    )
+    parser.add_argument("--port", type=int, default=8000, help="Server port")
+    parser.add_argument("--host", default="0.0.0.0", help="Bind host")
+    args = parser.parse_args()
+    print_banner()
+    _print(f"▶ Starting gpudefrag REST API on {args.host}:{args.port}...", "bold cyan")
+
+    import uvicorn
+    uvicorn.run("gpudefrag.api:app", host=args.host, port=args.port, reload=True)
+
+
+def dashboard_cmd() -> None:
+    """Entry point for `gpudefrag-dashboard` — launch the standalone monitoring dashboard."""
+    parser = argparse.ArgumentParser(
+        description="Launch the AEON CORE monitoring dashboard."
+    )
+    parser.add_argument("--port", type=int, default=8000, help="Port to run the dashboard on")
+    args = parser.parse_args()
+    print_banner()
+    _print("▶ Starting Standalone AEON CORE Dashboard...", "bold #10b981")
+
+    import subprocess
+    import time
+    import webbrowser
+
+    # Add current directory to PYTHONPATH so uvicorn can find the module
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(Path.cwd()) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    api_proc = subprocess.Popen(
+        [sys.executable, "-m", "uvicorn", "gpudefrag.api:app", "--host", "127.0.0.1", "--port", str(args.port)],
+        stdout=subprocess.PIPE, # Keep logs available
+        stderr=subprocess.STDOUT,
+        env=env,
+        text=True
+    )
+    
+    # Simple background thread to drain uvicorn output
+    def drain_api():
+        for line in api_proc.stdout:
+            if "error" in line.lower():
+                log.error(f"[API] {line.strip()}")
+            else:
+                log.debug(f"[API] {line.strip()}")
+                
+    threading.Thread(target=drain_api, daemon=True).start()
+
+    _print(f"▶ Dashboard available at http://127.0.0.1:{args.port}", "bold cyan")
+    _print("▶ Opening browser...", "bold yellow")
+    
+    time.sleep(1.5) # Wait for uvicorn to bind
+    webbrowser.open(f"http://127.0.0.1:{args.port}")
+    
+    try:
+        while True:
+            time.sleep(1)
+            if api_proc.poll() is not None:
+                _print("✗ Dashboard Server died unexpectedly.", "bold red")
+                break
+    except KeyboardInterrupt:
+        _print("\nStopping Dashboard Service...", "bold yellow")
+        api_proc.terminate()
+        api_proc.wait(timeout=5)
+        _print("✔ System offline. Have a productive day!", "bold green")
+
+
+# ─── Main CLI ─────────────────────────────────────────────────────────────────
+
+
+def main() -> None:
+    """Unified CLI entry point with subcommands."""
     parser = argparse.ArgumentParser(
         description="gpudefrag: NVIDIA-Grade Predictive Memory Defragmenter Engine"
     )
     subparsers = parser.add_subparsers(dest="command", required=True, help="Available subcommands")
-    
+
     # 1. Profile command
     profile_p = subparsers.add_parser("profile", help="Collect raw VRAM telemetry from reference models")
     profile_p.add_argument("--model", choices=["gpt2", "resnet50", "bert", "all"], default="all")
     profile_p.add_argument("--iterations", type=int, default=200)
-    
-    # 2. Simulate command
-    sim_p = subparsers.add_parser("simulate", help="Run the benchmark simulation locally without GPUs")
-    sim_p.add_argument("--baseline", action="store_true", help="Run baseline without mitigation")
-    
-    # 3. Server command
-    serve_p = subparsers.add_parser("server", help="Launch the local live Telemetry API server")
+
+    # 2. Train command
+    train_p = subparsers.add_parser("train", help="Train the FragPredictor model")
+    train_p.add_argument("--epochs", type=int, default=20)
+    train_p.add_argument("--lr", type=float, default=1e-3)
+    train_p.add_argument("--batch-size", type=int, default=64)
+    train_p.add_argument("--trace-dir", default="data/traces")
+
+    # 3. Simulate command
+    sim_p = subparsers.add_parser("simulate", help="Run the benchmark simulation")
+    sim_p.add_argument("--runs", type=int, default=5)
+    sim_p.add_argument("--steps", type=int, default=100)
+
+    # 4. Server command
+    serve_p = subparsers.add_parser("server", help="Launch the live Telemetry API server")
     serve_p.add_argument("--port", type=int, default=8000)
-    
+    serve_p.add_argument("--host", default="0.0.0.0")
+
+    # 5. Dashboard command
+    dash_p = subparsers.add_parser("dashboard", help="Launch the AEON CORE monitoring dashboard")
+    dash_p.add_argument("--root", default=".")
+
     args = parser.parse_args()
-    
     print_banner()
 
     if args.command == "profile":
-        if HAS_RICH:
-            console.print(f"[bold cyan]▶ Starting telemetry collection for {args.model}...[/]")
-        else:
-            print(f"▶ Starting telemetry collection for {args.model}...")
-        
-        # We can trigger the existing python scripts locally 
-        # (This avoids circular imports in this CLI wrapper)
-        script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "scripts", "collect_real_traces.py")
-        os.system(f"{sys.executable} {script_path}")
-        
+        _print(f"▶ Starting telemetry collection for {args.model}...", "bold cyan")
+        from gpudefrag.profiler.collector import collect_from_model
+        models = ["gpt2", "resnet50", "bert"] if args.model == "all" else [args.model]
+        for model_name in models:
+            try:
+                count = collect_from_model(model_name, iterations=args.iterations)
+                _print(f"  ✓ {model_name}: {count} events collected", "bold green")
+            except Exception as e:
+                _print(f"  ✗ {model_name}: {e}", "bold red")
+
+    elif args.command == "train":
+        _print("▶ Starting FragPredictor training...", "bold cyan")
+        from gpudefrag.utils import DefragConfig
+        from gpudefrag.trainer.trainer import train
+        config = DefragConfig(
+            train_epochs=args.epochs,
+            learning_rate=args.lr,
+            batch_size=args.batch_size,
+            trace_dir=args.trace_dir,
+        )
+        train(config=config, verbose=True)
+
     elif args.command == "simulate":
-        if HAS_RICH:
-            console.print("[bold #76b900]▶ Launching Hardware Workload Simulation...[/]")
-        else:
-            print("▶ Launching Hardware Workload Simulation...")
-            
-        script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "benchmarks", "run_local_benchmark.py")
-        os.system(f"{sys.executable} {script_path}")
+        _print(f"▶ Launching benchmark ({args.runs} runs, {args.steps} steps)...", "bold #76b900")
+        sys.argv = [
+            "run_local_benchmark.py",
+            "--runs", str(args.runs),
+            "--steps", str(args.steps),
+        ]
+        from benchmarks.run_local_benchmark import main as benchmark_main
+        benchmark_main()
 
     elif args.command == "server":
-        if HAS_RICH:
-            console.print(f"[bold cyan]▶ Starting gpudefrag REST API on port {args.port}...[/]")
-        else:
-            print(f"▶ Starting gpudefrag REST API on port {args.port}...")
-            
-        script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "gpudefrag", "api.py")
-        os.system(f"{sys.executable} -m uvicorn gpudefrag.api:app --host 0.0.0.0 --port {args.port} --reload")
+        _print(f"▶ Starting gpudefrag REST API on {args.host}:{args.port}...", "bold cyan")
+        import uvicorn
+        uvicorn.run("gpudefrag.api:app", host=args.host, port=args.port, reload=True)
+
+    elif args.command == "dashboard":
+        _print("▶ Starting AEON CORE Dashboard & Telemetry Sync...", "bold #10b981")
+        from gpudefrag.dashboard import DashboardManager
+        mgr = DashboardManager(root_dir=args.root)
+        mgr.start_sync()
+        mgr.start_dashboard()
+        try:
+            import time
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            _print("\n▶ Shutting down dashboard...", "bold yellow")
+            mgr.stop_sync()
+
 
 if __name__ == "__main__":
     main()

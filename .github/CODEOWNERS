@@ -11,18 +11,15 @@
 # Primary Owner: @poojakira (ML Engineer)
 # -----------------------------------------------------------------------------
 # Core ML models, memory hooking, predictive diagnostics, and data pipelines.
-/src/hooks/                  @poojakira
-/src/predictor/              @poojakira
-/src/monitor/                @poojakira
-/src/mitigation/             @poojakira
 /gpudefrag/                  @poojakira
 /gpudefrag/defrag_engine/    @poojakira
 /gpudefrag/trainer/          @poojakira
+/gpudefrag/profiler/         @poojakira
+/gpudefrag/scheduler/        @poojakira
 /tests/                      @poojakira
 /scripts/                    @poojakira
 /benchmarks/                 @poojakira
 /data/                       @poojakira
-/notebooks/                  @poojakira
 
 # -----------------------------------------------------------------------------
 # ROBOTICS ENGINEERING & VISUALIZATION INFRASTRUCTURE

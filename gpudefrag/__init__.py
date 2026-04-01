@@ -6,29 +6,41 @@ A Transformer-driven proactive CUDA memory optimizer for PyTorch.
 
 Quick Start::
 
-    from gpudefrag import DefragMonitor, DefragCallback
+    from gpudefrag import auto_instrument
 
-    # Option 1: Background monitor
-    monitor = DefragMonitor(threshold=0.7)
-    monitor.start()
+    # Wrap your model and optimizer with zero code changes
+    model, optimizer = auto_instrument(model, optimizer)
 
-    # Option 2: Training callback
-    callback = DefragCallback()
+    # ... standard training loop ...
 """
 
-__version__ = "1.0.0"
-__author__ = "GPU Defrag Team"
+__version__ = "2.0.0"
+__author__ = "GPU Defrag Infrastructure Team"
 
 from gpudefrag.scheduler.monitor import DefragMonitor
 from gpudefrag.trainer.callback import DefragCallback
+from gpudefrag.trainer.auto_instrument import auto_instrument
+from gpudefrag.trainer.ddp import DDPSyncManager
 from gpudefrag.profiler.collector import AllocationCollector
 from gpudefrag.scheduler.predictor import FragPredictor
-from gpudefrag.defrag_engine.compactor import MemoryCompactor
+from gpudefrag.defrag_engine.defragmenter import GPUMemoryDefragmenter
+
+# Re-exported from migrated modules for unified namespace
+from gpudefrag.profiler.allocator_logger import AllocatorLogger
+from gpudefrag.scheduler.risk_model import OOMRiskModel
+from gpudefrag.trainer.training_hook import TrainingHook
+from gpudefrag.defrag_engine.policy import MitigationPolicy
 
 __all__ = [
     "DefragMonitor",
     "DefragCallback",
+    "auto_instrument",
+    "DDPSyncManager",
     "AllocationCollector",
     "FragPredictor",
-    "MemoryCompactor",
+    "GPUMemoryDefragmenter",
+    "AllocatorLogger",
+    "OOMRiskModel",
+    "TrainingHook",
+    "MitigationPolicy",
 ]

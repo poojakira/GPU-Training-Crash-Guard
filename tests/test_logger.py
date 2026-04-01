@@ -4,14 +4,9 @@ tests/test_logger.py — Prove the AllocatorLogger actually runs.
 
 import json
 import csv
-import os
-import sys
-import pytest
 from pathlib import Path
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from src.monitor.allocator_logger import AllocatorLogger, StepRecord
+from gpudefrag.profiler.allocator_logger import AllocatorLogger, StepRecord
 
 
 class TestAllocatorLogger:

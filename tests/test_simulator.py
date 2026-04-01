@@ -2,12 +2,7 @@
 tests/test_simulator.py — Verify the workload simulator produces correct data.
 """
 
-import os
-import sys
-import pytest
 import numpy as np
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scripts.workload_simulator import (
     GPUWorkload,

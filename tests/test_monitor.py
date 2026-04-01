@@ -1,15 +1,8 @@
 """Unit tests for the DefragMonitor."""
 
-import torch
-import pytest
 import time
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from gpudefrag.scheduler.monitor import DefragMonitor
-from gpudefrag.utils import DefragConfig
 
 
 class TestDefragMonitor:

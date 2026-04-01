@@ -4,17 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gpudefrag"
-version = "1.0.0"
-description = "Predictive GPU Memory Defragmenter — Transformer-driven proactive CUDA memory optimization"
+version = "2.0.0"
+description = "NVIDIA-Grade Predictive GPU Memory Defragmenter — Transformer-driven proactive CUDA memory infrastructure"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [
-    {name = "GPU Defrag Team"}
+    {name = "GPU Defrag Infrastructure Team"}
 ]
 keywords = ["gpu", "cuda", "memory", "defragmentation", "pytorch", "transformer"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "License :: OSI Approved :: MIT License",
@@ -32,19 +32,24 @@ dependencies = [
     "pyyaml>=6.0",
     "fastapi>=0.100.0",
     "uvicorn>=0.23.0",
+    "pydantic>=2.0",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0", "pytest-cov", "black", "ruff", "mypy"]
+dev = ["pytest>=7.0", "pytest-cov", "black", "ruff", "mypy", "flake8"]
 models = ["torchvision>=0.15", "transformers>=4.30"]
 profiler = ["torch-tb-profiler>=0.4"]
+triton = ["triton>=2.1.0"]
+rich = ["rich>=13.0"]
+all = ["gpudefrag[dev,models,profiler,triton,rich]"]
 
 [project.scripts]
+gpu-defragger = "gpudefrag.cli:main"
 gpudefrag-collect = "gpudefrag.cli:collect_cmd"
 gpudefrag-train = "gpudefrag.cli:train_cmd"
 gpudefrag-benchmark = "gpudefrag.cli:benchmark_cmd"
-gpudefrag-api = "gpudefrag.api:app"
-gpu-defragger = "gpudefrag.cli:main"
+gpudefrag-serve = "gpudefrag.cli:serve_cmd"
+gpudefrag-dashboard = "gpudefrag.cli:dashboard_cmd"
 
 [tool.setuptools.packages.find]
 include = ["gpudefrag*"]

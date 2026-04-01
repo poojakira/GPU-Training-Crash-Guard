@@ -1,5 +1,5 @@
 """
-src.hooks.training_hook — PyTorch training-loop instrumentation.
+gpudefrag.trainer.training_hook — PyTorch training-loop instrumentation.
 
 Attaches to a toy (or real) PyTorch training loop and logs GPU memory
 state before/after forward, backward, and optimizer step via an
@@ -28,8 +28,8 @@ import time
 from contextlib import contextmanager
 from typing import Optional, Generator
 
-from src.monitor.allocator_logger import AllocatorLogger
-from src.predictor.risk_model import OOMRiskModel
+from gpudefrag.profiler.allocator_logger import AllocatorLogger
+from gpudefrag.scheduler.risk_model import OOMRiskModel
 
 log = logging.getLogger("gpudefrag.training_hook")
 

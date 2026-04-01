@@ -1,16 +1,16 @@
 {
   "run_id": 1,
   "gpu": "NVIDIA GeForce RTX 4060",
-  "steps": 100,
+  "steps": 20,
   "batch_size": 6,
   "oom_count": 0,
-  "peak_reserved_mb": 6639.1,
-  "avg_fragmentation": 0.150636,
-  "avg_step_time_s": 1.829041,
-  "throughput_iter_s": 0.547,
-  "total_time_s": 182.904,
+  "peak_reserved_mb": 6620.1,
+  "avg_fragmentation": 0.199369,
+  "avg_step_time_s": 1.838517,
+  "throughput_iter_s": 0.544,
+  "total_time_s": 36.77,
   "policy_actions": {
-    "SAFE": 100,
+    "SAFE": 20,
     "WARN": 0,
     "ACT": 0
   },
@@ -24,7 +24,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.786
+      "timestamp": 1775001907.441
     },
     {
       "step": 0,
@@ -35,7 +35,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.788
+      "timestamp": 1775001907.443
     },
     {
       "step": 0,
@@ -46,7 +46,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.788
+      "timestamp": 1775001907.443
     },
     {
       "step": 0,
@@ -57,7 +57,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.79
+      "timestamp": 1775001907.445
     },
     {
       "step": 0,
@@ -68,7 +68,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.79
+      "timestamp": 1775001907.445
     },
     {
       "step": 0,
@@ -76,10 +76,10 @@
       "reserved_mb": 6600.0,
       "free_estimate_mb": 1024.0,
       "fragmentation_ratio": 0.155152,
-      "step_time_s": 0.003116,
+      "step_time_s": 0.002829,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.79
+      "timestamp": 1775001907.445
     },
     {
       "step": 1,
@@ -90,7 +90,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.79
+      "timestamp": 1775001907.445
     },
     {
       "step": 1,
@@ -101,7 +101,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.792
+      "timestamp": 1775001907.446
     },
     {
       "step": 1,
@@ -112,7 +112,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.792
+      "timestamp": 1775001907.446
     },
     {
       "step": 1,
@@ -123,7 +123,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.793
+      "timestamp": 1775001907.448
     },
     {
       "step": 1,
@@ -134,7 +134,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.793
+      "timestamp": 1775001907.448
     },
     {
       "step": 1,
@@ -142,10 +142,10 @@
       "reserved_mb": 6638.9,
       "free_estimate_mb": 991.0,
       "fragmentation_ratio": 0.149272,
-      "step_time_s": 0.003235,
+      "step_time_s": 0.003073,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.793
+      "timestamp": 1775001907.448
     },
     {
       "step": 2,
@@ -156,7 +156,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.793
+      "timestamp": 1775001907.448
     },
     {
       "step": 2,
@@ -167,7 +167,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.795
+      "timestamp": 1775001907.45
     },
     {
       "step": 2,
@@ -178,7 +178,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.795
+      "timestamp": 1775001907.45
     },
     {
       "step": 2,
@@ -189,7 +189,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.796
+      "timestamp": 1775001907.451
     },
     {
       "step": 2,
@@ -200,7 +200,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.796
+      "timestamp": 1775001907.451
     },
     {
       "step": 2,
@@ -208,10 +208,10 @@
       "reserved_mb": 6664.2,
       "free_estimate_mb": 1197.9,
       "fragmentation_ratio": 0.179752,
-      "step_time_s": 0.003194,
+      "step_time_s": 0.003182,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.796
+      "timestamp": 1775001907.451
     },
     {
       "step": 3,
@@ -222,7 +222,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.796
+      "timestamp": 1775001907.451
     },
     {
       "step": 3,
@@ -233,7 +233,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.798
+      "timestamp": 1775001907.453
     },
     {
       "step": 3,
@@ -244,7 +244,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.798
+      "timestamp": 1775001907.453
     },
     {
       "step": 3,
@@ -255,7 +255,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.8
+      "timestamp": 1775001907.454
     },
     {
       "step": 3,
@@ -266,7 +266,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.8
+      "timestamp": 1775001907.454
     },
     {
       "step": 3,
@@ -274,142 +274,142 @@
       "reserved_mb": 6612.4,
       "free_estimate_mb": 1127.5,
       "fragmentation_ratio": 0.170513,
+      "step_time_s": 0.003179,
+      "batch_size": 6,
+      "phase": "step",
+      "timestamp": 1775001907.454
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "forward_begin",
+      "timestamp": 1775001907.454
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "forward_end",
+      "timestamp": 1775001907.456
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "backward_begin",
+      "timestamp": 1775001907.456
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "backward_end",
+      "timestamp": 1775001907.458
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "optimizer_step",
+      "timestamp": 1775001907.458
+    },
+    {
+      "step": 4,
+      "allocated_mb": 5578.0,
+      "reserved_mb": 6601.0,
+      "free_estimate_mb": 1023.0,
+      "fragmentation_ratio": 0.154977,
+      "step_time_s": 0.00313,
+      "batch_size": 6,
+      "phase": "step",
+      "timestamp": 1775001907.458
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "forward_begin",
+      "timestamp": 1775001907.458
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "forward_end",
+      "timestamp": 1775001907.459
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "backward_begin",
+      "timestamp": 1775001907.459
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "backward_end",
+      "timestamp": 1775001907.461
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
+      "step_time_s": 0.0,
+      "batch_size": 0,
+      "phase": "optimizer_step",
+      "timestamp": 1775001907.461
+    },
+    {
+      "step": 5,
+      "allocated_mb": 5367.9,
+      "reserved_mb": 6662.6,
+      "free_estimate_mb": 1294.7,
+      "fragmentation_ratio": 0.194324,
       "step_time_s": 0.003217,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.8
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.8
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.801
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.801
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.803
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.803
-    },
-    {
-      "step": 4,
-      "allocated_mb": 5578.0,
-      "reserved_mb": 6601.0,
-      "free_estimate_mb": 1023.0,
-      "fragmentation_ratio": 0.154977,
-      "step_time_s": 0.003214,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.803
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.803
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.805
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.805
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.806
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.806
-    },
-    {
-      "step": 5,
-      "allocated_mb": 5367.9,
-      "reserved_mb": 6662.6,
-      "free_estimate_mb": 1294.7,
-      "fragmentation_ratio": 0.194324,
-      "step_time_s": 0.003204,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.806
+      "timestamp": 1775001907.461
     },
     {
       "step": 6,
@@ -420,7 +420,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.806
+      "timestamp": 1775001907.461
     },
     {
       "step": 6,
@@ -431,7 +431,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.808
+      "timestamp": 1775001907.463
     },
     {
       "step": 6,
@@ -442,7 +442,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.808
+      "timestamp": 1775001907.463
     },
     {
       "step": 6,
@@ -453,7 +453,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.809
+      "timestamp": 1775001907.465
     },
     {
       "step": 6,
@@ -464,7 +464,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.809
+      "timestamp": 1775001907.465
     },
     {
       "step": 6,
@@ -472,10 +472,10 @@
       "reserved_mb": 6600.4,
       "free_estimate_mb": 1211.8,
       "fragmentation_ratio": 0.183595,
-      "step_time_s": 0.00306,
+      "step_time_s": 0.003447,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.809
+      "timestamp": 1775001907.465
     },
     {
       "step": 7,
@@ -486,7 +486,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.809
+      "timestamp": 1775001907.465
     },
     {
       "step": 7,
@@ -497,7 +497,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.811
+      "timestamp": 1775001907.466
     },
     {
       "step": 7,
@@ -508,7 +508,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.811
+      "timestamp": 1775001907.466
     },
     {
       "step": 7,
@@ -519,7 +519,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.813
+      "timestamp": 1775001907.467
     },
     {
       "step": 7,
@@ -530,7 +530,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.813
+      "timestamp": 1775001907.467
     },
     {
       "step": 7,
@@ -538,10 +538,10 @@
       "reserved_mb": 6669.1,
       "free_estimate_mb": 1388.4,
       "fragmentation_ratio": 0.208184,
-      "step_time_s": 0.003145,
+      "step_time_s": 0.002856,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.813
+      "timestamp": 1775001907.467
     },
     {
       "step": 8,
@@ -552,7 +552,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.813
+      "timestamp": 1775001907.467
     },
     {
       "step": 8,
@@ -563,7 +563,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.814
+      "timestamp": 1775001907.469
     },
     {
       "step": 8,
@@ -574,7 +574,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.814
+      "timestamp": 1775001907.469
     },
     {
       "step": 8,
@@ -585,7 +585,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.816
+      "timestamp": 1775001907.471
     },
     {
       "step": 8,
@@ -596,7 +596,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.816
+      "timestamp": 1775001907.471
     },
     {
       "step": 8,
@@ -604,10 +604,10 @@
       "reserved_mb": 6639.5,
       "free_estimate_mb": 1450.1,
       "fragmentation_ratio": 0.218405,
-      "step_time_s": 0.003144,
+      "step_time_s": 0.003177,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.816
+      "timestamp": 1775001907.471
     },
     {
       "step": 9,
@@ -618,7 +618,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.816
+      "timestamp": 1775001907.471
     },
     {
       "step": 9,
@@ -629,7 +629,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.817
+      "timestamp": 1775001907.472
     },
     {
       "step": 9,
@@ -640,7 +640,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.817
+      "timestamp": 1775001907.472
     },
     {
       "step": 9,
@@ -651,7 +651,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.819
+      "timestamp": 1775001907.474
     },
     {
       "step": 9,
@@ -662,7 +662,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.819
+      "timestamp": 1775001907.474
     },
     {
       "step": 9,
@@ -670,10 +670,10 @@
       "reserved_mb": 6628.7,
       "free_estimate_mb": 1546.4,
       "fragmentation_ratio": 0.233289,
-      "step_time_s": 0.003231,
+      "step_time_s": 0.002881,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.819
+      "timestamp": 1775001907.474
     },
     {
       "step": 10,
@@ -684,7 +684,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.819
+      "timestamp": 1775001907.474
     },
     {
       "step": 10,
@@ -695,7 +695,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.82
+      "timestamp": 1775001907.476
     },
     {
       "step": 10,
@@ -706,7 +706,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.82
+      "timestamp": 1775001907.476
     },
     {
       "step": 10,
@@ -717,7 +717,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.822
+      "timestamp": 1775001907.477
     },
     {
       "step": 10,
@@ -728,7 +728,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.822
+      "timestamp": 1775001907.477
     },
     {
       "step": 10,
@@ -736,10 +736,10 @@
       "reserved_mb": 6637.8,
       "free_estimate_mb": 1312.7,
       "fragmentation_ratio": 0.197761,
-      "step_time_s": 0.003144,
+      "step_time_s": 0.003352,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.822
+      "timestamp": 1775001907.477
     },
     {
       "step": 11,
@@ -750,7 +750,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.822
+      "timestamp": 1775001907.477
     },
     {
       "step": 11,
@@ -761,7 +761,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.824
+      "timestamp": 1775001907.479
     },
     {
       "step": 11,
@@ -772,7 +772,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.824
+      "timestamp": 1775001907.479
     },
     {
       "step": 11,
@@ -783,7 +783,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.825
+      "timestamp": 1775001907.481
     },
     {
       "step": 11,
@@ -794,7 +794,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.825
+      "timestamp": 1775001907.481
     },
     {
       "step": 11,
@@ -802,10 +802,10 @@
       "reserved_mb": 6611.5,
       "free_estimate_mb": 1535.3,
       "fragmentation_ratio": 0.232217,
-      "step_time_s": 0.003153,
+      "step_time_s": 0.003535,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.825
+      "timestamp": 1775001907.481
     },
     {
       "step": 12,
@@ -816,7 +816,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.825
+      "timestamp": 1775001907.481
     },
     {
       "step": 12,
@@ -827,7 +827,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.827
+      "timestamp": 1775001907.482
     },
     {
       "step": 12,
@@ -838,7 +838,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.827
+      "timestamp": 1775001907.482
     },
     {
       "step": 12,
@@ -849,7 +849,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.829
+      "timestamp": 1775001907.484
     },
     {
       "step": 12,
@@ -860,7 +860,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.829
+      "timestamp": 1775001907.484
     },
     {
       "step": 12,
@@ -871,7 +871,7 @@
       "step_time_s": 0.003222,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.829
+      "timestamp": 1775001907.484
     },
     {
       "step": 13,
@@ -882,7 +882,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.829
+      "timestamp": 1775001907.484
     },
     {
       "step": 13,
@@ -893,7 +893,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.83
+      "timestamp": 1775001907.486
     },
     {
       "step": 13,
@@ -904,7 +904,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.83
+      "timestamp": 1775001907.486
     },
     {
       "step": 13,
@@ -915,7 +915,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.832
+      "timestamp": 1775001907.487
     },
     {
       "step": 13,
@@ -926,7 +926,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.832
+      "timestamp": 1775001907.487
     },
     {
       "step": 13,
@@ -934,10 +934,10 @@
       "reserved_mb": 6646.9,
       "free_estimate_mb": 1731.3,
       "fragmentation_ratio": 0.260467,
-      "step_time_s": 0.003349,
+      "step_time_s": 0.002633,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.832
+      "timestamp": 1775001907.487
     },
     {
       "step": 14,
@@ -948,7 +948,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.832
+      "timestamp": 1775001907.487
     },
     {
       "step": 14,
@@ -959,7 +959,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.833
+      "timestamp": 1775001907.488
     },
     {
       "step": 14,
@@ -970,7 +970,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.833
+      "timestamp": 1775001907.488
     },
     {
       "step": 14,
@@ -981,7 +981,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.835
+      "timestamp": 1775001907.49
     },
     {
       "step": 14,
@@ -992,7 +992,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.835
+      "timestamp": 1775001907.49
     },
     {
       "step": 14,
@@ -1000,10 +1000,10 @@
       "reserved_mb": 6669.9,
       "free_estimate_mb": 1636.0,
       "fragmentation_ratio": 0.245281,
-      "step_time_s": 0.003091,
+      "step_time_s": 0.003159,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.835
+      "timestamp": 1775001907.49
     },
     {
       "step": 15,
@@ -1014,7 +1014,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.835
+      "timestamp": 1775001907.49
     },
     {
       "step": 15,
@@ -1025,7 +1025,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.837
+      "timestamp": 1775001907.492
     },
     {
       "step": 15,
@@ -1036,7 +1036,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.837
+      "timestamp": 1775001907.492
     },
     {
       "step": 15,
@@ -1047,7 +1047,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.838
+      "timestamp": 1775001907.493
     },
     {
       "step": 15,
@@ -1058,7 +1058,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.838
+      "timestamp": 1775001907.493
     },
     {
       "step": 15,
@@ -1066,10 +1066,10 @@
       "reserved_mb": 6605.6,
       "free_estimate_mb": 1418.2,
       "fragmentation_ratio": 0.214697,
-      "step_time_s": 0.003158,
+      "step_time_s": 0.003413,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.838
+      "timestamp": 1775001907.493
     },
     {
       "step": 16,
@@ -1080,7 +1080,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.838
+      "timestamp": 1775001907.493
     },
     {
       "step": 16,
@@ -1091,7 +1091,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.84
+      "timestamp": 1775001907.495
     },
     {
       "step": 16,
@@ -1102,7 +1102,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.84
+      "timestamp": 1775001907.495
     },
     {
       "step": 16,
@@ -1113,7 +1113,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902889.842
+      "timestamp": 1775001907.497
     },
     {
       "step": 16,
@@ -1124,7 +1124,7 @@
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902889.842
+      "timestamp": 1775001907.497
     },
     {
       "step": 16,
@@ -1132,5488 +1132,208 @@
       "reserved_mb": 6642.2,
       "free_estimate_mb": 1306.9,
       "fragmentation_ratio": 0.196757,
-      "step_time_s": 0.003388,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.842
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.842
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.844
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.844
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.845
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.845
-    },
-    {
-      "step": 17,
-      "allocated_mb": 5299.0,
-      "reserved_mb": 6596.3,
-      "free_estimate_mb": 1297.3,
-      "fragmentation_ratio": 0.196671,
-      "step_time_s": 0.003382,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.845
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.845
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.847
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.847
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.848
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.848
-    },
-    {
-      "step": 18,
-      "allocated_mb": 5420.9,
-      "reserved_mb": 6631.3,
-      "free_estimate_mb": 1210.4,
-      "fragmentation_ratio": 0.182528,
-      "step_time_s": 0.003277,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.848
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.848
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.85
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.85
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.852
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.852
-    },
-    {
-      "step": 19,
-      "allocated_mb": 5122.0,
-      "reserved_mb": 6606.2,
-      "free_estimate_mb": 1484.2,
-      "fragmentation_ratio": 0.224668,
-      "step_time_s": 0.003051,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.852
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.852
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.853
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.853
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.855
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.855
-    },
-    {
-      "step": 20,
-      "allocated_mb": 5321.6,
-      "reserved_mb": 6635.2,
-      "free_estimate_mb": 1313.6,
-      "fragmentation_ratio": 0.197974,
-      "step_time_s": 0.003254,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.855
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.855
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.856
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.856
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.858
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.858
-    },
-    {
-      "step": 21,
-      "allocated_mb": 5320.4,
-      "reserved_mb": 6579.1,
-      "free_estimate_mb": 1258.7,
-      "fragmentation_ratio": 0.191318,
-      "step_time_s": 0.00315,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.858
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.858
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.86
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.86
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.861
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.861
-    },
-    {
-      "step": 22,
-      "allocated_mb": 5397.7,
-      "reserved_mb": 6604.7,
-      "free_estimate_mb": 1207.0,
-      "fragmentation_ratio": 0.182749,
-      "step_time_s": 0.003238,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.861
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.861
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.863
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.863
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.864
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.864
-    },
-    {
-      "step": 23,
-      "allocated_mb": 5653.4,
-      "reserved_mb": 6612.9,
-      "free_estimate_mb": 959.5,
-      "fragmentation_ratio": 0.145095,
-      "step_time_s": 0.003084,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.864
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.864
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.866
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.866
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.868
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.868
-    },
-    {
-      "step": 24,
-      "allocated_mb": 5257.9,
-      "reserved_mb": 6597.7,
-      "free_estimate_mb": 1339.8,
-      "fragmentation_ratio": 0.203071,
-      "step_time_s": 0.00338,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.868
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.868
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.869
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.869
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.871
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.871
-    },
-    {
-      "step": 25,
-      "allocated_mb": 5743.8,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 874.2,
-      "fragmentation_ratio": 0.132094,
-      "step_time_s": 0.00312,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.871
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.871
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.873
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.873
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.874
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.874
-    },
-    {
-      "step": 26,
-      "allocated_mb": 5592.0,
-      "reserved_mb": 6641.4,
-      "free_estimate_mb": 1049.4,
-      "fragmentation_ratio": 0.158009,
-      "step_time_s": 0.003155,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.874
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.874
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.876
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.876
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.877
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.877
-    },
-    {
-      "step": 27,
-      "allocated_mb": 5787.4,
-      "reserved_mb": 6646.1,
-      "free_estimate_mb": 858.7,
-      "fragmentation_ratio": 0.129204,
-      "step_time_s": 0.003317,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.877
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.877
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.879
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.879
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.881
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.881
-    },
-    {
-      "step": 28,
-      "allocated_mb": 5581.6,
-      "reserved_mb": 6584.1,
-      "free_estimate_mb": 1002.5,
-      "fragmentation_ratio": 0.152261,
-      "step_time_s": 0.00329,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.881
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.881
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.882
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.882
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.884
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.884
-    },
-    {
-      "step": 29,
-      "allocated_mb": 5933.4,
-      "reserved_mb": 6596.1,
-      "free_estimate_mb": 662.7,
-      "fragmentation_ratio": 0.100468,
-      "step_time_s": 0.003147,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.884
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.884
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.886
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.886
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.887
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.887
-    },
-    {
-      "step": 30,
-      "allocated_mb": 6095.3,
-      "reserved_mb": 6632.5,
-      "free_estimate_mb": 537.2,
-      "fragmentation_ratio": 0.080995,
-      "step_time_s": 0.003081,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.887
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.887
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.889
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.889
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.89
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.89
-    },
-    {
-      "step": 31,
-      "allocated_mb": 5924.2,
-      "reserved_mb": 6598.5,
-      "free_estimate_mb": 674.3,
-      "fragmentation_ratio": 0.10219,
-      "step_time_s": 0.003027,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.89
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.89
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.892
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.892
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.893
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.893
-    },
-    {
-      "step": 32,
-      "allocated_mb": 6011.2,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 604.7,
-      "fragmentation_ratio": 0.091401,
-      "step_time_s": 0.003116,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.893
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.893
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.895
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.895
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.897
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.897
-    },
-    {
-      "step": 33,
-      "allocated_mb": 5994.3,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 630.2,
-      "fragmentation_ratio": 0.095132,
-      "step_time_s": 0.003232,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.897
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.897
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.898
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.898
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.9
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.9
-    },
-    {
-      "step": 34,
-      "allocated_mb": 6075.8,
-      "reserved_mb": 6647.2,
-      "free_estimate_mb": 571.4,
-      "fragmentation_ratio": 0.085961,
-      "step_time_s": 0.003185,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.9
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.9
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.902
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.902
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.903
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.903
-    },
-    {
-      "step": 35,
-      "allocated_mb": 6091.1,
-      "reserved_mb": 6553.4,
-      "free_estimate_mb": 462.3,
-      "fragmentation_ratio": 0.070544,
-      "step_time_s": 0.003277,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.903
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.903
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.905
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.905
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.906
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.906
-    },
-    {
-      "step": 36,
-      "allocated_mb": 6422.9,
-      "reserved_mb": 6622.3,
-      "free_estimate_mb": 199.4,
-      "fragmentation_ratio": 0.03011,
-      "step_time_s": 0.003122,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.906
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.906
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.908
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.908
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.909
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.909
-    },
-    {
-      "step": 37,
-      "allocated_mb": 6159.6,
-      "reserved_mb": 6610.4,
-      "free_estimate_mb": 450.8,
-      "fragmentation_ratio": 0.068196,
-      "step_time_s": 0.003114,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.909
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.909
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.911
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.911
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.913
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.913
-    },
-    {
-      "step": 38,
-      "allocated_mb": 6317.9,
-      "reserved_mb": 6618.4,
-      "free_estimate_mb": 300.5,
-      "fragmentation_ratio": 0.045404,
-      "step_time_s": 0.003258,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.913
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.913
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.914
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.914
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.916
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.916
-    },
-    {
-      "step": 39,
-      "allocated_mb": 6171.5,
-      "reserved_mb": 6618.0,
-      "free_estimate_mb": 446.5,
-      "fragmentation_ratio": 0.067468,
-      "step_time_s": 0.003354,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.916
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.916
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.918
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.918
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.92
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.92
-    },
-    {
-      "step": 40,
-      "allocated_mb": 6193.9,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 441.9,
-      "fragmentation_ratio": 0.066593,
-      "step_time_s": 0.003754,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.92
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.92
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.921
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.921
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.923
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.923
-    },
-    {
-      "step": 41,
-      "allocated_mb": 6121.1,
-      "reserved_mb": 6607.1,
-      "free_estimate_mb": 486.0,
-      "fragmentation_ratio": 0.073557,
-      "step_time_s": 0.002777,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.923
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.923
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.924
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.924
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.926
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.926
-    },
-    {
-      "step": 42,
-      "allocated_mb": 5838.5,
-      "reserved_mb": 6610.2,
-      "free_estimate_mb": 771.7,
-      "fragmentation_ratio": 0.116744,
-      "step_time_s": 0.003158,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.926
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.926
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.928
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.928
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.929
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.929
-    },
-    {
-      "step": 43,
-      "allocated_mb": 5899.5,
-      "reserved_mb": 6620.7,
-      "free_estimate_mb": 721.2,
-      "fragmentation_ratio": 0.108931,
-      "step_time_s": 0.003233,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.929
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.929
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.931
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.931
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.932
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.932
-    },
-    {
-      "step": 44,
-      "allocated_mb": 5960.2,
-      "reserved_mb": 6601.8,
-      "free_estimate_mb": 641.6,
-      "fragmentation_ratio": 0.097186,
-      "step_time_s": 0.003137,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.932
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.932
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.934
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.934
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.936
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.936
-    },
-    {
-      "step": 45,
-      "allocated_mb": 6032.8,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 588.0,
-      "fragmentation_ratio": 0.088811,
-      "step_time_s": 0.003198,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.936
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.936
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.937
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.937
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.939
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.939
-    },
-    {
-      "step": 46,
-      "allocated_mb": 6021.2,
-      "reserved_mb": 6631.8,
-      "free_estimate_mb": 610.6,
-      "fragmentation_ratio": 0.092072,
-      "step_time_s": 0.003152,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.939
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.939
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.941
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.941
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.942
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.942
-    },
-    {
-      "step": 47,
-      "allocated_mb": 5783.2,
-      "reserved_mb": 6608.8,
-      "free_estimate_mb": 825.6,
-      "fragmentation_ratio": 0.124924,
-      "step_time_s": 0.003266,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.942
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.942
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.944
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.944
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.945
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.945
-    },
-    {
-      "step": 48,
-      "allocated_mb": 5611.7,
-      "reserved_mb": 6623.9,
-      "free_estimate_mb": 1012.2,
-      "fragmentation_ratio": 0.15281,
-      "step_time_s": 0.003118,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.945
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.945
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.947
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.947
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.949
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.949
-    },
-    {
-      "step": 49,
-      "allocated_mb": 5704.6,
-      "reserved_mb": 6619.5,
-      "free_estimate_mb": 914.9,
-      "fragmentation_ratio": 0.138213,
-      "step_time_s": 0.003247,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.949
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.949
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.95
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.95
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.952
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.952
-    },
-    {
-      "step": 50,
-      "allocated_mb": 5289.4,
-      "reserved_mb": 6590.7,
-      "free_estimate_mb": 1301.3,
-      "fragmentation_ratio": 0.197445,
-      "step_time_s": 0.002955,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.952
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.952
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.953
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.953
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.955
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.955
-    },
-    {
-      "step": 51,
-      "allocated_mb": 5377.5,
-      "reserved_mb": 6594.9,
-      "free_estimate_mb": 1217.4,
-      "fragmentation_ratio": 0.184597,
-      "step_time_s": 0.003433,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.955
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.955
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.957
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.957
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.958
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.958
-    },
-    {
-      "step": 52,
-      "allocated_mb": 5228.3,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 1385.7,
-      "fragmentation_ratio": 0.20951,
-      "step_time_s": 0.003049,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.958
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.958
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.96
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.96
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.961
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.961
-    },
-    {
-      "step": 53,
-      "allocated_mb": 5527.5,
-      "reserved_mb": 6632.8,
-      "free_estimate_mb": 1105.3,
-      "fragmentation_ratio": 0.166642,
-      "step_time_s": 0.003077,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.961
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.961
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.962
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.962
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.964
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.964
-    },
-    {
-      "step": 54,
-      "allocated_mb": 5166.7,
-      "reserved_mb": 6636.6,
-      "free_estimate_mb": 1469.9,
-      "fragmentation_ratio": 0.221484,
-      "step_time_s": 0.002826,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.964
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.964
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.966
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.966
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.968
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.968
-    },
-    {
-      "step": 55,
-      "allocated_mb": 5406.6,
-      "reserved_mb": 6622.4,
-      "free_estimate_mb": 1215.8,
-      "fragmentation_ratio": 0.183589,
-      "step_time_s": 0.00345,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.968
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.968
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.969
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.969
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.971
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.971
-    },
-    {
-      "step": 56,
-      "allocated_mb": 4957.2,
-      "reserved_mb": 6653.2,
-      "free_estimate_mb": 1696.0,
-      "fragmentation_ratio": 0.254915,
-      "step_time_s": 0.003249,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.971
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.971
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.973
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.973
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.974
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.974
-    },
-    {
-      "step": 57,
-      "allocated_mb": 5247.7,
-      "reserved_mb": 6647.1,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.210528,
-      "step_time_s": 0.003305,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.974
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.974
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.976
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.976
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.977
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.977
-    },
-    {
-      "step": 58,
-      "allocated_mb": 5167.2,
-      "reserved_mb": 6645.8,
-      "free_estimate_mb": 1478.6,
-      "fragmentation_ratio": 0.222486,
-      "step_time_s": 0.00331,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.977
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.977
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.979
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.979
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.981
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.981
-    },
-    {
-      "step": 59,
-      "allocated_mb": 5218.3,
-      "reserved_mb": 6586.3,
-      "free_estimate_mb": 1368.0,
-      "fragmentation_ratio": 0.207704,
-      "step_time_s": 0.003264,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.981
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.981
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.982
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.982
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.984
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.984
-    },
-    {
-      "step": 60,
-      "allocated_mb": 5128.2,
-      "reserved_mb": 6640.5,
-      "free_estimate_mb": 1512.3,
-      "fragmentation_ratio": 0.227739,
-      "step_time_s": 0.003047,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.984
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.984
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.986
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.986
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.987
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.987
-    },
-    {
-      "step": 61,
-      "allocated_mb": 5179.6,
-      "reserved_mb": 6643.2,
-      "free_estimate_mb": 1463.6,
-      "fragmentation_ratio": 0.220316,
-      "step_time_s": 0.003293,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.987
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.987
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.989
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.989
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.991
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.991
-    },
-    {
-      "step": 62,
-      "allocated_mb": 5352.4,
-      "reserved_mb": 6586.6,
-      "free_estimate_mb": 1234.2,
-      "fragmentation_ratio": 0.18738,
-      "step_time_s": 0.003253,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.991
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.991
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.992
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.992
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.994
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.994
-    },
-    {
-      "step": 63,
-      "allocated_mb": 5103.0,
-      "reserved_mb": 6615.9,
-      "free_estimate_mb": 1512.9,
-      "fragmentation_ratio": 0.228676,
-      "step_time_s": 0.003274,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902889.994
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902889.994
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902889.995
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902889.995
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902889.997
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902889.997
-    },
-    {
-      "step": 64,
-      "allocated_mb": 4819.6,
-      "reserved_mb": 6597.3,
-      "free_estimate_mb": 1777.7,
-      "fragmentation_ratio": 0.269459,
       "step_time_s": 0.003183,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902889.997
+      "timestamp": 1775001907.497
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902889.997
+      "timestamp": 1775001907.497
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902889.999
+      "timestamp": 1775001907.498
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902889.999
+      "timestamp": 1775001907.498
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902890.0
+      "timestamp": 1775001907.5
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902890.0
+      "timestamp": 1775001907.5
     },
     {
-      "step": 65,
-      "allocated_mb": 5123.6,
-      "reserved_mb": 6624.5,
-      "free_estimate_mb": 1500.9,
-      "fragmentation_ratio": 0.226568,
-      "step_time_s": 0.003282,
+      "step": 17,
+      "allocated_mb": 5299.0,
+      "reserved_mb": 6596.3,
+      "free_estimate_mb": 1297.3,
+      "fragmentation_ratio": 0.196671,
+      "step_time_s": 0.003199,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902890.0
+      "timestamp": 1775001907.5
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902890.0
+      "timestamp": 1775001907.5
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902890.002
+      "timestamp": 1775001907.502
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902890.002
+      "timestamp": 1775001907.502
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902890.004
+      "timestamp": 1775001907.503
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902890.004
+      "timestamp": 1775001907.503
     },
     {
-      "step": 66,
-      "allocated_mb": 5077.1,
-      "reserved_mb": 6620.8,
-      "free_estimate_mb": 1543.7,
-      "fragmentation_ratio": 0.233159,
-      "step_time_s": 0.003205,
+      "step": 18,
+      "allocated_mb": 5420.9,
+      "reserved_mb": 6631.3,
+      "free_estimate_mb": 1210.4,
+      "fragmentation_ratio": 0.182528,
+      "step_time_s": 0.003217,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902890.004
+      "timestamp": 1775001907.503
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_begin",
-      "timestamp": 1774902890.004
+      "timestamp": 1775001907.503
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "forward_end",
-      "timestamp": 1774902890.005
+      "timestamp": 1775001907.505
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_begin",
-      "timestamp": 1774902890.005
+      "timestamp": 1775001907.505
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "backward_end",
-      "timestamp": 1774902890.007
+      "timestamp": 1775001907.507
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
       "step_time_s": 0.0,
       "batch_size": 0,
       "phase": "optimizer_step",
-      "timestamp": 1774902890.007
+      "timestamp": 1775001907.507
     },
     {
-      "step": 67,
-      "allocated_mb": 5104.8,
-      "reserved_mb": 6604.6,
-      "free_estimate_mb": 1499.8,
-      "fragmentation_ratio": 0.227084,
-      "step_time_s": 0.003223,
+      "step": 19,
+      "allocated_mb": 5122.0,
+      "reserved_mb": 6606.2,
+      "free_estimate_mb": 1484.2,
+      "fragmentation_ratio": 0.224668,
+      "step_time_s": 0.003291,
       "batch_size": 6,
       "phase": "step",
-      "timestamp": 1774902890.007
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.007
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.008
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.008
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.01
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.01
-    },
-    {
-      "step": 68,
-      "allocated_mb": 5204.1,
-      "reserved_mb": 6603.5,
-      "free_estimate_mb": 1399.4,
-      "fragmentation_ratio": 0.211918,
-      "step_time_s": 0.003047,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.01
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.01
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.011
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.011
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.013
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.013
-    },
-    {
-      "step": 69,
-      "allocated_mb": 5205.5,
-      "reserved_mb": 6625.2,
-      "free_estimate_mb": 1419.7,
-      "fragmentation_ratio": 0.214288,
-      "step_time_s": 0.003125,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.013
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.013
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.015
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.015
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.016
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.016
-    },
-    {
-      "step": 70,
-      "allocated_mb": 5118.8,
-      "reserved_mb": 6629.0,
-      "free_estimate_mb": 1510.2,
-      "fragmentation_ratio": 0.227817,
-      "step_time_s": 0.00313,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.016
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.016
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.018
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.018
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.019
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.019
-    },
-    {
-      "step": 71,
-      "allocated_mb": 5321.7,
-      "reserved_mb": 6611.0,
-      "free_estimate_mb": 1289.3,
-      "fragmentation_ratio": 0.195023,
-      "step_time_s": 0.003195,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.019
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.019
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.021
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.021
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.023
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.023
-    },
-    {
-      "step": 72,
-      "allocated_mb": 5599.5,
-      "reserved_mb": 6639.9,
-      "free_estimate_mb": 1040.4,
-      "fragmentation_ratio": 0.156689,
-      "step_time_s": 0.003156,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.023
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.023
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.024
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.024
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.026
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.026
-    },
-    {
-      "step": 73,
-      "allocated_mb": 5478.4,
-      "reserved_mb": 6615.1,
-      "free_estimate_mb": 1136.7,
-      "fragmentation_ratio": 0.171834,
-      "step_time_s": 0.003097,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.026
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.026
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.028
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.028
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.029
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.029
-    },
-    {
-      "step": 74,
-      "allocated_mb": 5559.2,
-      "reserved_mb": 6622.7,
-      "free_estimate_mb": 1063.5,
-      "fragmentation_ratio": 0.160584,
-      "step_time_s": 0.003334,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.029
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.029
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.031
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.031
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.032
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.032
-    },
-    {
-      "step": 75,
-      "allocated_mb": 5467.5,
-      "reserved_mb": 6575.4,
-      "free_estimate_mb": 1107.9,
-      "fragmentation_ratio": 0.168492,
-      "step_time_s": 0.003144,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.032
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.032
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.034
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.034
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.035
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.035
-    },
-    {
-      "step": 76,
-      "allocated_mb": 5678.2,
-      "reserved_mb": 6626.4,
-      "free_estimate_mb": 948.2,
-      "fragmentation_ratio": 0.143094,
-      "step_time_s": 0.003209,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.035
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.035
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.037
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.037
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.039
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.039
-    },
-    {
-      "step": 77,
-      "allocated_mb": 5521.3,
-      "reserved_mb": 6635.8,
-      "free_estimate_mb": 1114.5,
-      "fragmentation_ratio": 0.167953,
-      "step_time_s": 0.003294,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.039
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.039
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.041
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.041
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.042
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.042
-    },
-    {
-      "step": 78,
-      "allocated_mb": 5818.4,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 799.9,
-      "fragmentation_ratio": 0.120862,
-      "step_time_s": 0.003426,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.042
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.042
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.044
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.044
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.045
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.045
-    },
-    {
-      "step": 79,
-      "allocated_mb": 5711.5,
-      "reserved_mb": 6650.8,
-      "free_estimate_mb": 939.3,
-      "fragmentation_ratio": 0.141231,
-      "step_time_s": 0.003155,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.045
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.045
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.047
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.047
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.049
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.049
-    },
-    {
-      "step": 80,
-      "allocated_mb": 5914.1,
-      "reserved_mb": 6627.3,
-      "free_estimate_mb": 713.2,
-      "fragmentation_ratio": 0.107615,
-      "step_time_s": 0.0034,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.049
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.049
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.051
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.051
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.052
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.052
-    },
-    {
-      "step": 81,
-      "allocated_mb": 6065.6,
-      "reserved_mb": 6623.7,
-      "free_estimate_mb": 558.1,
-      "fragmentation_ratio": 0.084258,
-      "step_time_s": 0.003187,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.052
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.052
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.054
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.054
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.056
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.056
-    },
-    {
-      "step": 82,
-      "allocated_mb": 5945.2,
-      "reserved_mb": 6618.3,
-      "free_estimate_mb": 673.1,
-      "fragmentation_ratio": 0.101703,
-      "step_time_s": 0.00331,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.056
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.056
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.057
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.057
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.059
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.059
-    },
-    {
-      "step": 83,
-      "allocated_mb": 5999.7,
-      "reserved_mb": 6628.8,
-      "free_estimate_mb": 629.1,
-      "fragmentation_ratio": 0.094904,
-      "step_time_s": 0.003264,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.059
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.059
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.06
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.06
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.062
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.062
-    },
-    {
-      "step": 84,
-      "allocated_mb": 5982.3,
-      "reserved_mb": 6636.7,
-      "free_estimate_mb": 654.4,
-      "fragmentation_ratio": 0.098603,
-      "step_time_s": 0.003239,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.062
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.062
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.064
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.064
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.065
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.065
-    },
-    {
-      "step": 85,
-      "allocated_mb": 6261.4,
-      "reserved_mb": 6593.3,
-      "free_estimate_mb": 331.9,
-      "fragmentation_ratio": 0.050339,
-      "step_time_s": 0.003081,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.065
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.065
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.067
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.067
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.069
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.069
-    },
-    {
-      "step": 86,
-      "allocated_mb": 6204.7,
-      "reserved_mb": 6614.0,
-      "free_estimate_mb": 409.3,
-      "fragmentation_ratio": 0.061884,
-      "step_time_s": 0.003264,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.069
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.069
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.07
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.07
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.072
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.072
-    },
-    {
-      "step": 87,
-      "allocated_mb": 6005.8,
-      "reserved_mb": 6578.4,
-      "free_estimate_mb": 572.6,
-      "fragmentation_ratio": 0.087042,
-      "step_time_s": 0.003325,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.072
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.072
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.073
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.073
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.075
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.075
-    },
-    {
-      "step": 88,
-      "allocated_mb": 6122.0,
-      "reserved_mb": 6633.5,
-      "free_estimate_mb": 511.5,
-      "fragmentation_ratio": 0.077109,
-      "step_time_s": 0.003168,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.075
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.075
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.077
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.077
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.078
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.078
-    },
-    {
-      "step": 89,
-      "allocated_mb": 6305.0,
-      "reserved_mb": 6610.9,
-      "free_estimate_mb": 305.9,
-      "fragmentation_ratio": 0.046272,
-      "step_time_s": 0.003456,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.078
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.078
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.08
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.08
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.081
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.081
-    },
-    {
-      "step": 90,
-      "allocated_mb": 6257.9,
-      "reserved_mb": 6581.3,
-      "free_estimate_mb": 323.4,
-      "fragmentation_ratio": 0.049139,
-      "step_time_s": 0.002843,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.081
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.081
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.083
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.083
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.085
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.085
-    },
-    {
-      "step": 91,
-      "allocated_mb": 5951.4,
-      "reserved_mb": 6607.4,
-      "free_estimate_mb": 656.0,
-      "fragmentation_ratio": 0.099283,
-      "step_time_s": 0.003151,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.085
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.085
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.086
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.086
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.088
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.088
-    },
-    {
-      "step": 92,
-      "allocated_mb": 6001.5,
-      "reserved_mb": 6600.1,
-      "free_estimate_mb": 598.6,
-      "fragmentation_ratio": 0.090696,
-      "step_time_s": 0.003002,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.088
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.088
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.089
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.089
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.091
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.091
-    },
-    {
-      "step": 93,
-      "allocated_mb": 6064.5,
-      "reserved_mb": 6636.3,
-      "free_estimate_mb": 571.8,
-      "fragmentation_ratio": 0.086162,
-      "step_time_s": 0.003306,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.091
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.091
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.093
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.093
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.094
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.094
-    },
-    {
-      "step": 94,
-      "allocated_mb": 6281.7,
-      "reserved_mb": 6660.3,
-      "free_estimate_mb": 378.6,
-      "fragmentation_ratio": 0.056844,
-      "step_time_s": 0.003197,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.094
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.094
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.096
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.096
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.097
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.097
-    },
-    {
-      "step": 95,
-      "allocated_mb": 6065.2,
-      "reserved_mb": 6586.2,
-      "free_estimate_mb": 521.0,
-      "fragmentation_ratio": 0.079105,
-      "step_time_s": 0.003246,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.097
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.097
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.099
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.099
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.101
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.101
-    },
-    {
-      "step": 96,
-      "allocated_mb": 5944.2,
-      "reserved_mb": 6605.1,
-      "free_estimate_mb": 660.9,
-      "fragmentation_ratio": 0.100059,
-      "step_time_s": 0.003336,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.101
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.101
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.103
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.103
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.104
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.104
-    },
-    {
-      "step": 97,
-      "allocated_mb": 5999.2,
-      "reserved_mb": 6632.2,
-      "free_estimate_mb": 633.0,
-      "fragmentation_ratio": 0.095443,
-      "step_time_s": 0.003261,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.104
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.104
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.106
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.106
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.108
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.108
-    },
-    {
-      "step": 98,
-      "allocated_mb": 5733.3,
-      "reserved_mb": 6634.9,
-      "free_estimate_mb": 901.6,
-      "fragmentation_ratio": 0.135888,
-      "step_time_s": 0.0034,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.108
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_begin",
-      "timestamp": 1774902890.108
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "forward_end",
-      "timestamp": 1774902890.109
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_begin",
-      "timestamp": 1774902890.109
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "backward_end",
-      "timestamp": 1774902890.111
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.0,
-      "batch_size": 0,
-      "phase": "optimizer_step",
-      "timestamp": 1774902890.111
-    },
-    {
-      "step": 99,
-      "allocated_mb": 5807.8,
-      "reserved_mb": 6640.0,
-      "free_estimate_mb": 832.2,
-      "fragmentation_ratio": 0.125331,
-      "step_time_s": 0.003295,
-      "batch_size": 6,
-      "phase": "step",
-      "timestamp": 1774902890.111
+      "timestamp": 1775001907.507
     }
   ]
 }

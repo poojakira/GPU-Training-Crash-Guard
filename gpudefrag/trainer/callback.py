@@ -24,7 +24,6 @@ Usage::
 """
 
 from typing import Optional
-import torch
 from gpudefrag.scheduler.monitor import DefragMonitor
 from gpudefrag.trainer.ddp import DDPSyncManager
 from gpudefrag.utils import get_logger, DefragConfig
@@ -76,26 +75,24 @@ class DefragCallback:
         """Called after each training step."""
         self.monitor.auto_record()
         self._step_count += 1
-        
+
         # Handle deferred compactions (DDP or Async)
         if hasattr(self.monitor, 'pending_compaction') and self.monitor.pending_compaction:
             should_compact = True
-            
+
             # Sync across DDP ranks if enabled
             if self.monitor.config.ddp_sync:
                 should_compact = self.ddp_manager.check_global_compaction(local_pending=True)
-                
+
             if should_compact:
                 score = self.monitor.last_predicted_score
-                reason = f"ddp_async_frag={score:.3f}" if self.monitor.config.ddp_sync else f"async_frag={score:.3f}"
-                
-                if self.monitor.config.async_compaction:
-                    # In true async we might dispatch to another stream, but for safety in PyTorch
-                    # we do it on step boundaries to avoid mid-kernel interference.
-                    self.monitor.compactor.compact(reason=reason)
-                else:
-                    self.monitor.compactor.compact(reason=reason)
-                    
+                reason = (
+                    f"ddp_async_frag={score:.3f}"
+                    if self.monitor.config.ddp_sync
+                    else f"async_frag={score:.3f}"
+                )
+                self.monitor.compactor.defragment_tensors([], reason=reason)
+
             self.monitor.pending_compaction = False
 
     def stats(self) -> dict:

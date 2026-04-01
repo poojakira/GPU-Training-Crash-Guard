@@ -19,7 +19,6 @@ import time
 import threading
 import torch
 import pandas as pd
-import numpy as np
 from pathlib import Path
 from typing import Optional, List, Dict
 from gpudefrag.utils import get_logger, DefragConfig, ensure_cuda

@@ -6,11 +6,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import json
-import os
 from pathlib import Path
 from gpudefrag.scheduler.predictor import FragPredictor
 from gpudefrag.scheduler.dataset import create_dataloaders
-from gpudefrag.utils import get_logger, DefragConfig, Timer
+from gpudefrag.utils import get_logger, DefragConfig
 
 log = get_logger("trainer")
 

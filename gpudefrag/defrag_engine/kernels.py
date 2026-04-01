@@ -11,7 +11,7 @@ import triton.language as tl
 
 @triton.jit
 def _compaction_copy_kernel(
-    src_ptr, dst_ptr, 
+    src_ptr, dst_ptr,
     n_elements,
     BLOCK_SIZE: tl.constexpr
 ):
@@ -24,16 +24,16 @@ def _compaction_copy_kernel(
     # Compute the starting offset of this block
     pid = tl.program_id(axis=0)
     block_start = pid * BLOCK_SIZE
-    
+
     # Compute the offsets for the elements in this block
     offsets = block_start + tl.arange(0, BLOCK_SIZE)
-    
+
     # Create a mask to avoid out-of-bounds memory access
     mask = offsets < n_elements
-    
+
     # Load from source, bypassing cache where possible, but here we just do normal load
     x = tl.load(src_ptr + offsets, mask=mask)
-    
+
     # Store to destination
     tl.store(dst_ptr + offsets, x, mask=mask)
 
@@ -51,25 +51,25 @@ def triton_compaction_copy(src: torch.Tensor, dst: torch.Tensor) -> torch.Tensor
     """
     assert src.is_cuda and dst.is_cuda, "Tensors must be on CUDA."
     assert src.numel() == dst.numel(), "Source and destination must have the same number of elements."
-    
+
     # Ensure source is contiguous for the 1D view, though in a real defrag we might handle striding
     src_flat = src.flatten()
     dst_flat = dst.flatten()
     n_elements = src_flat.numel()
-    
+
     if n_elements == 0:
         return dst
-        
+
     BLOCK_SIZE = 1024
     grid = lambda meta: (triton.cdiv(n_elements, meta['BLOCK_SIZE']),)
-    
+
     _compaction_copy_kernel[grid](
-        src_flat, 
-        dst_flat, 
+        src_flat,
+        dst_flat,
         n_elements,
         BLOCK_SIZE=BLOCK_SIZE
     )
-    
+
     return dst
 
 @triton.jit
@@ -87,18 +87,18 @@ def _fragmentation_scan_kernel(
     block_start = pid * BLOCK_SIZE
     offsets = block_start + tl.arange(0, BLOCK_SIZE)
     mask = offsets < n_blocks
-    
+
     sizes = tl.load(mem_blocks_ptr + offsets, mask=mask, other=0)
-    
+
     # Simple heuristic: heavily fragmented if block is small and free (negative)
     # We output a score: 1.0 if highly fragmented free block, 0.0 otherwise.
     # In reality, fragmentation is a global property, but this simulates a parallel local pass.
     is_free = sizes < 0
     abs_size = tl.where(is_free, -sizes, sizes)
-    
+
     # If the free block is smaller than 1MB (1024*1024 bytes), consider it fragmented
     is_small = abs_size < 1048576
-    
+
     score = tl.where(is_free & is_small, 1.0, 0.0)
     tl.store(frag_scores_ptr + offsets, score, mask=mask)
 
@@ -112,21 +112,21 @@ def analyze_fragmentation_triton(block_sizes: torch.Tensor) -> float:
     """
     if not block_sizes.is_cuda:
         block_sizes = block_sizes.cuda()
-        
+
     n_blocks = block_sizes.numel()
     if n_blocks == 0:
         return 0.0
-        
+
     scores = torch.zeros_like(block_sizes, dtype=torch.float32)
     BLOCK_SIZE = 1024
     grid = lambda meta: (triton.cdiv(n_blocks, meta['BLOCK_SIZE']),)
-    
+
     _fragmentation_scan_kernel[grid](
         block_sizes,
         scores,
         n_blocks,
         BLOCK_SIZE=BLOCK_SIZE
     )
-    
+
     # Aggregate on GPU and return CPU scalar
     return scores.mean().item()

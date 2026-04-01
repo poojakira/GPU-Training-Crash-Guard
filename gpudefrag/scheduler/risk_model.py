@@ -1,5 +1,5 @@
 """
-src.predictor.risk_model — Simple OOM-risk scorer.
+gpudefrag.scheduler.risk_model — Simple OOM-risk scorer.
 
 Two modes:
   1. Rule-based (default) — weighted heuristic over fragmentation,
@@ -16,7 +16,7 @@ Usage::
 
 import logging
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Any
 
 import numpy as np
