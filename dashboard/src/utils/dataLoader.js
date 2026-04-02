@@ -28,10 +28,10 @@ export const fetchLiveTelemetry = async () => {
       avgTime:          Number(data.avg_latency_ms) || 0,
       history: Array.isArray(data.compaction_history)
         ? data.compaction_history.map((c, idx) => ({
-            id:            c.compaction_id ?? idx,
-            freed:         Number(c.freed_mb) || 0,
+            id:            c.compaction_id ?? c.id ?? idx,
+            freed:         Number(c.freed_mb ?? c.recoveredMb) || 0,
             fragReduction: Number(c.frag_reduction) * 100 || 0,
-            elapsedMs:     Number(c.elapsed_ms) || 0,
+            elapsedMs:     Number(c.elapsed_ms ?? c.elapsedMs) || 0,
             timestamp:     c.timestamp || `sweep_${idx}`
           }))
         : []
