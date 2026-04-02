@@ -1,158 +1,193 @@
-# Predictive GPU Memory Defragmenter v2.0.0 
+# Predictive GPU Memory Defragmenter
 
-[![Coverage Status](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)](https://github.com/poojakira/Predictive-GPU-Memory-Defragmenter)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/poojakira/Predictive-GPU-Memory-Defragmenter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An enterprise-grade, "Zero-Code-Change" PyTorch ML Infrastructure tool designed to actively predict and mitigate GPU memory fragmentation before Out-of-Memory (OOM) exceptions occur. Powered by custom Triton kernels and an NVIDIA Nsight-inspired cinematic monitoring dashboard (**AeroGrid**).
+A PyTorch research prototype that **predicts GPU memory fragmentation and triggers proactive compaction before Out-of-Memory (OOM) crashes occur** during deep learning training.
 
-## 🏆 Project Engineers
-
-* **Pooja Kiran** — ML Engineer  
-  *Architect of the Predictive Risk Models, Core Telemetry Pipelines, PyTorch Allocator Hooking, native Triton-powered active tensor defragmentation kernels, and Distributed Data Parallel (DDP) integration logic.*
-* **Rhutvik Pachghare** — Robotics & UI Engineer  
-  *Architect of the NVIDIA-Nsight Cinematic Dashboard, hardware visualization topology logic, and CI/CD operations.*
+Tested on: NVIDIA RTX 4060 8 GB · PyTorch 2.6.0.dev · CUDA 12.1 · GPT-2 (6-layer, 768-dim)
 
 ---
 
-## ⚡ Key Enterprise Features
+## The Problem
 
-1. **Zero-Code-Change Auto-Instrumentation**  
-   Forget plastering `hook.on_forward_begin()` across your codebase. Wrap your model once:
-   ```python
-   from gpudefrag import auto_instrument
-   model, optimizer = auto_instrument(model, optimizer, risk_threshold=0.8)
-   ```
-
-2. **True Triton-Powered GPU Defragmentation (< 15ms Overhead)**  
-   Unlike simple `empty_cache()` scripts, this engine acts as a **true physical defragmenter**. It uses extreme-bandwidth custom Triton kernels (`triton_compaction_copy`) to seamlessly repack live model parameters into dense VRAM blocks in *under 15 milliseconds* without severing autograd backward graphs.
-
-3. **AeroGrid — 6-Page Cinematic Monitoring HUD**  
-   A high-density, NVIDIA Nsight-themed React dashboard with six dedicated inspection pages:
-
-   | Page | Purpose |
-   |------|---------|
-   | **Mission Control** | Primary KPIs: OOMs prevented, cumulative VRAM recovered |
-   | **VRAM Topology** | Live hex-offset physical memory layout map with allocation distribution |
-   | **Shadow Forecast** | Predictive fragmentation timeline with OOM threshold overlay |
-   | **Scheduler Attention** | Heatmap visualization of the internal allocator decision matrix |
-   | **DDP Choreography** | Multi-GPU barrier synchronization status and sync overhead |
-   | **Triton Inspector** | Kernel-level latency profiling and compaction execution trace |
-
-4. **Distributed Data Parallel (DDP) Safe**  
-   Includes native `DDPSyncManager` with `torch.distributed.barrier()` safety nets and global `all_reduce(MAX)` checks to prevent NCCL broadcast hangs during multi-GPU compaction.
-
-5. **Enterprise-Grade Verification & Hardening**  
-   Fully validated across 267 distinct enterprise tests with **strict 100.00% statement coverage**, guaranteeing extreme resiliency against I/O filesystem failures, DDP barrier timeouts, and platform precision variance. Built-in health checks (`gpu-defragger status`) ensure your environment is compliant before training begins.
-
-6. **AeroGrid Telemetry Synchronization (Fixed)**  
-   The real-time telemetry pipeline has been standardized for v2.0.0, resolving field-level synchronization issues between the Python compute plane and React dashboard (standardized to `elapsedMs`).
+GPU memory fragmentation is a frequent cause of training instability. PyTorch's caching allocator reserves large blocks over time, but repeated alloc/free cycles produce small, scattered free regions that cannot satisfy the next large allocation — resulting in an OOM crash even when `nvidia-smi` shows free memory. The standard fix (`torch.cuda.empty_cache()`) is reactive: it runs *after* the failure. This project explores whether a predictive approach can act *before* the crash.
 
 ---
 
-## 🚀 Quick Start
+## What Was Built
 
-### 1. Installation
+### 1. Fragmentation Predictor (`gpudefrag/scheduler/predictor.py`)
 
-```bash
-pip install -e .
-```
+A lightweight Transformer encoder (`FragPredictor`) that takes a sliding window of the last `seq_len=64` allocation events as input features `(batch, seq_len, 4)` and outputs a scalar fragmentation score in `[0, 1]` via sigmoid regression.
 
-### 2. Zero-Code-Change Integration
+Architecture:
+- Linear input projection → LayerNorm → GELU
+- Learnable positional encoding `(1, seq_len, hidden_dim=128)`
+- N=4 Transformer encoder layers with pre-norm (`norm_first=True`)
+- Global average pooling across the time axis
+- 3-layer regression head → sigmoid score
+- Xavier uniform initialization throughout
+- ~500K trainable parameters total
+
+When the predicted score exceeds `risk_threshold=0.8`, the monitor thread triggers a compaction sweep.
+
+### 2. Triton Defragmentation Kernels (`gpudefrag/defrag_engine/kernels.py`)
+
+Two custom Triton kernels:
+
+- `_compaction_copy_kernel` — copies tensor data from a potentially fragmented source into a fresh contiguous CUDA buffer using 1024-element blocks, maximizing memory bandwidth. This is the physical compaction step.
+- `_fragmentation_scan_kernel` — a parallel scan over an allocator block-size array that computes local fragmentation scores on the GPU, avoiding CPU round-trip overhead.
+
+Both kernels fall back gracefully to a `DummyTriton` stub when Triton is not installed, so the package runs on CPU-only environments for testing.
+
+### 3. Defragmentation Engine (`gpudefrag/defrag_engine/defragmenter.py`)
+
+`GPUMemoryDefragmenter` iterates over live model parameters, checks whether each tensor is already contiguous, and if not uses the Triton compaction copy (or a `torch.clone()` fallback) to repack it into a fresh contiguous VRAM block. Parameter data pointers are updated in-place so the autograd computation graph remains valid.
+
+### 4. Zero-Code-Change Auto-Instrumentation (`gpudefrag/trainer/auto_instrument.py`)
+
+Dynamically intercepts forward passes, backward passes, and optimizer steps using PyTorch hooks, abstracting the `TrainingHook` entirely away from the user's training code:
 
 ```python
-from gpudefrag import auto_instrument, GPUMemoryDefragmenter
-
-# Option A: Auto-instrument an existing training loop (recommended)
+from gpudefrag import auto_instrument
 model, optimizer = auto_instrument(model, optimizer, risk_threshold=0.8)
-# ... standard training loop — defragmentation happens invisibly ...
-
-# Option B: Manual defragmentation
-defrag = GPUMemoryDefragmenter(use_triton=True)
-result = defrag.defragment_tensors(model.parameters(), reason="manual_sweep")
+# Existing training loop runs unchanged below
 ```
 
-# 3. Command Line Interface (CLI)
-# The package provides a Rich-powered CLI (gpu-defragger):
+### 5. DDP Safety (`gpudefrag/trainer/ddp.py`)
 
-# Profile real models (gpt2, resnet50)
-gpu-defragger profile --model gpt2
+`DDPSyncManager` wraps multi-GPU compaction events with `torch.distributed.barrier()` synchronization and `all_reduce(MAX)` risk checks to prevent NCCL hangs during compaction across ranks.
 
-# Launch Live REST API Server
-gpu-defragger server --port 8000
+### 6. Monitoring Dashboard (`dashboard/`)
 
-# Launch AeroGrid Monitoring Dashboard (Fastest Way)
-gpu-defragger dashboard
+A React + FastAPI real-time dashboard with six inspection pages:
 
-# Run the full comparison benchmark
-python benchmarks/compare.py
-
-### 4. Launching the AeroGrid Dashboard
-
-The easiest way to start the dashboard is via the CLI:
-```bash
-gpu-defragger dashboard
-```
-
-Alternatively, run manually:
-```bash
-cd dashboard
-npm run dev
-```
-
-Navigate to `http://localhost:5173/` to view the 6-page monitoring HUD.
+| Page | What it shows |
+|---|---|
+| Mission Control | OOM crashes prevented, cumulative VRAM recovered |
+| VRAM Topology | Live hex-offset physical memory layout map |
+| Shadow Forecast | Predicted fragmentation timeline with OOM threshold overlay |
+| Scheduler Attention | Allocator decision heatmap |
+| DDP Choreography | Multi-GPU barrier sync status and overhead |
+| Triton Inspector | Kernel-level latency profiling and compaction traces |
 
 ---
 
-## 🏗️ Architecture
+## Benchmark Results
+
+Setup: RTX 4060 (8 GB VRAM), PyTorch 2.6.0.dev, CUDA 12.1, GPT-2 (6-layer, 768-dim), 100 training iterations with synthetic fragmentation injected.
+
+| Metric | Baseline | With gpudefrag | Change |
+|---|---|---|---|
+| OOM Errors | 0–3 per run | 0 | Eliminated |
+| Training Restarts | 2–5 | 0 | Eliminated |
+| Peak Memory (MB) | 7,840.4 | 6,920.4 | −11.7% |
+| Avg Iteration Time | 1.94 s | 1.76 s | −9.3% |
+| Proactive Compactions | — | 42 per session | Automatic |
+| Triton Sweep Latency | — | 7.3–14.5 ms | Sub-iteration |
+| Test Coverage | — | 100% (267 tests) | — |
+
+Full numbers and raw JSON outputs are in [RESULTS.md](RESULTS.md). Reproduction steps are in [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md).
+
+**Honest caveats:**
+- All benchmarks use *synthetic* fragmentation injection, not organic fragmentation from real production workloads.
+- Tested on a single consumer GPU (RTX 4060). Multi-GPU DDP paths are implemented but not benchmarked end-to-end.
+- The `FragPredictor` was trained on traces from this specific workload; out-of-distribution generalization to other architectures is not yet validated.
+- This is a research prototype, not a drop-in production memory manager.
+
+---
+
+## Quick Start
+
+```bash
+pip install -e ".[models]"
+
+# Profile a model
+gpu-defragger profile --model gpt2
+
+# Start the FastAPI telemetry server
+gpu-defragger server --port 8000
+
+# Launch the monitoring dashboard (React dev server at http://localhost:5173)
+gpu-defragger dashboard
+
+# Run the benchmark
+python benchmarks/compare.py
+```
+
+---
+
+## Repository Structure
 
 ```
 gpudefrag/
-├── __init__.py               # Unified v2.0.0 exports (auto_instrument, DDPSyncManager, etc.)
-├── cli.py                    # Rich CLI entry points (profile, server, dashboard)
-├── api.py                    # FastAPI REST surface for telemetry
-├── dashboard.py              # AEON CORE Dashboard manager & bridge
 ├── profiler/
 │   ├── collector.py          # torch.cuda.memory_snapshot ingestion
 │   └── allocator_logger.py   # High-resolution allocation event logger
 ├── scheduler/
-│   ├── monitor.py            # Background DefragMonitor daemon thread
-│   ├── predictor.py          # Autoregressive Transformer fragmentation forecaster
+│   ├── predictor.py          # FragPredictor: Transformer fragmentation forecaster
 │   ├── dataset.py            # Trace-to-tensor dataset pipeline
-│   └── risk_model.py         # Multi-modal OOM risk scoring engine
+│   ├── risk_model.py         # Multi-signal OOM risk scorer
+│   └── monitor.py            # Background DefragMonitor thread
 ├── defrag_engine/
-│   ├── defragmenter.py       # GPUMemoryDefragmenter — active VRAM repacking engine
-│   ├── policy.py             # MitigationPolicy decision engine
-│   └── kernels.py            # Custom Triton kernels (triton_compaction_copy)
+│   ├── kernels.py            # Triton kernels: compaction copy + fragmentation scan
+│   ├── defragmenter.py       # GPUMemoryDefragmenter: active VRAM repacker
+│   └── policy.py             # MitigationPolicy decision engine
 ├── trainer/
 │   ├── auto_instrument.py    # Zero-code-change PyTorch hook orchestrator
-│   ├── callback.py           # DefragCallback for training loop integration
-│   ├── training_hook.py      # Low-level training loop interceptors
-│   └── ddp.py                # DDPSyncManager — global barrier choreography
-├── optimization/             # Dynamic int8 quantization utilities
-└── llm_system/               # PagedKV cache integration paths
+│   ├── training_hook.py      # Low-level forward/backward/optimizer interceptors
+│   └── ddp.py                # DDPSyncManager: multi-GPU barrier choreography
+├── optimization/             # int8 quantization utilities
+├── llm_system/               # PagedKV cache integration
+├── api.py                    # FastAPI telemetry REST surface
+├── cli.py                    # Rich-powered CLI
+└── dashboard.py              # Dashboard bridge/launcher
 
-benchmarks/                   # Performance evaluation suite
-├── compare.py                # Baseline vs Defrag top-level report generator
+benchmarks/
+├── compare.py                # Baseline vs defrag report generator
 └── run_local_benchmark.py    # Per-rank local simulation engine
+
+tests/                        # 267 unit tests, 100% statement coverage
+results/                      # Benchmark JSON and CSV outputs
+data/traces/                  # Allocation event trace data
+checkpoints/                  # FragPredictor model checkpoints
+dashboard/                    # React frontend
 ```
 
 ---
 
-## 📊 Benchmark Reports
+## Tech Stack
 
-Full results and reproduction steps are available in [RESULTS.md](RESULTS.md) and [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md).
+| Layer | Technology |
+|---|---|
+| Core ML / runtime | PyTorch |
+| Prediction model | Transformer encoder (PyTorch `nn.TransformerEncoder`) |
+| GPU kernels | Triton (`triton_compaction_copy`, `_fragmentation_scan_kernel`) |
+| API | FastAPI |
+| Dashboard | React + Vite |
+| CLI | Rich |
+| Testing | pytest (267 tests, 100% statement coverage) |
 
 ---
 
-## 📝 License
+## Engineers
 
-MIT License — see [LICENSE](LICENSE) for details.
+**Pooja Kiran** — ML systems: `FragPredictor` Transformer architecture and training, allocator telemetry pipeline, Triton kernel authorship, `GPUMemoryDefragmenter` engine, `DDPSyncManager` integration, `auto_instrument` hook orchestration.
 
+**Rhutvik Pachghare** — Observability: AeroGrid dashboard architecture and React frontend, hardware visualization topology, CI/CD pipeline and repository hardening.
 
+---
 
-https://github.com/user-attachments/assets/e769d8b0-407f-4fbe-8f00-2288781373b8
+## Reproduce Results
 
+```bash
+pip install -e ".[models]"
+python benchmarks/compare.py
+# Outputs: results/comparison.csv, results/comparison.json
+```
 
+---
 
+## License
 
+MIT — see [LICENSE](LICENSE)
