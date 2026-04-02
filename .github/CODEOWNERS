@@ -2,6 +2,9 @@
 # 
 # This file is used to specify who owns which files/directories in the repository.
 # GitHub uses this to automatically request reviews.
+# 
+# V2.0.0 ENTERPRISE POLICY REQUIREMENT:
+# Any PR modifying core execution paths requires 100% test coverage matching.
 
 # Global default owner
 * @poojakira @rhutvik-pachghare
@@ -16,8 +19,7 @@
 /gpudefrag/trainer/          @poojakira
 /gpudefrag/profiler/         @poojakira
 /gpudefrag/scheduler/        @poojakira
-/tests/                      @poojakira
-/scripts/                    @poojakira
+/scripts/                    @poojakira @rhutvik-pachghare
 /benchmarks/                 @poojakira
 /data/                       @poojakira
 
