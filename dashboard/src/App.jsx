@@ -11,9 +11,10 @@ import { Panel9_LatencyBarGraph } from './components/Panel9_LatencyBarGraph';
 import { Panel10_CumulativeFreed } from './components/Panel10_CumulativeFreed';
 import { Panel11_AllocationDist } from './components/Panel11_AllocationDist';
 import { Panel12_SyncOverhead } from './components/Panel12_SyncOverhead';
-import { fetchLiveTelemetry } from './utils/dataLoader';
+import { Panel13_Benchmarking } from './components/Panel13_Benchmarking';
+import { fetchLiveTelemetry, fetchSimulatedModeling } from './utils/dataLoader';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Cpu, ShieldCheck, Server, History, AlignLeft, Layers, TerminalSquare } from 'lucide-react';
+import { Cpu, ShieldCheck, Server, History, AlignLeft, Layers, TerminalSquare, BarChart2 } from 'lucide-react';
 
 // =============================================================================
 // App.jsx — AeroGrid 6-Page Cinematic HUD Orchestrator
@@ -41,6 +42,8 @@ function App() {
     currentAllocated: 0,
     currentReserved: 0
   });
+
+  const [benchmarkData, setBenchmarkData] = useState(null);
 
   const THRESHOLD = 80;
 
@@ -116,6 +119,10 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    fetchSimulatedModeling().then(data => setBenchmarkData(data));
+  }, []);
+
   const renderContent = () => {
      switch(activePage) {
         case 'mission_control':
@@ -184,6 +191,12 @@ function App() {
                    </div>
                 </div>
             );
+        case 'model_benchmarks':
+            return (
+                <div className="h-full">
+                    <Panel13_Benchmarking data={benchmarkData} />
+                </div>
+            );
         default: return null;
      }
   };
@@ -230,6 +243,12 @@ function App() {
            
            <button onClick={() => setActivePage('triton_inspector')} className={`nav-btn ${activePage === 'triton_inspector' ? 'active' : ''}`}>
                <TerminalSquare size={16} /> Triton Inspector
+           </button>
+
+           <div className="mt-8 mb-4 text-[10px] text-dim font-bold uppercase tracking-widest ml-1">Projections</div>
+
+           <button onClick={() => setActivePage('model_benchmarks')} className={`nav-btn ${activePage === 'model_benchmarks' ? 'active' : ''}`}>
+               <BarChart2 size={16} /> Modeling Benchmarks
            </button>
         </nav>
         

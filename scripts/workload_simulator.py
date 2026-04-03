@@ -28,6 +28,14 @@ from dataclasses import dataclass, asdict
 from typing import List, Dict, Any, Optional
 
 import numpy as np
+import logging
+
+log = logging.getLogger("workload_simulator")
+if not log.handlers:
+    sh = logging.StreamHandler()
+    sh.setFormatter(logging.Formatter("[SIM] %(message)s"))
+    log.addHandler(sh)
+    log.setLevel(logging.INFO)
 
 
 # ---------------------------------------------------------------------------
@@ -189,62 +197,73 @@ class CachingAllocator:
         self.vram_mb = vram_mb
         self.noise_std = noise_std
         self._blocks: Dict[int, _Block] = {}
-        self._free_blocks: List[float] = []  # sizes of freed-but-cached blocks
         self._next_id = 0
         self._reserved_mb = 0.0
         self._allocated_mb = 0.0
+        # Simplified address space modeling
+        self._block_map: List[tuple[int, int, int]] = [] # (start, size, bid) - sorted by start
 
     def alloc(self, size_mb: float, tag: str, step: int) -> Optional[int]:
         """Allocate a block. Returns block_id or None on OOM."""
         quantized = _quantize(size_mb + abs(np.random.normal(0, self.noise_std * size_mb)))
 
-        # Try to reuse a free block
-        reused = False
-        for i, free_sz in enumerate(self._free_blocks):
-            if free_sz >= quantized:
-                self._free_blocks.pop(i)
-                # Internal fragmentation: block may be larger than needed
-                leftover = free_sz - quantized
-                if leftover >= BLOCK_SIZE_MB:
-                    self._free_blocks.append(leftover)
-                else:
-                    quantized = free_sz  # absorb the leftover
-                reused = True
+        # 1. First-fit search in reserved segments (holes)
+        self._block_map.sort()
+        curr_addr = 0
+        best_gap_start = -1
+        
+        for start, size, bid in self._block_map:
+            gap = start - curr_addr
+            if gap >= quantized:
+                best_gap_start = curr_addr
                 break
+            curr_addr = start + size
+            
+        if best_gap_start != -1:
+            # Found a hole!
+            bid = self._next_id
+            self._next_id += 1
+            self._block_map.append((best_gap_start, quantized, bid))
+            self._allocated_mb += quantized
+            self._blocks[bid] = _Block(bid, quantized, tag, step, int(time.perf_counter() * 1e9))
+            return bid
 
-        if not reused:
-            # Need new memory from VRAM
-            if self._reserved_mb + quantized > self.vram_mb:
-                return None  # OOM
-            self._reserved_mb += quantized
+        # 2. No hole found, try to expand reserved memory at the end
+        if curr_addr + quantized > self.vram_mb:
+            log.debug("  OOM: Requested %.1f MB, but Max Contiguous Gap = %.1f MB", quantized, self.vram_mb - curr_addr)
+            return None # OOM from topological fragmentation
 
-        self._allocated_mb += quantized
         bid = self._next_id
         self._next_id += 1
-        self._blocks[bid] = _Block(
-            block_id=bid,
-            size_mb=quantized,
-            tag=tag,
-            step=step,
-            timestamp_ns=int(time.perf_counter() * 1e9),
-        )
+        self._block_map.append((curr_addr, quantized, bid))
+        self._reserved_mb = max(self._reserved_mb, curr_addr + quantized)
+        self._allocated_mb += quantized
+        self._blocks[bid] = _Block(bid, quantized, tag, step, int(time.perf_counter() * 1e9))
         return bid
 
     def free(self, block_id: int) -> float:
-        """Free a block (returns it to cache, not to OS)."""
+        """Free a block and remove it from the address map."""
         if block_id not in self._blocks:
             return 0.0
         blk = self._blocks.pop(block_id)
         self._allocated_mb -= blk.size_mb
-        self._free_blocks.append(blk.size_mb)
+        # Remove from block map
+        self._block_map = [b for b in self._block_map if b[2] != block_id]
         return blk.size_mb
 
     def empty_cache(self):
-        """Release all cached blocks back to VRAM pool."""
-        total_freed = sum(self._free_blocks)
-        self._reserved_mb -= total_freed
-        self._free_blocks.clear()
-        return total_freed
+        """Release all tailing reserved memory back to OS."""
+        if not self._block_map:
+            freed = self._reserved_mb
+            self._reserved_mb = 0
+            return freed
+        
+        self._block_map.sort()
+        last_start, last_size, _ = self._block_map[-1]
+        end_addr = last_start + last_size
+        freed = self._reserved_mb - end_addr
+        self._reserved_mb = end_addr
+        return max(0.0, freed)
 
     @property
     def allocated_mb(self) -> float:
@@ -256,14 +275,30 @@ class CachingAllocator:
 
     @property
     def fragmentation(self) -> float:
-        """External fragmentation: fraction of reserved that is unusable."""
-        if self._reserved_mb <= 0:
+        """Topological fragmentation: (1 - max_hole / total_abs_free)."""
+        if self.vram_mb <= 0:
             return 0.0
-        return 1.0 - (self._allocated_mb / self._reserved_mb)
-
-    @property
-    def free_cached_mb(self) -> float:
-        return sum(self._free_blocks)
+        
+        # Calculate holes
+        self._block_map.sort()
+        curr_addr = 0
+        holes = []
+        for start, size, bid in self._block_map:
+            gap = start - curr_addr
+            if gap > 0:
+                holes.append(gap)
+            curr_addr = start + size
+        
+        # Add the big hole at the end
+        if curr_addr < self.vram_mb:
+            holes.append(self.vram_mb - curr_addr)
+            
+        if not holes:
+            return 0.0
+        
+        max_hole = max(holes)
+        total_free = sum(holes)
+        return 1.0 - (max_hole / total_free) if total_free > 0 else 0.0
 
     @property
     def utilization(self) -> float:
@@ -273,12 +308,24 @@ class CachingAllocator:
         return {
             "allocated_mb": round(self.allocated_mb, 2),
             "reserved_mb": round(self.reserved_mb, 2),
-            "free_cached_mb": round(self.free_cached_mb, 2),
+            "free_cached_mb": round(self.reserved_mb - self.allocated_mb, 2),
             "fragmentation": round(self.fragmentation, 6),
             "utilization": round(self.utilization, 6),
             "num_blocks": len(self._blocks),
-            "num_free_blocks": len(self._free_blocks),
+            "num_free_blocks": 0, # In topological model, holes are dynamic
         }
+
+    def defragment(self):
+        """Physical compaction: repack all live blocks to start of address space."""
+        live_blocks = sorted(self._block_map, key=lambda x: x[0])
+        new_map = []
+        curr_addr = 0
+        for _, size, bid in live_blocks:
+            new_map.append((curr_addr, size, bid))
+            curr_addr += size
+        self._block_map = new_map
+        self._reserved_mb = curr_addr
+        return True
 
 
 # ---------------------------------------------------------------------------
@@ -323,13 +370,20 @@ class GPUWorkload:
         vram_mb: float = 8192.0,
         noise_std: float = 0.02,
         cache_clear_interval: int = 50,
+        defrag_strategy: Optional[str] = None, # None or "predictive"
+        defrag_threshold: float = 0.7,
+        defrag_overhead_ms: float = 15.0,
     ):
         self.spec = spec
         self.allocator = CachingAllocator(vram_mb=vram_mb, noise_std=noise_std)
         self.cache_clear_interval = cache_clear_interval
+        self.defrag_strategy = defrag_strategy
+        self.defrag_threshold = defrag_threshold
+        self.defrag_overhead_ms = defrag_overhead_ms
         self.events: List[TraceEvent] = []
         self._param_blocks: List[int] = []
         self._optimizer_blocks: List[int] = []
+        self._total_defrag_overhead_ns: int = 0
 
     def _emit(self, step: int, phase: str, action: int,
               delta_mb: float, tag: str, oom: bool = False):
@@ -360,6 +414,19 @@ class GPUWorkload:
         self._emit(step, phase, 1, size_mb, tag, oom=False)
         return bid
 
+    def apply_defragmentation(self, step: int, phase: str):
+        """Simulate a proactive compaction event."""
+        # 1. Record overhead
+        overhead_ns = int(self.defrag_overhead_ms * 1e6)
+        self._total_defrag_overhead_ns += overhead_ns
+        
+        # 2. Topological compaction
+        self.allocator.defragment()
+        
+        # 3. Emit defrag event
+        self._emit(step, phase, 0, 0, tag="predictive_defrag")
+        log.info("Step %d - Predictive Defrag repacked memory positions.", step)
+
     def run(self, steps: int = 500, seed: int = 42) -> List[Dict[str, Any]]:
         """
         Execute the workload for `steps` training iterations.
@@ -376,17 +443,20 @@ class GPUWorkload:
             per_layer = spec.param_mb / max(spec.layers, 1)
             for layer_i in range(spec.layers):
                 bid = self._alloc_or_oom(per_layer, "param", 0, "init")
-                if bid is not None:
-                    self._param_blocks.append(bid)
+                if bid is None:
+                    return [asdict(e) for e in self.events]
+                self._param_blocks.append(bid)
         else:
             bid = self._alloc_or_oom(spec.param_mb, "param", 0, "init")
-            if bid is not None:
-                self._param_blocks.append(bid)
+            if bid is None:
+                return [asdict(e) for e in self.events]
+            self._param_blocks.append(bid)
 
         # Allocate optimizer state (Adam m + v, persist)
         opt_bid = self._alloc_or_oom(spec.optimizer_state_mb, "optimizer", 0, "init")
-        if opt_bid is not None:
-            self._optimizer_blocks.append(opt_bid)
+        if opt_bid is None:
+            return [asdict(e) for e in self.events]
+        self._optimizer_blocks.append(opt_bid)
 
         # Training loop
         for step in range(1, steps + 1):
@@ -398,8 +468,9 @@ class GPUWorkload:
             for i in range(n_act_allocs):
                 act_size = spec.activation_per_layer_mb * (1 + rng.normal(0, 0.05))
                 bid = self._alloc_or_oom(max(act_size, 0.5), "activation", step, "forward")
-                if bid is not None:
-                    activation_ids.append(bid)
+                if bid is None:
+                    return [asdict(e) for e in self.events]
+                activation_ids.append(bid)
 
             # Small temporary buffers (attention masks, scaling tensors)
             n_temps = rng.randint(2, 8)
@@ -407,8 +478,9 @@ class GPUWorkload:
             for _ in range(n_temps):
                 temp_size = rng.uniform(0.5, 4.0)  # 0.5–4 MB
                 bid = self._alloc_or_oom(temp_size, "temp", step, "forward")
-                if bid is not None:
-                    temp_ids.append(bid)
+                if bid is None:
+                    return [asdict(e) for e in self.events]
+                temp_ids.append(bid)
 
             # Free temps immediately (creates fragmentation gaps)
             for tid in temp_ids:
@@ -421,8 +493,9 @@ class GPUWorkload:
                 bid = self._alloc_or_oom(
                     grad_size * (1 + rng.normal(0, 0.03)), "gradient", step, "backward"
                 )
-                if bid is not None:
-                    gradient_ids.append(bid)
+                if bid is None:
+                    return [asdict(e) for e in self.events]
+                gradient_ids.append(bid)
 
             # Free activations during backward (as gradients are computed)
             for aid in activation_ids:
@@ -434,16 +507,23 @@ class GPUWorkload:
             for _ in range(rng.randint(1, 4)):
                 temp_size = rng.uniform(1.0, 6.0)
                 bid = self._alloc_or_oom(temp_size, "optimizer_temp", step, "optimizer")
-                if bid is not None:
-                    freed = self.allocator.free(bid)
-                    self._emit(step, "optimizer", 0, freed, "optimizer_temp")
+                if bid is None:
+                    return [asdict(e) for e in self.events]
+                freed = self.allocator.free(bid)
+                self._emit(step, "optimizer", 0, freed, "optimizer_temp")
 
             # ── Cleanup: free gradients (zero_grad) ──
             for gid in gradient_ids:
                 freed = self.allocator.free(gid)
                 self._emit(step, "cleanup", 0, freed, "gradient")
 
-            # Periodic cache clear
+            # ── Predictive Defragmentation Check ──
+            if self.defrag_strategy == "predictive":
+                current_frag = self.allocator.fragmentation
+                if current_frag > self.defrag_threshold:
+                    self.apply_defragmentation(step, "cleanup")
+
+            # Periodic cache clear (Baseline mechanism)
             if self.cache_clear_interval > 0 and step % self.cache_clear_interval == 0:
                 cleared = self.allocator.empty_cache()
                 if cleared > 0:
