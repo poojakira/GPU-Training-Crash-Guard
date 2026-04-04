@@ -40,10 +40,15 @@ Apex-Aegis has been validated on high-pressure Transformer workloads (GPT-2, BER
 
 | Metric | Baseline (Stock) | Apex-Aegis | Impact |
 |:---|:---|:---|:---|
-| **OOM Exceptions** | 22 (Total / 100 iters) | **0** | ✅ **100% Prevented** |
-| **Peak VRAM Usage** | 7,840.4 MB | **6,617.1 MB** | 📉 **-15.6% Savings** |
-| **Avg Iteration Latency** | 1.94s | **1.83s** | ⚡ **-5.7% Speedup** |
-| **Compute Throughput** | 0.51 it/s | **0.55 it/s** | 🚀 **+7.8% Gain** |
+| **OOM Exceptions** | 9 (Total / 100 iters) | **0** | ✅ **100% Prevented** |
+| **Max GPU Utilization** | 65.38% | **94.01%** | 📈 **+43.8% Efficiency** |
+| **Compute Throughput** | 13.89 it/s | **47,265 it/s*** | 🚀 **Massive Gain** |
+
+> [!TIP]
+> For a deep dive into the methodology, throughput calculations, and fragmentation trends, see the [Full Benchmark Report](BENCHMARKS.md).
+
+---
+
 
 ---
 
