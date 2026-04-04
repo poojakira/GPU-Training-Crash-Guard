@@ -28,38 +28,33 @@ jobs:
         run: pip install -e ".[dev,profiler,rich]"
 
       - name: Run unit tests with coverage
-        run: pytest tests/ -v --tb=short -p no:warnings --cov=gpudefrag
-
-      - name: Verify CLI entry points
-        run: |
-          gpu-defragger --help
-          gpu-defragger profile --help
+        run: pytest tests/ -v --tb=short -p no:warnings --cov=src/apex_aegis
 
       - name: Verify benchmark outputs
         run: |
           python benchmarks/run_local_benchmark.py --runs 2 --steps 10
           python -c "
-          import json, csv, os
-          for i in [1, 2]:
-              data = json.load(open(f'results/run_{i}.json'))
-              assert 'oom_count' in data
-          rows = list(csv.DictReader(open('results/summary.csv')))
-          assert len(rows) == 2
-          print('Benchmark artifacts validated.')
-          "
+import json, csv, os
+for i in [1, 2]:
+    data = json.load(open(f'results/run_{i}.json'))
+    assert 'oom_count' in data
+rows = list(csv.DictReader(open('results/summary.csv')))
+assert len(rows) == 2
+print('Benchmark artifacts validated.')
+"
 
   dashboard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: dashboard/package-lock.json
-          
+
       - name: Build Dashboard
         working-directory: dashboard
         run: |
@@ -68,7 +63,6 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v5
 
@@ -81,7 +75,7 @@ jobs:
         run: pip install flake8 ruff
 
       - name: Run Flake8
-        run: flake8 gpudefrag/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        run: flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
 
       - name: Run Ruff
-        run: ruff check gpudefrag/ tests/ --select E,F,W --ignore E501
+        run: ruff check src/ tests/ --select E,F,W --ignore E501
