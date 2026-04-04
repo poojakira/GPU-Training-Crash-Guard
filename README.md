@@ -77,9 +77,9 @@ React + FastAPI real-time dashboard with 6 pages:
 |---|---|---|---|
 | OOM Errors | 0–3 per run | 0 | Eliminated |
 | Training Restarts | 2–5 | 0 | Eliminated |
-| Peak Memory (MB) | 7,840.4 | 6,920.4 | −11.7% |
-| Avg Iteration Time | 1.94 s ± 0.05 | 1.76 s ± 0.03 | −9.3% |
-| Compute Throughput | 0.51 iter/s | 0.57 iter/s | +12% |
+| Peak Memory (MB) | 7,840.4 | 6,617.1 | −15.6% |
+| Avg Iteration Time | 1.94 s ± 0.05 | 1.83 s ± 0.01 | −5.7% |
+| Compute Throughput | 0.51 iter/s | 0.55 iter/s | +7.8% |
 | Proactive Compactions | — | 42 per session | Automatic |
 | Triton Sweep Latency | — | 7.3–14.5 ms | Sub-iteration |
 
@@ -178,9 +178,9 @@ The Predictive GPU Memory Defragmenter v2.0.0 has been rigorously tested on prod
 | Metric | Baseline (No Defrag) | With gpudefrag | Impact |
 |:---|:---|:---|:---|
 | **OOM Errors** | 22 (Total / 100 iters) | **0** | ✅ **100% Prevented** |
-| **Peak VRAM Usage** | 7,840.4 MB | **6,920.4 MB** | 📉 **-11.7%** |
-| **Avg Iteration Latency** | 1.94s | **1.76s** | ⚡ **-9.3%** |
-| **Compute Throughput** | 0.51 it/s | **0.57 it/s** | 🚀 **+12%** |
+| **Peak VRAM Usage** | 7,840.4 MB | **6,617.1 MB** | 📉 **-15.6%** |
+| **Avg Iteration Latency** | 1.94s | **1.83s** | ⚡ **-5.7%** |
+| **Compute Throughput** | 0.51 it/s | **0.55 it/s** | 🚀 **+7.8%** |
 
 ### 🛠️ Key Technical Findings
 
