@@ -1,4 +1,4 @@
-# Apex-Aegis: Predictive GPU Memory Defragmenter
+# GPU-Training-Crash-Guard
 
 [![CI](https://github.com/poojakira/Predictive-GPU-Memory-Defragmenter/actions/workflows/ci.yml/badge.svg)](https://github.com/poojakira/Predictive-GPU-Memory-Defragmenter/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 
 
 
-**Apex-Aegis** is an industrial-grade PyTorch infrastructure layer that **predicts GPU memory fragmentation and triggers proactive physical compaction before Out-of-Memory (OOM) crashes occur**.
+**GPU-Training-Crash-Guard** is an PyTorch infrastructure layer that **predicts GPU memory fragmentation and triggers proactive physical compaction before Out-of-Memory (OOM) crashes occur**.
 
 ---
 
