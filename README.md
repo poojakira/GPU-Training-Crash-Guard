@@ -5,8 +5,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/poojakira/Predictive-GPU-Memory-Defragmenter/graphs/commit-activity)
-[![GitHub issues](https://img.shields.io/github/issues/poojakira/Predictive-GPU-Memory-Defragmenter.svg)](https://GitHub.com/poojakira/Predictive-GPU-Memory-Defragmenter/issues)
-[![GitHub PRs](https://img.shields.io/github/issues-pr/poojakira/Predictive-GPU-Memory-Defragmenter.svg)](https://GitHub.com/poojakira/Predictive-GPU-Memory-Defragmenter/pulls)
+
 
 
 **Apex-Aegis** is an industrial-grade PyTorch infrastructure layer that **predicts GPU memory fragmentation and triggers proactive physical compaction before Out-of-Memory (OOM) crashes occur**.
