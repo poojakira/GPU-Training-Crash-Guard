@@ -1,7 +1,13 @@
-# GPU-Training-Crash-Guard
+# GPU-Training-Crash-Guard (Apex-Aegis)
+=====================================
+Prototype lab for modeling GPU memory fragmentation and deploying **GPU-Training-Crash-Guard (Apex-Aegis)**, a PyTorch guardrail that predicts fragmentation and prevents training-time OOM crashes on RTX-class workloads.
 
-[[![CI](https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab/actions/workflows/ci.yml/badge.svg)](https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab/actions/workflows/ci.yml)](https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab/actions/workflows/ci.yml)[![Tests](https://img.shields.io/badge/tests-50%2B%20passing-brightgreen.svg)](#)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)[![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
-
+[![CI](https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab/actions/workflows/ci.yml/badge.svg)](https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab/actions/workflows/ci.yml)
+![Tests](https://img.shields.io/badge/tests-50%2B%20passing-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
+![Docker-ready](https://img.shields.io/badge/Docker-ready-blue.svg)
 ---
 
 ## Problem Statement
@@ -10,7 +16,7 @@
 
 Even when 20% of VRAM appears "free," training often crashes because that free memory is scattered in non-contiguous blocks. Developers respond by manually tuning batch sizes per hardware generation—a brittle, time-consuming process that slows down iteration and reduces hardware utilization.
 
-**GPU-Training-Crash-Guard** is a PyTorch infrastructure layer that **predicts GPU memory fragmentation in real time and triggers proactive physical compaction before OOM crashes occur**. It integrates directly into your existing training loop with zero code changes.
+**GPU-Training-Crash-Guard (Apex-Aegis)** is a PyTorch infrastructure layer that **predicts GPU memory fragmentation in real time and triggers proactive physical compaction before OOM crashes occur**. It integrates directly into your existing training loop with zero code changes.
 
 ### Who Is This For?
 
@@ -31,7 +37,15 @@ Even when 20% of VRAM appears "free," training often crashes because that free m
 Apex-Aegis addresses this by **predicting fragmentation before it becomes pathological**, allowing proactive intervention that keeps training stable without manual tuning. The result: **zero OOMs across 100 benchmark runs** and **43.8% higher GPU utilization** compared to stock PyTorch.
 
 ---
+Architecture Overview
+---------------------
 
+At a high level:
+
+- **Trace collection** – training runs log per‑step GPU memory stats into `data/traces/*.parquet`.
+- **Fragmentation predictor** – a small model learns to map memory state → fragmentation risk.
+- **Guard layer (DefragGuard)** – wraps your training step, queries the predictor, and triggers compaction when risk exceeds `risk_threshold`.
+- **Telemetry & benchmarks** – metrics and experiment results are exported to `results/` and documented in `Benchmarks.md` / `RESULTS.md`.
 ## Key Results (v2.0.0)
 
 Apex-Aegis validated on high-pressure Transformer workloads (GPT-2, BERT, ResNet-50) on an RTX-class GPU (8 GB VRAM), PyTorch 2.0, CUDA 11.8, Python 3.10.
@@ -110,13 +124,13 @@ The predictor was trained with an **80/20 train/test split** (configurable via `
 
 ### Installation
 
-```bash
+# From PyPI
 pip install apex-aegis
-# Or from source:
-git clone https://github.com/poojakira/GPU-Training-Crash-Guard.git
-cd GPU-Training-Crash-Guard
+
+# Or from source (this repo)
+git clone https://github.com/poojakira/GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab.git
+cd GPU-Training-OOM-Reduction---RTX-Memory-Fragmentation-Lab
 pip install -e .
-```
 
 ### Basic Integration (Single GPU)
 
@@ -134,7 +148,48 @@ def training_step(batch):
         loss.backward()
     return loss
 ```
+### Minimal End‑to‑End PyTorch Example
 
+Below is a single‑file example you can copy‑paste to see GPU-Training-Crash-Guard in action on a dummy model:
+
+```python
+import torch
+from torch import nn, optim
+from torch.utils.data import DataLoader, TensorDataset
+
+from apex_aegis import DefragGuard, DefragConfig
+
+# 1. Dummy dataset
+x = torch.randn(1024, 32).cuda()
+y = torch.randint(0, 2, (1024,)).cuda()
+dataset = TensorDataset(x, y)
+loader = DataLoader(dataset, batch_size=64, shuffle=True)
+
+# 2. Simple model
+model = nn.Sequential(
+    nn.Linear(32, 64),
+    nn.ReLU(),
+    nn.Linear(64, 2),
+).cuda()
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+# 3. Wrap model with Crash-Guard
+config = DefragConfig(risk_threshold=0.8, compaction_frequency=10, log_level="INFO")
+guard = DefragGuard(model, config=config)
+
+# 4. Training loop with guard
+for epoch in range(3):
+    for batch_x, batch_y in loader:
+        optimizer.zero_grad()
+        with guard.step():
+            logits = model(batch_x)
+            loss = criterion(logits, batch_y)
+            loss.backward()
+        optimizer.step()
+    print(f"Epoch {epoch + 1}: loss={loss.item():.4f}")
+```
 ### DDP Integration (Multi-GPU)
 
 ```python
