@@ -1,69 +1,59 @@
 name: GPU Defragmenter CI
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install linting tools
         run: pip install flake8 ruff
-
       - name: Run Flake8
         run: flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
-
       - name: Run Ruff
         run: ruff check src/ tests/ --select E,F,W --ignore E501
         continue-on-error: true
-
   test:
     runs-on: ubuntu-latest
     needs: lint
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Install PyTorch (CPU-only)
         run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-
       - name: Install package and dependencies
         run: pip install -e ".[dev,profiler,rich]"
-
       - name: Run unit tests with coverage
         run: pytest tests/ -v --tb=short -p no:warnings --cov=src/apex_aegis
         continue-on-error: true
-
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
   dashboard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: dashboard/package-lock.json
-
       - name: Build Dashboard
         working-directory: dashboard
         run: |
