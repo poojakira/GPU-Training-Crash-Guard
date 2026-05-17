@@ -19,7 +19,7 @@ mlruns/
 # Large generated datasets (keep only sample traces)
 data/traces/large_v1/
 data/traces/senior_v1/
-data/traces/real/
+data/traces/cpu_fallback/
 
 # Dashboard build artifacts
 dashboard/node_modules/
