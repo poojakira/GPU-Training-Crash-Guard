@@ -387,7 +387,7 @@ def main():
                     default=["gpt2", "resnet50", "bert"],
                     choices=list(MODEL_CONFIGS.keys()),
                     help="Models to train")
-    ap.add_argument("--output", default="data/traces/real",
+    ap.add_argument("--output", default="data/traces/cpu_fallback",
                     help="Output directory")
     ap.add_argument("--vary-batch", action="store_true",
                     help="Vary batch size during training to create pressure changes")

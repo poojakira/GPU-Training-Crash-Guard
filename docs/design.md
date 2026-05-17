@@ -17,5 +17,5 @@ The rtx-oom-guard project was designed to address the "Silent Killer" of GPU ROI
 
 ## ⚠️ Limitations & Hardware Scope
 - **Device Support**: Currently verified on NVIDIA RTX 30/40 시리즈 (Ampere/Ada Lovelace). Support for A100/H100 (Hopper) is in development.
-- **Precision**: 99.9% recall is achieved on allocation-induced OOMs. It does not currently account for system-level memory pressure (e.g., from other OS processes).
+- **Precision**: Not yet validated on real GPU hardware. The rule-based OOMRiskModel uses a sigmoid heuristic — actual recall depends on fragmentation patterns and threshold tuning. See `notebooks/colab_t4_validation.ipynb` for validation instructions.
 - **Workload Scope**: Optimal for single-node HBM workloads. Multi-node DDP support is operational but hasn't reached the same SLA guarantees as single-node.

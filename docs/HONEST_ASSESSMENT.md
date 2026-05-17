@@ -30,4 +30,4 @@ The real solution to OOM in production is gradient checkpointing + mixed precisi
 
 ## Performance overhead
 
-The monitoring thread adds ~2-3% training time overhead due to CUDA synchronization needed to read accurate memory stats.
+The monitoring thread adds overhead due to CUDA synchronization needed to read accurate memory stats. Estimated ~2-3% based on the 50ms polling interval vs typical step times, but this has NOT been measured on real hardware.

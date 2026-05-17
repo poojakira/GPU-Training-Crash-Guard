@@ -157,72 +157,8 @@ def _run_gpu(run_id: int, steps: int, batch_size: int, seq_len: int):
     }
 
 
-# Single run (CPU — simulated metrics consistent with README)
-
-def _run_cpu_simulated(run_id: int, steps: int, batch_size: int, seq_len: int):
-    """Generate realistic simulated metrics on CPU."""
-    np.random.seed(42 + run_id)
-    random.seed(42 + run_id)
-
-    logger = AllocatorLogger()
-    risk_model = OOMRiskModel()
-    policy = MitigationPolicy()
-    hook = TrainingHook(logger=logger, risk_model=risk_model)
-
-    oom_count = 0
-    frag_vals = []
-    step_times = []
-
-    for step in range(steps):
-        # Simulate realistic values
-        base_frag = 0.15 + 0.08 * np.sin(step / 8.0) + np.random.normal(0, 0.02)
-        base_frag = max(0.01, min(0.99, base_frag))
-
-        # We assume 8GB limit, simulate reserved and allocated to hit frag target
-        # frag = 1 - (alloc / reserved) => alloc = reserved * (1 - frag)
-        reserved_mb = round(6620 + np.random.normal(0, 22), 1)
-        allocated_mb = round(reserved_mb * (1.0 - base_frag), 1)
-
-        hook.on_forward_begin(allocated_mb=allocated_mb, reserved_mb=reserved_mb)
-        time.sleep(0.001)  # sub-ms to keep things fast
-        hook.on_forward_end(allocated_mb=allocated_mb, reserved_mb=reserved_mb)
-
-        hook.on_backward_begin(allocated_mb=allocated_mb, reserved_mb=reserved_mb)
-        time.sleep(0.001)
-        hook.on_backward_end(allocated_mb=allocated_mb, reserved_mb=reserved_mb)
-
-        hook.on_optimizer_step(allocated_mb=allocated_mb, reserved_mb=reserved_mb)
-        risk = hook.on_step_complete(
-            batch_size=batch_size,
-            allocated_mb=allocated_mb,
-            reserved_mb=reserved_mb,
-        )
-
-        frag_vals.append(base_frag)
-        step_times.append(1.83 + np.random.normal(0, 0.05))
-
-        # Simulate OOM: with defrag pipeline active, no OOMs
-        policy.evaluate(risk, current_batch_size=batch_size)
-
-    avg_frag = round(float(np.mean(frag_vals)), 6)
-    avg_step = round(float(np.mean(step_times)), 6)
-    peak_reserved = round(6620 + np.random.normal(0, 22), 1)
-    throughput = round(1.0 / avg_step, 3) if avg_step > 0 else 0
-
-    return {
-        "run_id": run_id,
-        "gpu": GPU_NAME,
-        "steps": steps,
-        "batch_size": batch_size,
-        "oom_count": oom_count,
-        "peak_reserved_mb": peak_reserved,
-        "avg_fragmentation": avg_frag,
-        "avg_step_time_s": avg_step,
-        "throughput_iter_s": throughput,
-        "total_time_s": round(steps * avg_step, 3),
-        "policy_actions": policy.action_counts,
-        "memory_log": logger.to_dicts(),
-    }
+# CPU simulation removed — was generating fake metrics with random numbers.
+# Use notebooks/colab_t4_validation.ipynb for real GPU benchmarks.
 
 
 # Main
@@ -241,8 +177,14 @@ def main():
     results_dir.mkdir(parents=True, exist_ok=True)
     plots_dir.mkdir(parents=True, exist_ok=True)
 
-    run_fn = _run_gpu if HAS_CUDA else _run_cpu_simulated
-    mode_label = "GPU" if HAS_CUDA else "CPU-simulated"
+    run_fn = _run_gpu if HAS_CUDA else None
+    mode_label = "GPU" if HAS_CUDA else "NO GPU"
+
+    if run_fn is None:
+        print("ERROR: No CUDA GPU available. This benchmark requires a real GPU.")
+        print("Run notebooks/colab_t4_validation.ipynb on a free Colab T4 instead.")
+        sys.exit(1)
+
     print(f"Running {args.runs} benchmark runs ({mode_label}) …")
 
     all_results = []
