@@ -1,16 +1,22 @@
 """
 rtx_oom_guard.monitor — Real-time background defragmentation monitor.
 
-Runs the FragPredictor in a daemon thread, analyzing the allocation event
-stream and triggering the Compactor when predicted fragmentation exceeds
+Runs a risk scoring heuristic in a daemon thread, analyzing memory
+utilization and triggering the Compactor when fragmentation exceeds
 the configured threshold.
 
-Features:
-    - Configurable prediction interval (default: 50ms)
-    - Automatic kill switch if prediction latency exceeds 5ms
-    - Cooldown timer to prevent excessive compaction
-    - Thread-safe event recording API
-    - Full telemetry for post-analysis
+The FragPredictor (Transformer) is available but has no training script
+or validated weights. In practice, the system uses OOMRiskModel (rule-based
+sigmoid scorer) as the primary decision mechanism. The predictor path
+exists as a research extension point.
+
+Limitations:
+    - Calling barrier() from this daemon thread is unsafe under DDP.
+      For distributed training, use pending_compaction=True and trigger
+      compaction from the main training loop instead.
+    - The kill switch (max_prediction_latency_ms) permanently disables
+      the monitor with no recovery. This is intentional — a slow predictor
+      under GIL contention should not block training.
 """
 
 import time

@@ -13,6 +13,7 @@ empty_cache() actually release physical memory holes underneath.
 import gc
 import json
 import logging
+import threading
 import time
 from pathlib import Path
 from typing import Iterable, List, Dict, Any
@@ -32,12 +33,18 @@ log = logging.getLogger("rtx_oom_guard.defragmenter")
 
 class GPUMemoryDefragmenter:
     """
-    Actively repacks dynamic PyTorch tensors into contiguous memory blocks.
+    Repacks model parameter tensors into a contiguous memory buffer.
     
-    This is not a simple cache eviction. It physically copies scattered tensor
-    data into a single contiguous VRAM allocation and silently replaces the
-    underlying `.data` pointers of the live tensors so that autograd and
-    optimizer states continue flawlessly.
+    Copies scattered tensor data into a single allocation and replaces
+    the `.data` pointers of live tensors. This allows the caching allocator
+    to release fragmented blocks via empty_cache().
+
+    Limitations:
+        - Only compacts tensors explicitly passed in (typically model.parameters()).
+        - Optimizer state (Adam exp_avg, exp_avg_sq) is NOT migrated.
+        - Gradients (p.grad) are NOT migrated.
+        - After compaction, optimizer state and gradients remain in their
+          original scattered allocations.
     """
 
     def __init__(self, use_triton: bool = True, results_dir: str = "results"):
@@ -92,10 +99,19 @@ class GPUMemoryDefragmenter:
         if total_elements == 0:  # pragma: no cover
             return {"skipped": True, "reason": "no_matching_tensors"}  # pragma: no cover
 
-        # 0. Distributed Data Parallel (DDP) sync safety
+        # 0. DDP safety: barrier() must NOT be called from a daemon thread.
+        # If DDP is active, log a warning. The caller should use
+        # pending_compaction=True and call defragment from the main loop.
         if torch.distributed.is_available() and torch.distributed.is_initialized():
-            log.info("DDP active: Waiting at barrier before defragmentation...")
-            torch.distributed.barrier()
+            if threading.current_thread() is not threading.main_thread():
+                log.warning(
+                    "defragment_tensors called from non-main thread with DDP active. "
+                    "Skipping barrier() to avoid NCCL deadlock. "
+                    "Call from main training loop for safe DDP compaction."
+                )
+            else:
+                log.info("DDP active: synchronizing at barrier before defragmentation.")
+                torch.distributed.barrier()
 
         t0 = time.perf_counter()
 
